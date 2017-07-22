@@ -1,0 +1,13 @@
+/.idea
+/node_modules
+/bower_components
+/.jscsrc
+/.eslintrc
+/bower.json
+/tasks
+/www
+/widgets
+/test
+/Gruntfile.js
+/.travis.yml
+/appveyor.yml

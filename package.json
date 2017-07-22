@@ -1,0 +1,63 @@
+{
+  "name": "iobroker.milight-smart-light",
+  "version": "0.0.1",
+  "description": "Adapter for Milight LED bulbs and LED strips",
+  "author": {
+    "name": "Steiger04",
+    "email": "steiger04@posteo.de"
+  },
+  "contributors": [
+    {
+      "name": "Steiger04",
+      "email": "steiger04@posteo.de"
+    }
+  ],
+  "homepage": "https://github.com/Steiger04/ioBroker.milight-smart-light",
+  "license": "MIT",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/Steiger04/ioBroker.admin/blob/master/LICENSE"
+    }
+  ],
+  "keywords": [
+    "ioBroker",
+    "milight-smart-light",
+    "milight",
+    "bulb",
+    "strip",
+    "LED",
+    "Smart Home",
+    "home automation"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Steiger04/ioBroker.milight-smart-light"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "lodash": "^4.17.4",
+    "node-milight-promise": "^0.1.5"
+  },
+  "devDependencies": {
+    "chai": "^3.4.1",
+    "grunt": "^0.4.5",
+    "grunt-bower": "^0.21.4",
+    "grunt-contrib-jshint": "^0.11.2",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-http": "^1.6.0",
+    "grunt-jscs": "^2.0.0",
+    "grunt-replace": "^0.9.3",
+    "grunt-run-cmd": "^1.0.3",
+    "mocha": "^2.3.4",
+    "time-grunt": "^1.4.0"
+  },
+  "main": "main.js",
+  "scripts": {
+    "test": "node node_modules/mocha/bin/mocha"
+  },
+  "bugs": {
+    "url": "https://github.com/Steiger04/ioBroker.milight-smart-light/issues"
+  },
+  "readmeFilename": "README.md"
+}

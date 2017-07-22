@@ -1,0 +1,45 @@
+{
+  "common": {
+    "name": "milight-smart-light",
+    "version": "0.0.1",
+    "news": {
+      "0.0.1": {
+        "en": "initial adapter",
+        "de": "Initiale Version",
+        "ru": "Первоначальный адаптер"
+      }
+    },
+    "title": "Javascript/Node.js based milight-smart-light adapter",
+    "desc": {
+      "en": "ioBroker milight-smart-light Adapter",
+      "de": "ioBroker Milight-smart-light Adapter",
+      "ru": "ioBroker Milight-smart-light драйвер как образец"
+    },
+    "platform": "Javascript/Node.js",
+    "mode": "daemon",
+    "icon": "lib/images/milight-smart-light.png",
+    "enabled": true,
+    "messagebox": true,
+    "supportStopInstance": true,
+    "extIcon": "https://raw.githubusercontent.com/Steiger04/ioBroker.milight-smart-light/master/admin/lib/images/milight-smart-light.png",
+    "keywords": [
+      "milight-smart-light",
+      "milight",
+      "bulb",
+      "strip",
+      "LED"
+    ],
+    "readme": "https://github.com/Steiger04/ioBroker.milight-smart-light/blob/master/README.md",
+    "loglevel": "info",
+    "type": "common adapters"
+  },
+  "native": {
+    "controllerType": "v6",
+    "controllerIp": "",
+    "controllerPort": "5987",
+    "commandRepeat": "1",
+    "delayBetweenCommands": "100"
+  },
+  "objects": [
+  ]
+}
