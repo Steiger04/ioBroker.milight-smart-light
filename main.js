@@ -72,8 +72,7 @@ adapter.on('message', function (obj) {
         adapter.log.debug('on:message:deleteenums . . .');
         Promise.mapSeries(_.flatten([addChannelsToStorage, devicesFromAdmin]),
             function (addDevice) {
-              return adapter.deleteChannelFromEnumAsync(null, addDevice.nameZone,
-                  addDevice.typeNumberZone);
+              return adapter.deleteChannelFromEnumAsync(null, addDevice.nameZone, addDevice.typeNumberZone);
             }).catch(function (err) {
           adapter.log.error('on:message:deleteenums->' + err.message);
         });
@@ -251,7 +250,6 @@ function configSync(callback) {
     deleteChannelsFromStorage = _.differenceWith(channelsFromStorage, devicesFromAdmin,
         function (channel, device) {
           return channel._id === device.channelId && channel.common.name === device.nameType;
-
         });
 
     deleteChannelsFromStorage = _.map(deleteChannelsFromStorage, function (channel) {
@@ -286,8 +284,7 @@ function configSync(callback) {
     // States hinzufügen
     return Promise.mapSeries(addChannelsToStorage, function (addDevice) {
       return Promise.map(states.statesList(adapter.config.controllerType, addDevice.typeZone), function (dp) {
-        return adapter.createStateAsync(addDevice.nameZone, addDevice.typeNumberZone, dp,
-            states.getCommon(dp));
+        return adapter.createStateAsync(addDevice.nameZone, addDevice.typeNumberZone, dp, states.getCommon(dp));
       });
     });
   }).then(function () {
@@ -298,9 +295,8 @@ function configSync(callback) {
               addDevice.typeNumberZone).then(function () {
             return Promise.map(_.flatten([addDevice.room, addDevice.func]), function (enumName) {
               return adapter.addChannelToEnumAsync(enumName, enumName, addDevice.nameZone, addDevice.typeNumberZone).then(function () {
-                adapter.log.debug(
-                    'config_Sync->::' + adapter.namespace + '.' + addDevice.nameZone + '.' + addDevice.typeNumberZone + ':: wurde Enum->::' + enumName +
-                    ':: zugeordnet!');
+                adapter.log.debug('config_Sync->::' + adapter.namespace + '.' + addDevice.nameZone + '.' + addDevice.typeNumberZone + ':: wurde Enum->::' +
+                    enumName + ':: zugeordnet!');
               });
             });
           });

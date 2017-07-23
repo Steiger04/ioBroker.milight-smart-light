@@ -14,11 +14,11 @@
         "ru": "Первоначальный адаптер"
       }
     },
-    "title": "Javascript/Node.js based milight-smart-light adapter",
+    "title": "milight-smart-light Adapter",
     "desc": {
-      "en": "ioBroker milight-smart-light Adapter",
-      "de": "ioBroker Milight-smart-light Adapter",
-      "ru": "ioBroker Milight-smart-light драйвер как образец"
+      "en": "Adapter for Milight LED bulbs and LED strips",
+      "de": "Adapter für Milight LED bulbs und LED strips",
+      "ru": "Adapter for Milight LED bulbs and LED strips"
     },
     "platform": "Javascript/Node.js",
     "mode": "daemon",
