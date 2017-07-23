@@ -90,6 +90,7 @@ adapter.on('message', function (obj) {
           }
 
           adapter.sendTo(adapter.namespace, 'deleteenums', null);
+
           //adapter.sendTo(adapter.namespace, 'deletedevices', null);
         }
 
@@ -116,6 +117,7 @@ adapter.on('unload', function (callback) {
     }
 
     adapter.sendTo(adapter.namespace, 'deleteenums', null);
+
     //adapter.sendTo(adapter.namespace, 'deletedevices', null);
 
     callback();
@@ -278,7 +280,7 @@ function configSync(callback) {
   }).then(function () {
     // Channels aus addChannelsToStorage anlegen
     return Promise.map(addChannelsToStorage, function (addDevice) {
-      return adapter.createChannelAsync(addDevice.nameZone, addDevice.typeNumberZone, {name: addDevice.nameType});
+      return adapter.createChannelAsync(addDevice.nameZone, addDevice.typeNumberZone, { name: addDevice.nameType });
     });
   }).then(function () {
     // States hinzufügen

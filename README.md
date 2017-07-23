@@ -25,7 +25,8 @@ With adapter you can use both: **v6 Bridge** and **Legacy Bridge**.
 - **Node.js**: use v. 6.00 or higher
 - **iobroker.admin**: use v. 1.8.2 or higehr
 
-
+### 0.0.2 (2017-07-23)
+- (steiger04) Bug fix: added parameter in effectMode(...)
 
 ### 0.0.1 (2017-07-16)
 - (steiger04) basis functionality

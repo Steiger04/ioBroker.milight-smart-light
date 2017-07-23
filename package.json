@@ -1,7 +1,7 @@
 {
   "name": "iobroker.milight-smart-light",
-  "version": "0.0.1",
   "description": "Adapter for Milight LED bulbs and LED strips",
+  "version": "0.0.2",
   "author": {
     "name": "Steiger04",
     "email": "steiger04@posteo.de"
