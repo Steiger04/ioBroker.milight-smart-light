@@ -24,6 +24,9 @@ With adapter you can use both: **v6 Bridge** and **Legacy Bridge**.
 
 - **Node.js**: use v. 6.00 or higher
 - **iobroker.admin**: use v. 1.8.2 or higehr
+- 
+### 0.0.3 (2017-07-24)
+- (steiger04) "on- /off- /onoff-states optimized for vis widgets"
 
 ### 0.0.2 (2017-07-23)
 - (steiger04) Bug fix: added parameter in effectMode(...)
