@@ -32,7 +32,7 @@ With adapter you can use both: **v6 Bridge** and **Legacy Bridge**.
 - (steiger04) Bug fix: added parameter in effectMode(...)
 
 ### 0.0.1 (2017-07-16)
-- (steiger04) basis functionality
+- (steiger04) Initial Version
 
 ## License
 
