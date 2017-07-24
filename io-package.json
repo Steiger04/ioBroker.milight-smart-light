@@ -1,8 +1,13 @@
 {
   "common": {
     "name": "milight-smart-light",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "news": {
+      "0.0.3": {
+        "en": "on- /off- /onoff-states optimized for vis widgets",
+        "de": "on- /off- /onoff-states für vis widgets optimiert",
+        "ru": "on- /off- /onoff-states optimized for vis widgets"
+      },
       "0.0.2": {
         "en": "Bug fix: added parameter in effectMode(...)",
         "de": "Fehler behoben: Parameter in effectMode(...) hinzugefügt",

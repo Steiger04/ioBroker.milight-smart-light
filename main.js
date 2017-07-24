@@ -216,21 +216,13 @@ function configSync(callback) {
     _.forEach(adapter.config.devices, function (device) {
       devicesFromAdmin.push({
         room: (device.room === '' || device.room === '0') ? [] : [device.room],
-
         func: device.func === '' ? [] : device.func,
-
         activeZone: device.activeZone,
-
         nameZone: _.isEmpty(device.nameZone) ? '' : device.nameZone,
-
         typeZone: device.typeZone === '0' ? '' : device.typeZone,
-
         nameType: _.isEmpty(device.nameType) ? device.typeZone + '-' + device.numberZone : device.nameType,
-
         numberZone: device.numberZone === '0' ? '' : device.numberZone,
-
         typeNumberZone: device.typeZone + '-' + device.numberZone,
-
         channelId: adapter.name + '.' + adapter.instance + '.' + device.nameZone + '.' + device.typeZone + '-' + device.numberZone,
       });
     });
@@ -240,67 +232,64 @@ function configSync(callback) {
     return val.activeZone === false || val.numberZone === '' || val.nameZone === '';
   });
 
-  return adapter.getDevicesAsync().then(function (devicesFromStorage) {
+  adapter.getDevicesAsync().then(function (devicesFromStorage) {
     return Promise.map(devicesFromStorage, function (device) {
       return adapter.getChannelsOfAsync(device._id);
     });
   }).then(function (channelsFromStorage) {
     channelsFromStorage = _.flatten(channelsFromStorage);
 
-    deleteChannelsFromStorage = _.differenceWith(channelsFromStorage, devicesFromAdmin,
-        function (channel, device) {
-          return channel._id === device.channelId && channel.common.name === device.nameType;
-        });
+    deleteChannelsFromStorage = _.differenceWith(channelsFromStorage, devicesFromAdmin, function (channel, device) {
+      return channel._id === device.channelId && channel.common.name === device.nameType;
+    });
 
     deleteChannelsFromStorage = _.map(deleteChannelsFromStorage, function (channel) {
       return adapter.idToDCS(channel._id);
     });
 
-    addChannelsToStorage = _.differenceWith(devicesFromAdmin, channelsFromStorage,
-        function (device, channel) {
-          return device.channelId === channel;
-        });
+    addChannelsToStorage = _.differenceWith(devicesFromAdmin, channelsFromStorage, function (device, channel) {
+      return device.channelId === channel;
+    });
   }).then(function () {
     // Enums löschen
-    return Promise.map(deleteChannelsFromStorage, function (DCS) {
+    Promise.map(deleteChannelsFromStorage, function (DCS) {
       return adapter.deleteChannelFromEnumAsync(null, DCS.device, DCS.channel);
     });
   }).then(function () {
     // Channels aus deleteChannelsFromStorage aus dem Speicher löschen
-    return Promise.map(deleteChannelsFromStorage, function (DCS) {
+    Promise.map(deleteChannelsFromStorage, function (DCS) {
       return adapter.deleteChannelAsync(DCS.device, DCS.channel);
     });
   }).then(function () {
     // Devices aus addChannelsToStorage anlegen
-    return Promise.map(addChannelsToStorage, function (addDevice) {
+    Promise.map(addChannelsToStorage, function (addDevice) {
       return adapter.createDeviceAsync(addDevice.nameZone);
     });
   }).then(function () {
     // Channels aus addChannelsToStorage anlegen
-    return Promise.map(addChannelsToStorage, function (addDevice) {
+    Promise.map(addChannelsToStorage, function (addDevice) {
       return adapter.createChannelAsync(addDevice.nameZone, addDevice.typeNumberZone, { name: addDevice.nameType });
     });
   }).then(function () {
     // States hinzufügen
-    return Promise.mapSeries(addChannelsToStorage, function (addDevice) {
+    Promise.mapSeries(addChannelsToStorage, function (addDevice) {
       return Promise.map(states.statesList(adapter.config.controllerType, addDevice.typeZone), function (dp) {
         return adapter.createStateAsync(addDevice.nameZone, addDevice.typeNumberZone, dp, states.getCommon(dp));
       });
     });
   }).then(function () {
     // Enums löschen und hinzufügen
-    return Promise.mapSeries(_.flatten([addChannelsToStorage, devicesFromAdmin]),
-        function (addDevice) {
-          return adapter.deleteChannelFromEnumAsync(null, addDevice.nameZone,
-              addDevice.typeNumberZone).then(function () {
-            return Promise.map(_.flatten([addDevice.room, addDevice.func]), function (enumName) {
-              return adapter.addChannelToEnumAsync(enumName, enumName, addDevice.nameZone, addDevice.typeNumberZone).then(function () {
-                adapter.log.debug('config_Sync->::' + adapter.namespace + '.' + addDevice.nameZone + '.' + addDevice.typeNumberZone + ':: wurde Enum->::' +
-                    enumName + ':: zugeordnet!');
-              });
-            });
+    Promise.mapSeries(_.flatten([addChannelsToStorage, devicesFromAdmin]), function (addDevice) {
+      return adapter.deleteChannelFromEnumAsync(null, addDevice.nameZone,
+          addDevice.typeNumberZone).then(function () {
+        return Promise.map(_.flatten([addDevice.room, addDevice.func]), function (enumName) {
+          return adapter.addChannelToEnumAsync(enumName, enumName, addDevice.nameZone, addDevice.typeNumberZone).then(function () {
+            adapter.log.debug('config_Sync->::' + adapter.namespace + '.' + addDevice.nameZone + '.' + addDevice.typeNumberZone + ':: wurde Enum->::' +
+                enumName + ':: zugeordnet!');
           });
         });
+      });
+    });
   }).then(function () {
     if (callback) {
       callback(null);
