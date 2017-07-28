@@ -2,7 +2,14 @@
 
 # ioBroker.milight-smart-light
 
-The adapter controls Milight LED bulbs and LED strips and based on the node module from mwittig.
+**Tests:** Linux/Mac:
+[![Travis-CI](http://img.shields.io/travis/Steiger04/ioBroker.milight-smart-light/master.svg)](https://travis-ci.org/Steiger04/ioBroker.milight-smart-light)
+Windows:
+[![AppVeyor](https://ci.appveyor.com/api/projects/status/github/Steiger04/ioBroker.milight-smart-light?branch=master&svg=true)](https://ci.appveyor.com/project/Steiger04/ioBroker-milight-smart-light/)
+
+
+This adapter for ioBroker controls Milight LED bulbs and LED strips and
+based on the node module from mwittig.
 
 mwittig / [node-milight-promise](https://github.com/mwittig/node-milight-promise)
 
@@ -23,8 +30,12 @@ With adapter you can use both: **v6 Bridge** and **Legacy Bridge**.
 ### Versions
 
 - **Node.js**: use v. 6.00 or higher
-- **iobroker.admin**: use v. 1.8.2 or higehr
-- 
+- **iobroker.admin**: use v. 1.8.2 or higher
+
+### 0.0.4 (2017-07-28)
+- (steiger04) "add basis-testing"
+
+
 ### 0.0.3 (2017-07-24)
 - (steiger04) "on- /off- /onoff-states optimized for vis widgets"
 

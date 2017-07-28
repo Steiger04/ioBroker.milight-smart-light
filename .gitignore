@@ -7,7 +7,4 @@
 /tasks
 /www
 /widgets
-/test
 /Gruntfile.js
-/.travis.yml
-/appveyor.yml
