@@ -36,7 +36,7 @@ adapter.on('message', function (obj) {
             adapter.sendTo(obj.from, obj.command, results, obj.callback);
           }
         }).catch(function (err) {
-          adapter.log.error('on:message:discover bridges ->' + err.message);
+          adapter.log.error('on:message:discover bridges->' + err.message);
         });
 
         break;
