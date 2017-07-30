@@ -1,0 +1,6 @@
+{
+  "preset": "airbnb",
+  "maximumLineLength": 160,
+  "requireTrailingComma" : false,
+  "maxErrors": -1
+}
