@@ -6,3 +6,5 @@
 /www
 /widgets
 /Gruntfile.js
+/node_modules
+/.idea

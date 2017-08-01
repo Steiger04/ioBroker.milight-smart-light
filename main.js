@@ -21,11 +21,16 @@ adapter.on('message', function (obj) {
   if (typeof obj === 'object') {
     switch (obj.command) {
       case 'discover':
-        let discoverIp = adapter.config.controllerIp.split('.');
+        let discoverIp = adapter.config.controllerIp;
 
-        discoverIp.pop();
-        discoverIp.push('255');
-        discoverIp = discoverIp.join('.');
+        if (discoverIp === '') {
+          discoverIp = '255.255.255.255';
+        } else {
+          discoverIp = discoverIp.split('.');
+          discoverIp.pop();
+          discoverIp.push('255');
+          discoverIp = discoverIp.join('.');
+        }
 
         let discoverBridges = require('node-milight-promise').discoverBridges;
         discoverBridges({
@@ -268,7 +273,7 @@ function configSync(callback) {
   }).then(function () {
     // Channels aus addChannelsToStorage anlegen
     Promise.map(addChannelsToStorage, function (addDevice) {
-      return adapter.createChannelAsync(addDevice.nameZone, addDevice.typeNumberZone, { name: addDevice.nameType });
+      return adapter.createChannelAsync(addDevice.nameZone, addDevice.typeNumberZone, {name: addDevice.nameType});
     });
   }).then(function () {
     // States hinzufügen
