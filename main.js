@@ -54,11 +54,9 @@ adapter.on('message', function (obj) {
         adapter.getDevicesAsync().then(function (devicesFromStorage) {
           count = devicesFromStorage.length;
 
-          Promise.mapSeries(_.flatten([addChannelsToStorage, devicesFromAdmin]),
-              function (addDevice) {
-                return adapter.deleteChannelFromEnumAsync(null, addDevice.nameZone,
-                    addDevice.typeNumberZone);
-              }).then(function () {
+          Promise.mapSeries(_.flatten([addChannelsToStorage, devicesFromAdmin]), function (addDevice) {
+            return adapter.deleteChannelFromEnumAsync(null, addDevice.nameZone, addDevice.typeNumberZone);
+          }).then(function () {
             Promise.each(devicesFromStorage, function (device) {
               return adapter.deleteDeviceAsync(device.common.name);
             });
@@ -75,10 +73,9 @@ adapter.on('message', function (obj) {
 
       case 'deleteenums':
         adapter.log.debug('on:message:deleteenums . . .');
-        Promise.mapSeries(_.flatten([addChannelsToStorage, devicesFromAdmin]),
-            function (addDevice) {
-              return adapter.deleteChannelFromEnumAsync(null, addDevice.nameZone, addDevice.typeNumberZone);
-            }).catch(function (err) {
+        Promise.mapSeries(_.flatten([addChannelsToStorage, devicesFromAdmin]), function (addDevice) {
+          return adapter.deleteChannelFromEnumAsync(null, addDevice.nameZone, addDevice.typeNumberZone);
+        }).catch(function (err) {
           adapter.log.error('on:message:deleteenums->' + err.message);
         });
 
@@ -88,8 +85,7 @@ adapter.on('message', function (obj) {
         if (os.platform() === 'win32') {
           if (smartLight) {
             smartLight.close().then(function () {
-              adapter.log.debug(
-                  'on:message:stopInstance->All command have been executed - closing Milight!');
+              adapter.log.debug('on:message:stopInstance->All command have been executed - closing Milight!');
             });
           }
 
@@ -273,7 +269,7 @@ function configSync(callback) {
   }).then(function () {
     // Channels aus addChannelsToStorage anlegen
     Promise.map(addChannelsToStorage, function (addDevice) {
-      return adapter.createChannelAsync(addDevice.nameZone, addDevice.typeNumberZone, {name: addDevice.nameType});
+      return adapter.createChannelAsync(addDevice.nameZone, addDevice.typeNumberZone, { name: addDevice.nameType });
     });
   }).then(function () {
     // States hinzufügen

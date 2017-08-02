@@ -69,11 +69,7 @@
     'conIp': {'en': 'IP', 'de': 'IP', 'ru': 'IP'},
     'conPort': {'en': 'Port', 'de': 'Port', 'ru': 'Порт'},
     'conRepeatCommand': {'en': 'Repetition of Commands', 'de': 'Befehlswiederholungen', 'ru': 'Повтор команд'},
-    'conPauseBetweenCommands': {
-      'en': 'Pause between two commands', 'de': 'Pause zwischen zwei Befehlen', 'ru': 'Пауза между командами',
-    },
-    'conBroadcastMode': {'en': 'Activate Broadcast', 'de': 'Broadcast Modus aktivieren', 'ru': 'Включить Broadcast'},
-    'conKeepAlive': {'en': 'Activate Keepalive', 'de': 'Keepalive aktivieren', 'ru': 'Включить Keep-alive'},
+    'conPauseBetweenCommands': {'en': 'Pause between two commands', 'de': 'Pause zwischen zwei Befehlen', 'ru': 'Пауза между командами'},
 
     // Controller Error
     'noController': {
@@ -126,7 +122,7 @@
     'msgError': {'en': 'Error', 'de': 'Fehler', 'ru': 'Ошибка'},
 
     'msgMultipleZones': {
-      'en': 'Don\'t use equal zones.', 'de': 'Zonen dürfen nicht doppelt belegt werden.', 'ru': 'Нельзя использовать зоны дважды'
+      'en': 'Don\'t use equal zones.', 'de': 'Zonen dürfen nicht doppelt belegt werden.', 'ru': 'Нельзя использовать зоны дважды',
     },
 
     'msgOnlyOneBridge': {
@@ -191,9 +187,7 @@
       maxRaw = 5;
 
       $('th[data-name=numberZone]').attr('data-options', '0/nozone;1/zone1;2/zone2;3/zone3;4/zone4;5/zone5');
-      $('th[data-name=typeZone]').
-          attr('data-options',
-              '0/notype;white/White;rgb/RGB;rgbw/RGB + White;fullColor/RGB + CWWW;bridge/Bridge (iBox1)');
+      $('th[data-name=typeZone]').attr('data-options', '0/notype;white/White;rgb/RGB;rgbw/RGB + White;fullColor/RGB + CWWW;bridge/Bridge (iBox1)');
     }
     else {
       maxRaw = 4;
@@ -339,19 +333,14 @@
 
       $('#tab-1').find('select[data-name=room]').multiselect({
         header: _('select'),
-
         noneSelectedText: _('nonerooms'),
-
         minWidth: false,
-
         multiple: false,
 
         create: function () {
           const $that = $(this);
 
-          $($that.multiselect('getButton')).css({
-            'width': '100%', 'color': 'inherit', 'font-weight': 'inherit',
-          });
+          $($that.multiselect('getButton')).css({'width': '100%', 'color': 'inherit', 'font-weight': 'inherit'});
 
           $($that.multiselect('widget')).css('width', 'auto');
 
@@ -369,9 +358,7 @@
         create: function () {
           const $that = $(this);
 
-          $($that.multiselect('getButton')).css({
-            'width': '100%', 'color': 'inherit', 'font-weight': 'inherit',
-          });
+          $($that.multiselect('getButton')).css({'width': '100%', 'color': 'inherit', 'font-weight': 'inherit'});
 
           $($that.multiselect('widget')).css('width', 'auto');
 
@@ -379,9 +366,7 @@
             selectedText: function () {
               selectedText = '';
               $that.children('option:checked').each(function (index) {
-                index < $that.children('option:checked').length - 1
-                    ? selectedText += $(this).text() + ' | '
-                    : selectedText += $(this).text();
+                index < $that.children('option:checked').length - 1 ? selectedText += $(this).text() + ' | ' : selectedText += $(this).text();
               });
               return selectedText;
             },
@@ -410,10 +395,8 @@
 
             for (let i = 0; i < list.length; i++) {
               selection += '<optgroup label="' +
-                  (list[i].name ? list[i].name + ' | ' + list[i].type + ' | ' + list[i].mac + '">' : list[i].type +
-                      ' | ' + list[i].mac + '">');
-              selection += '<option value="' + list[i].ip + '"' + 'data-type="' + list[i].type + '">' + list[i].ip +
-                  '</option>';
+                  (list[i].name ? list[i].name + ' | ' + list[i].type + ' | ' + list[i].mac + '">' : list[i].type + ' | ' + list[i].mac + '">');
+              selection += '<option value="' + list[i].ip + '"' + ' data-type="' + list[i].type + '">' + list[i].ip + '</option>';
               selection += '</optgroup>';
             }
 
@@ -473,8 +456,7 @@
             $thNumberZone.attr('data-options', '0/' + _('nozone') + ';1/zone1;2/zone2;3/zone3;4/zone4;5/zone5');
 
             $thTypeZone.removeData('options');
-            $thTypeZone.attr('data-options', '0/' + _('notype') +
-                ';white/White;rgb/RGB;rgbw/RGB + White;fullColor/RGB + CWWW;bridge/Bridge (iBox1)');
+            $thTypeZone.attr('data-options', '0/' + _('notype') + ';white/White;rgb/RGB;rgbw/RGB + White;fullColor/RGB + CWWW;bridge/Bridge (iBox1)');
           }
 
           sendTo(null, 'deletedevices', null, function (count) {
@@ -550,6 +532,7 @@
                     </div>
                     <div class="pure-control-group">
                         <label for="controllerIp" class="translate">conIp</label>
+                        <!--suppress XmlDefaultAttributeValue -->
                         <input type="text" name="controllerIp" id="controllerIp" class="value">
 
                         <button type="button" id="discover" class="pure-button">
@@ -560,14 +543,17 @@
                     </div>
                     <div class="pure-control-group">
                         <label for="controllerPort" class="translate">conPort</label>
+                        <!--suppress XmlDefaultAttributeValue -->
                         <input type="text" name="controllerPort" id="controllerPort" class="value">
                     </div>
                     <div class="pure-control-group">
                         <label for="commandRepeat" class="translate">conRepeatCommand</label>
+                        <!--suppress XmlDefaultAttributeValue -->
                         <input type="text" name="commandRepeat" id="commandRepeat" class="value">
                     </div>
                     <div class="pure-control-group">
                         <label for="delayBetweenCommands" class="translate">conPauseBetweenCommands</label>
+                        <!--suppress XmlDefaultAttributeValue -->
                         <input type="text" name="delayBetweenCommands" id="delayBetweenCommands" class="value">
                     </div>
                 </fieldset>
