@@ -1,12 +1,17 @@
 {
   "common": {
     "name": "milight-smart-light",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "news": {
+      "0.0.5": {
+        "en": "Added russian translation",
+        "de": "Russische Übersetzung hinzugefügt",
+        "ru": "Added russian translation"
+      },
       "0.0.4": {
-        "en": "Add basis-testing",
+        "en": "Added basis-testing",
         "de": "Basistests hinzugefügt",
-        "ru": "Add basis-testing"
+        "ru": "Added basis-testing"
       },
       "0.0.3": {
         "en": "on- /off- /onoff-states optimized for vis widgets",

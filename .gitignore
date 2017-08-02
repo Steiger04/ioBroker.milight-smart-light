@@ -1,10 +1,5 @@
-/bower_components
-/.jscsrc
-/.eslintrc
-/bower.json
-/tasks
-/www
-/widgets
-/Gruntfile.js
-/node_modules
-/.idea
+/.idea/
+/test/
+/bower_components/
+/package-lock.json
+/node_modules/
