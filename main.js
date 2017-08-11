@@ -252,11 +252,6 @@ function configSync(callback) {
       return device.channelId === channel;
     });
   }).then(function () {
-    // Enums löschen
-    Promise.map(deleteChannelsFromStorage, function (DCS) {
-      return adapter.deleteChannelFromEnumAsync(null, DCS.device, DCS.channel);
-    });
-  }).then(function () {
     // Channels aus deleteChannelsFromStorage aus dem Speicher löschen
     Promise.map(deleteChannelsFromStorage, function (DCS) {
       return adapter.deleteChannelAsync(DCS.device, DCS.channel);
