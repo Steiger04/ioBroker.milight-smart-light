@@ -187,13 +187,13 @@
       maxRaw = 5;
 
       $('th[data-name=numberZone]').attr('data-options', '0/nozone;1/zone1;2/zone2;3/zone3;4/zone4;5/zone5');
-      $('th[data-name=typeZone]').attr('data-options', '0/notype;white/White;rgb/RGB;rgbw/RGB + White;fullColor/RGB + CWWW;bridge/Bridge (iBox1)');
+      $('th[data-name=typeZone]').attr('data-options', '0/notype;white/White;rgbw/RGB(W);fullColor/RGB + CWWW;bridge/Bridge (iBox1)');
     }
     else {
       maxRaw = 4;
 
       $('th[data-name=numberZone]').attr('data-options', '0/nozone;1/zone1;2/zone2;3/zone3;4/zone4');
-      $('th[data-name=typeZone]').attr('data-options', '0/notype;white/White;rgb/RGB;rgbw/RGB + White');
+      $('th[data-name=typeZone]').attr('data-options', '0/notype;white/White;rgbw/RGB(W)');
     }
 
     $('#devices').hide();
@@ -446,7 +446,7 @@
             $thNumberZone.attr('data-options', '0/' + _('nozone') + ';1/zone1;2/zone2;3/zone3;4/zone4');
 
             $thTypeZone.removeData('options');
-            $thTypeZone.attr('data-options', '0/' + _('notype') + ';white/White;rgb/RGB;rgbw/RGB + White');
+            $thTypeZone.attr('data-options', '0/' + _('notype') + ';white/White;rgbw/RGB(W)');
           }
           else if (ct === 'v6') {
             maxRaw = 5;
@@ -456,7 +456,7 @@
             $thNumberZone.attr('data-options', '0/' + _('nozone') + ';1/zone1;2/zone2;3/zone3;4/zone4;5/zone5');
 
             $thTypeZone.removeData('options');
-            $thTypeZone.attr('data-options', '0/' + _('notype') + ';white/White;rgb/RGB;rgbw/RGB + White;fullColor/RGB + CWWW;bridge/Bridge (iBox1)');
+            $thTypeZone.attr('data-options', '0/' + _('notype') + ';white/White;rgbw/RGB(W);fullColor/RGB + CWWW;bridge/Bridge (iBox1)');
           }
 
           sendTo(null, 'deletedevices', null, function (count) {
