@@ -1,65 +1,70 @@
 {
-  "common": {
-    "name": "milight-smart-light",
-    "version": "0.0.5",
-    "news": {
-      "0.0.5": {
-        "en": "Added russian translation",
-        "de": "Russische Übersetzung hinzugefügt",
-        "ru": "Added russian translation"
-      },
-      "0.0.4": {
-        "en": "Added basis-testing",
-        "de": "Basistests hinzugefügt",
-        "ru": "Added basis-testing"
-      },
-      "0.0.3": {
-        "en": "on- /off- /onoff-states optimized for vis widgets",
-        "de": "on- /off- /onoff-states für vis widgets optimiert",
-        "ru": "on- /off- /onoff-states optimized for vis widgets"
-      },
-      "0.0.2": {
-        "en": "Bug fix: added parameter in effectMode(...)",
-        "de": "Fehler behoben: Parameter in effectMode(...) hinzugefügt",
-        "ru": "Bug fix: added parameter in effectMode(...)"
-      },
-      "0.0.1": {
-        "en": "initial adapter",
-        "de": "Initiale Version",
-        "ru": "Первоначальный адаптер"
-      }
+    "common": {
+        "name": "milight-smart-light",
+        "version": "0.0.5",
+        "news": {
+            "0.0.5": {
+                "en": "Added russian translation",
+                "de": "Russische Übersetzung hinzugefügt",
+                "ru": "Added russian translation"
+            },
+            "0.0.4": {
+                "en": "Added basis-testing",
+                "de": "Basistests hinzugefügt",
+                "ru": "Added basis-testing"
+            },
+            "0.0.3": {
+                "en": "on- /off- /onoff-states optimized for vis widgets",
+                "de": "on- /off- /onoff-states für vis widgets optimiert",
+                "ru": "on- /off- /onoff-states optimized for vis widgets"
+            },
+            "0.0.2": {
+                "en": "Bug fix: added parameter in effectMode(...)",
+                "de": "Fehler behoben: Parameter in effectMode(...) hinzugefügt",
+                "ru": "Bug fix: added parameter in effectMode(...)"
+            },
+            "0.0.1": {
+                "en": "initial adapter",
+                "de": "Initiale Version",
+                "ru": "Первоначальный адаптер"
+            }
+        },
+        "title": "milight-smart-light Adapter",
+        "desc": {
+            "en": "Adapter for Milight LED bulbs and LED strips",
+            "de": "Adapter für Milight LED bulbs und LED strips",
+            "ru": "Adapter for Milight LED bulbs and LED strips"
+        },
+        "platform": "Javascript/Node.js",
+        "mode": "daemon",
+        "icon": "lib/images/milight-smart-light.png",
+        "enabled": true,
+        "messagebox": true,
+        "supportStopInstance": true,
+        "extIcon": "https://raw.githubusercontent.com/Steiger04/ioBroker.milight-smart-light/master/admin/lib/images/milight-smart-light.png",
+        "keywords": [
+            "milight-smart-light",
+            "milight",
+            "bulb",
+            "strip",
+            "LED"
+        ],
+        "readme": "https://github.com/Steiger04/ioBroker.milight-smart-light/blob/master/README.md",
+        "loglevel": "info",
+        "type": "lighting",
+        "authors": [
+            {
+                "name": "Steiger04",
+                "email": "steiger04@posteo.de"
+            }
+        ]
     },
-    "title": "milight-smart-light Adapter",
-    "desc": {
-      "en": "Adapter for Milight LED bulbs and LED strips",
-      "de": "Adapter für Milight LED bulbs und LED strips",
-      "ru": "Adapter for Milight LED bulbs and LED strips"
+    "native": {
+        "controllerType": "v6",
+        "controllerIp": "",
+        "controllerPort": "5987",
+        "commandRepeat": "1",
+        "delayBetweenCommands": "100"
     },
-    "platform": "Javascript/Node.js",
-    "mode": "daemon",
-    "icon": "lib/images/milight-smart-light.png",
-    "enabled": true,
-    "messagebox": true,
-    "supportStopInstance": true,
-    "extIcon": "https://raw.githubusercontent.com/Steiger04/ioBroker.milight-smart-light/master/admin/lib/images/milight-smart-light.png",
-    "keywords": [
-      "milight-smart-light",
-      "milight",
-      "bulb",
-      "strip",
-      "LED"
-    ],
-    "readme": "https://github.com/Steiger04/ioBroker.milight-smart-light/blob/master/README.md",
-    "loglevel": "info",
-    "type": "common adapters"
-  },
-  "native": {
-    "controllerType": "v6",
-    "controllerIp": "",
-    "controllerPort": "5987",
-    "commandRepeat": "1",
-    "delayBetweenCommands": "100"
-  },
-  "objects": [
-  ]
+    "objects": []
 }
