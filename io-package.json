@@ -1,8 +1,13 @@
 {
     "common": {
         "name": "milight-smart-light",
-        "version": "0.0.5",
+        "version": "0.0.6",
         "news": {
+            "0.0.6": {
+                "en": "Bug fix: All four zones can be created for the instance (via iobroker.admin) and remain after a reload. There are no more problems with umlauts.",
+                "de": "Fehler behoben: Alle vier Zonen können für die Instanz (via iobroker.admin) angelegt werden und gehen nach einem Reload nicht verloren. Umlaute können ebenfalls genutzt werden.",
+                "ru": "Bug fix: All four zones can be created for the instance (via iobroker.admin) and remain after a reload. There are no more problems with umlauts."
+            },
             "0.0.5": {
                 "en": "Added russian translation",
                 "de": "Russische Übersetzung hinzugefügt",

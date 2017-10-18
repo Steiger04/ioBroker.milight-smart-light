@@ -19,34 +19,38 @@ With adapter you can use both: **v6 Bridge** and **Legacy Bridge**.
 
 - bridge (only iBox1)
 - white
-- rgbw
+- rgb(w)
 - fullColor
 
 
 **Legacy Bridge:**
 - white
-- rgbw
+- rgb(w)
 
 ### Versions
 
 - **Node.js**: use v. 6.00 or higher
 - **iobroker.admin**: use v. 1.8.2 or higher
 
+### 0.0.6 (2017-10-18)
+- (steiger04): Bug fix: All four zones can be created for the instance (via iobroker.admin) and remain after a reload. There are no more problems with umlauts.
+- (steiger04): The types "RGB + White" and "RGB" were combined in the type "RGB (W)"
+
 ### 0.0.5 (2017-08-02)
-- (bluefox) "Added russian translation"
+- (bluefox): Added russian translation
 
 ### 0.0.4 (2017-07-28)
-- (steiger04) "Added basis-testing"
+- (steiger04): Added basis-testing
 
 
 ### 0.0.3 (2017-07-24)
-- (steiger04) "on- /off- /onoff-states optimized for vis widgets"
+- (steiger04): on- /off- /onoff-states optimized for vis widgets
 
 ### 0.0.2 (2017-07-23)
-- (steiger04) "Bug fix: added parameter in effectMode(...)"
+- (steiger04): Bug fix: added parameter in effectMode(...)
 
 ### 0.0.1 (2017-07-16)
-- (steiger04) "Initial Version"
+- (steiger04): Initial Version
 
 ## License
 

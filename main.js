@@ -25,7 +25,8 @@ adapter.on('message', function (obj) {
 
         if (discoverIp === '') {
           discoverIp = '255.255.255.255';
-        } else {
+        }
+        else {
           discoverIp = discoverIp.split('.');
           discoverIp.pop();
           discoverIp.push('255');
@@ -121,7 +122,8 @@ adapter.on('unload', function (callback) {
     //adapter.sendTo(adapter.namespace, 'deletedevices', null);
 
     callback();
-  } catch (err) {
+  }
+  catch (err) {
     callback();
   }
 });
@@ -156,21 +158,27 @@ adapter.on('stateChange', function (_id, state) {
 
   switch (adapter.config.controllerType) {
     case 'v6':
+      adapter.setStateAsync(_id, state.val, true);
+
       smartLight.sendCommands(mslcommandsV6[typeZone][dp](options)).then(function () {
-        adapter.setStateAsync(_id, state.val, true);
+        //adapter.setStateAsync(_id, state.val, true);
       }).catch(function (err) {
         adapter.log.error('on:stateChange:mslcommandsV6->' + err.message);
       });
-
+      
+      //adapter.setStateAsync(_id, state.val, true);
       break;
 
     case 'legacy':
+      adapter.setStateAsync(_id, state.val, true);
+
       smartLight.sendCommands(mslcommands2[typeZone][dp](options)).then(function () {
-        adapter.setStateAsync(_id, state.val, true);
+        //adapter.setStateAsync(_id, state.val, true);
       }).catch(function (err) {
         adapter.log.error('on:stateChange:mslcommands2->' + err.message);
       });
 
+      //adapter.setStateAsync(_id, state.val, true);
       break;
 
     default:
@@ -183,7 +191,7 @@ adapter.on('ready', function () {
   main();
 });
 
-function main() {
+function main () {
   let configSyncAsync = Promise.promisify(configSync);
 
   adapter.log.info('adapter:main->:::milight-smart-light::: wurde gestartet!');
@@ -207,11 +215,10 @@ function main() {
 let devicesFromAdmin = [];
 let addChannelsToStorage = [];
 
-function configSync(callback) {
+function configSync (callback) {
   let deleteChannelsFromStorage = [];
 
-  adapter.log.debug('config_Sync: Konfigurierte Devices in adapter.config.devices->' +
-      JSON.stringify(adapter.config.devices));
+  adapter.log.debug('config_Sync: Konfigurierte Devices in adapter.config.devices->' + JSON.stringify(adapter.config.devices));
 
   if (adapter.config.devices && adapter.config.devices.length) { // Gibt es Devices im Admin?
     _.forEach(adapter.config.devices, function (device) {
@@ -234,7 +241,7 @@ function configSync(callback) {
   });
 
   adapter.getDevicesAsync().then(function (devicesFromStorage) {
-    return Promise.map(devicesFromStorage, function (device) {
+    return Promise.mapSeries(devicesFromStorage, function (device) {
       return adapter.getChannelsOfAsync(device._id);
     });
   }).then(function (channelsFromStorage) {
@@ -253,35 +260,33 @@ function configSync(callback) {
     });
   }).then(function () {
     // Channels aus deleteChannelsFromStorage aus dem Speicher löschen
-    Promise.map(deleteChannelsFromStorage, function (DCS) {
+    Promise.mapSeries(deleteChannelsFromStorage, function (DCS) {
       return adapter.deleteChannelAsync(DCS.device, DCS.channel);
     });
   }).then(function () {
     // Devices aus addChannelsToStorage anlegen
-    Promise.map(addChannelsToStorage, function (addDevice) {
+    Promise.mapSeries(addChannelsToStorage, function (addDevice) {
       return adapter.createDeviceAsync(addDevice.nameZone);
     });
   }).then(function () {
     // Channels aus addChannelsToStorage anlegen
-    Promise.map(addChannelsToStorage, function (addDevice) {
-      return adapter.createChannelAsync(addDevice.nameZone, addDevice.typeNumberZone, { name: addDevice.nameType });
+    Promise.mapSeries(addChannelsToStorage, function (addDevice) {
+      return adapter.createChannelAsync(addDevice.nameZone, addDevice.typeNumberZone, {name: addDevice.nameType, type:addDevice.typeZone });
     });
   }).then(function () {
     // States hinzufügen
     Promise.mapSeries(addChannelsToStorage, function (addDevice) {
-      return Promise.map(states.statesList(adapter.config.controllerType, addDevice.typeZone), function (dp) {
+      return Promise.mapSeries(states.statesList(adapter.config.controllerType, addDevice.typeZone), function (dp) {
         return adapter.createStateAsync(addDevice.nameZone, addDevice.typeNumberZone, dp, states.getCommon(dp));
       });
     });
   }).then(function () {
     // Enums löschen und hinzufügen
     Promise.mapSeries(_.flatten([addChannelsToStorage, devicesFromAdmin]), function (addDevice) {
-      return adapter.deleteChannelFromEnumAsync(null, addDevice.nameZone,
-          addDevice.typeNumberZone).then(function () {
-        return Promise.map(_.flatten([addDevice.room, addDevice.func]), function (enumName) {
+      return adapter.deleteChannelFromEnumAsync(null, addDevice.nameZone, addDevice.typeNumberZone).then(function () {
+        return Promise.mapSeries(_.flatten([addDevice.room, addDevice.func]), function (enumName) {
           return adapter.addChannelToEnumAsync(enumName, enumName, addDevice.nameZone, addDevice.typeNumberZone).then(function () {
-            adapter.log.debug('config_Sync->::' + adapter.namespace + '.' + addDevice.nameZone + '.' + addDevice.typeNumberZone + ':: wurde Enum->::' +
-                enumName + ':: zugeordnet!');
+            adapter.log.debug('config_Sync->::' + adapter.namespace + '.' + addDevice.nameZone + '.' + addDevice.typeNumberZone + ':: wurde Enum->::' + enumName + ':: zugeordnet!');
           });
         });
       });
