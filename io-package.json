@@ -1,8 +1,13 @@
 {
     "common": {
         "name": "milight-smart-light",
-        "version": "0.0.6",
+        "version": "0.1.0",
         "news": {
+            "0.1.0": {
+                "en": "Added Small FE for milight-smart-light",
+                "de": "Small FE for milight-smart-light hinzugefügt",
+                "ru": "Added Small FE for milight-smart-light"
+            },
             "0.0.6": {
                 "en": "Bug fix: All four zones can be created for the instance (via iobroker.admin) and remain after a reload. There are no more problems with umlauts.",
                 "de": "Fehler behoben: Alle vier Zonen können für die Instanz (via iobroker.admin) angelegt werden und gehen nach einem Reload nicht verloren. Umlaute können ebenfalls genutzt werden.",
@@ -62,7 +67,9 @@
                 "name": "Steiger04",
                 "email": "steiger04@posteo.de"
             }
-        ]
+        ],
+        "dependencies": ["web"],
+        "localLink": "%web_protocol%://%ip%:%web_port%/milight-smart-light/index.html"
     },
     "native": {
         "controllerType": "v6",

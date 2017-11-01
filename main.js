@@ -223,6 +223,8 @@ function configSync (callback) {
   if (adapter.config.devices && adapter.config.devices.length) { // Gibt es Devices im Admin?
     _.forEach(adapter.config.devices, function (device) {
       devicesFromAdmin.push({
+        controllerType: adapter.config.controllerType,
+
         room: (device.room === '' || device.room === '0') ? [] : [device.room],
         func: device.func === '' ? [] : device.func,
         activeZone: device.activeZone,
@@ -271,7 +273,7 @@ function configSync (callback) {
   }).then(function () {
     // Channels aus addChannelsToStorage anlegen
     Promise.mapSeries(addChannelsToStorage, function (addDevice) {
-      return adapter.createChannelAsync(addDevice.nameZone, addDevice.typeNumberZone, {name: addDevice.nameType, type:addDevice.typeZone });
+      return adapter.createChannelAsync(addDevice.nameZone, addDevice.typeNumberZone, {name: addDevice.nameType, type:addDevice.typeZone, controllerType: addDevice.controllerType });
     });
   }).then(function () {
     // States hinzufügen
