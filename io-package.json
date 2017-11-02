@@ -3,6 +3,11 @@
         "name": "milight-smart-light",
         "version": "0.1.0",
         "news": {
+            "0.1.1": {
+                "en": "Bug fix: Fixed EffectMode for Legacy",
+                "de": "Fehler behoben: EffectMode für Legacy",
+                "ru": "Bug fix: Fixed EffectMode for Legacy"
+            },
             "0.1.0": {
                 "en": "Added Small FE for milight-smart-light",
                 "de": "Small FE for milight-smart-light hinzugefügt",

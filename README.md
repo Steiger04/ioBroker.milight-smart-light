@@ -32,6 +32,9 @@ With adapter you can use both: **v6 Bridge** and **Legacy Bridge**.
 - **Node.js**: use v. 6.00 or higher
 - **iobroker.admin**: use v. 1.8.2 or higher
 
+### 0.1.1 (2017-11-02)
+- (steiger04): Bug fix: Fixed EffectMode for Legacy
+
 ### 0.1.0 (2017-11-01)
 - (steiger04): Added Small FE for milight-smart-light
 
