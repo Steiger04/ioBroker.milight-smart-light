@@ -32,6 +32,9 @@ With adapter you can use both: **v6 Bridge** and **Legacy Bridge**.
 - **Node.js**: use v. 6.00 or higher
 - **iobroker.admin**: use v. 1.8.2 or higher
 
+### 0.1.2 (2017-11-04)
+- (steiger04): Bug fix: socketio
+
 ### 0.1.1 (2017-11-02)
 - (steiger04): Bug fix: Fixed EffectMode for Legacy
 

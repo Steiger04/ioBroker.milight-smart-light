@@ -1,8 +1,13 @@
 {
     "common": {
         "name": "milight-smart-light",
-        "version": "0.1.1",
+        "version": "0.1.2",
         "news": {
+            "0.1.2": {
+                "en": "Bug fix: socketio",
+                "de": "Fehler behoben: socketio",
+                "ru": "Bug fix: socketio"
+            },
             "0.1.1": {
                 "en": "Bug fix: Fixed EffectMode for Legacy",
                 "de": "Fehler behoben: EffectMode für Legacy",
