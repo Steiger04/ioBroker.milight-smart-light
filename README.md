@@ -33,6 +33,10 @@ With adapter you can use both: **v6 Bridge** and **Legacy Bridge**.
 - **iobroker.admin**: use v. 1.8.2 or higher
 
 
+### 0.1.4 (2017-11-05)
+- (steiger04): Set configuration option fullSync to false in milight instance
+
+
 ### 0.1.3 (2017-11-04)
 - (steiger04): Added start image
 

@@ -1,8 +1,13 @@
 {
     "common": {
         "name": "milight-smart-light",
-        "version": "0.1.3",
+        "version": "0.1.4",
         "news": {
+            "0.1.4": {
+                "en": "Set configuration option fullSync to false in milight instance",
+                "de": "Setzt fullSync auf false in der milight Instanz",
+                "ru": "Set configuration option fullSync to false in milight instance"
+            },
             "0.1.3": {
                 "en": "Added start image",
                 "de": "Startbild hinzugefügt",

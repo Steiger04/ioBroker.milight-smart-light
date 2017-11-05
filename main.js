@@ -203,6 +203,7 @@ function main () {
     delayBetweenCommands: parseInt(adapter.config.delayBetweenCommands),
     commandRepeat: parseInt(adapter.config.commandRepeat),
     port: parseInt(adapter.config.controllerPort),
+    fullSync: false
   });
 
   configSyncAsync().then(function () {
