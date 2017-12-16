@@ -10,6 +10,7 @@ let adapter = utils.adapter({
 
 const mslcommandsV6 = require(__dirname + '/lib/js/mslcommandsV6')(adapter);
 const mslcommands2 = require(__dirname + '/lib/js/mslcommands2')(adapter);
+const mslcommands = require(__dirname + '/lib/js/mslcommands')(adapter);
 
 const states = require(__dirname + '/lib/js/mslstates');
 
@@ -202,7 +203,8 @@ function main () {
     type: adapter.config.controllerType,
     delayBetweenCommands: parseInt(adapter.config.delayBetweenCommands),
     commandRepeat: parseInt(adapter.config.commandRepeat),
-    port: parseInt(adapter.config.controllerPort)
+    port: parseInt(adapter.config.controllerPort),
+    fullSync: false
   });
 
   configSyncAsync().then(function () {
