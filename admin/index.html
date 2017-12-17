@@ -143,6 +143,10 @@
   });
 
   function setValue(id, value, onChange) {
+    if(id === 'controllerPortV6' || id === 'controllerPortLegacy') {
+      id = 'controllerPort'
+    }
+
     if ($('#' + id + '.value').prop('type') === 'checkbox') {
       $('#' + id + '.value').prop('checked', value).on('change', function () {
         setTimeout(function () {
@@ -177,7 +181,6 @@
     let maxRaw = undefined;
 
     const devices = settings.devices || [];
-    const port = settings.controllerPort;
 
     for (let key in settings) {
       setValue(key, settings[key], onChange);
@@ -440,7 +443,7 @@
         if (!id) {
           if (ct === 'legacy') {
             maxRaw = 4;
-            $('#controllerPort').val(port);
+            $('#controllerPort').val(settings.controllerPortLegacy);
 
             $thNumberZone.removeData('options');
             $thNumberZone.attr('data-options', '0/' + _('nozone') + ';1/zone1;2/zone2;3/zone3;4/zone4');
@@ -450,7 +453,7 @@
           }
           else if (ct === 'v6') {
             maxRaw = 5;
-            $('#controllerPort').val(port);
+            $('#controllerPort').val(settings.controllerPortV6);
 
             $thNumberZone.removeData('options');
             $thNumberZone.attr('data-options', '0/' + _('nozone') + ';1/zone1;2/zone2;3/zone3;4/zone4;5/zone5');

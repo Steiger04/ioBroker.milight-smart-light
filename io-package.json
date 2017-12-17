@@ -94,7 +94,8 @@
     "native": {
         "controllerType": "v6",
         "controllerIp": "",
-        "controllerPort": "5987",
+        "controllerPortLegacy": "8899",
+        "controllerPortV6": "5987",
         "commandRepeat": "1",
         "delayBetweenCommands": "100"
     },

@@ -203,7 +203,7 @@ function main () {
     type: adapter.config.controllerType,
     delayBetweenCommands: parseInt(adapter.config.delayBetweenCommands),
     commandRepeat: parseInt(adapter.config.commandRepeat),
-    port: parseInt(adapter.config.controllerPort),
+    port: adapter.config.controllerType === 'v6' ? parseInt(adapter.config.controllerPortV6) : parseInt(adapter.config.controllerPortLegacy),
     fullSync: false
   });
 
