@@ -4,7 +4,7 @@ const Promise = require('bluebird'); // jshint ignore:line
 const _ = require('lodash');
 const utils = require(__dirname + '/lib/utils');
 
-let adapter = utils.adapter({
+let adapter = utils.Adapter({
   name: 'milight-smart-light',
 });
 
