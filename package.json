@@ -52,12 +52,12 @@
     "grunt-jscs": "^3.0.1",
     "grunt-replace": "^1.0.1",
     "grunt-run-cmd": "^1.0.3",
-    "mocha": "^3.5.3",
+    "mocha": "^4.1.0",
     "time-grunt": "^1.4.0"
   },
   "main": "main.js",
   "scripts": {
-    "test": "node node_modules/mocha/bin/mocha"
+    "test": "node node_modules/mocha/bin/mocha --exit"
   },
   "bugs": {
     "url": "https://github.com/Steiger04/ioBroker.milight-smart-light/issues"
