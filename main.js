@@ -1,3 +1,5 @@
+'use strict';
+
 const os = require('os'); // win32? -> supportStopInstance erforderlich in common{...}
 const Promise = require('bluebird'); // jshint ignore:line
 const _ = require('lodash');
@@ -236,7 +238,7 @@ function configSync(callback) {
     });
   }
 
-  _.remove(devicesFromAdmin, val => val.activeZone === false || val.numberZone === '' || val.nameZone === '');
+  _.remove(devicesFromAdmin, val => val.activeZone === false || val.numberZone === '' || val.nameZone === '' || val.typeZone === '');
 
   adapter.getDevicesAsync().
       then(devicesFromStorage => Promise.mapSeries(devicesFromStorage, device => adapter.getChannelsOfAsync(device._id))).
