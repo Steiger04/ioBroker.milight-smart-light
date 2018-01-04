@@ -1,103 +1,109 @@
 {
-    "common": {
-        "name": "milight-smart-light",
-        "version": "0.1.4",
-        "news": {
-            "0.1.4": {
-                "en": "Set configuration option fullSync to false in milight instance",
-                "de": "Setzt fullSync auf false in der milight Instanz",
-                "ru": "Set configuration option fullSync to false in milight instance"
-            },
-            "0.1.3": {
-                "en": "Added start image",
-                "de": "Startbild hinzugefügt",
-                "ru": "Added start image"
-            },
-            "0.1.2": {
-                "en": "Bug fix: socketio",
-                "de": "Fehler behoben: socketio",
-                "ru": "Bug fix: socketio"
-            },
-            "0.1.1": {
-                "en": "Bug fix: Fixed EffectMode for Legacy",
-                "de": "Fehler behoben: EffectMode für Legacy",
-                "ru": "Bug fix: Fixed EffectMode for Legacy"
-            },
-            "0.1.0": {
-                "en": "Added Small FE for milight-smart-light",
-                "de": "Small FE for milight-smart-light hinzugefügt",
-                "ru": "Added Small FE for milight-smart-light"
-            },
-            "0.0.6": {
-                "en": "Bug fix: All four zones can be created for the instance (via iobroker.admin) and remain after a reload. There are no more problems with umlauts.",
-                "de": "Fehler behoben: Alle vier Zonen können für die Instanz (via iobroker.admin) angelegt werden und gehen nach einem Reload nicht verloren. Umlaute können ebenfalls genutzt werden.",
-                "ru": "Bug fix: All four zones can be created for the instance (via iobroker.admin) and remain after a reload. There are no more problems with umlauts."
-            },
-            "0.0.5": {
-                "en": "Added russian translation",
-                "de": "Russische Übersetzung hinzugefügt",
-                "ru": "Added russian translation"
-            },
-            "0.0.4": {
-                "en": "Added basis-testing",
-                "de": "Basistests hinzugefügt",
-                "ru": "Added basis-testing"
-            },
-            "0.0.3": {
-                "en": "on- /off- /onoff-states optimized for vis widgets",
-                "de": "on- /off- /onoff-states für vis widgets optimiert",
-                "ru": "on- /off- /onoff-states optimized for vis widgets"
-            },
-            "0.0.2": {
-                "en": "Bug fix: added parameter in effectMode(...)",
-                "de": "Fehler behoben: Parameter in effectMode(...) hinzugefügt",
-                "ru": "Bug fix: added parameter in effectMode(...)"
-            },
-            "0.0.1": {
-                "en": "initial adapter",
-                "de": "Initiale Version",
-                "ru": "Первоначальный адаптер"
-            }
-        },
-        "title": "milight-smart-light Adapter",
-        "desc": {
-            "en": "Adapter for Milight LED bulbs and LED strips",
-            "de": "Adapter für Milight LED bulbs und LED strips",
-            "ru": "Adapter for Milight LED bulbs and LED strips"
-        },
-        "platform": "Javascript/Node.js",
-        "mode": "daemon",
-        "icon": "lib/images/milight-smart-light.png",
-        "enabled": true,
-        "messagebox": true,
-        "supportStopInstance": true,
-        "extIcon": "https://raw.githubusercontent.com/Steiger04/ioBroker.milight-smart-light/master/admin/lib/images/milight-smart-light.png",
-        "keywords": [
-            "milight-smart-light",
-            "milight",
-            "bulb",
-            "strip",
-            "LED"
-        ],
-        "readme": "https://github.com/Steiger04/ioBroker.milight-smart-light/blob/master/README.md",
-        "loglevel": "info",
-        "type": "lighting",
-        "authors": [
-            {
-                "name": "Steiger04",
-                "email": "steiger04@posteo.de"
-            }
-        ],
-        "dependencies": ["web"],
-        "localLink": "%web_protocol%://%ip%:%web_port%/milight-smart-light/index.html"
+  "common": {
+    "name": "milight-smart-light",
+    "version": "0.1.4",
+    "news": {
+      "0.1.4": {
+        "en": "Set configuration option fullSync to false in milight instance",
+        "de": "Setzt fullSync auf false in der milight Instanz",
+        "ru": "Set configuration option fullSync to false in milight instance"
+      },
+      "0.1.3": {
+        "en": "Added start image",
+        "de": "Startbild hinzugefügt",
+        "ru": "Added start image"
+      },
+      "0.1.2": {
+        "en": "Bug fix: socketio",
+        "de": "Fehler behoben: socketio",
+        "ru": "Bug fix: socketio"
+      },
+      "0.1.1": {
+        "en": "Bug fix: Fixed EffectMode for Legacy",
+        "de": "Fehler behoben: EffectMode für Legacy",
+        "ru": "Bug fix: Fixed EffectMode for Legacy"
+      },
+      "0.1.0": {
+        "en": "Added Small FE for milight-smart-light",
+        "de": "Small FE for milight-smart-light hinzugefügt",
+        "ru": "Added Small FE for milight-smart-light"
+      },
+      "0.0.6": {
+        "en": "Bug fix: All four zones can be created for the instance (via iobroker.admin) and remain after a reload. There are no more problems with umlauts.",
+        "de": "Fehler behoben: Alle vier Zonen können für die Instanz (via iobroker.admin) angelegt werden und gehen nach einem Reload nicht verloren. Umlaute können ebenfalls genutzt werden.",
+        "ru": "Bug fix: All four zones can be created for the instance (via iobroker.admin) and remain after a reload. There are no more problems with umlauts."
+      },
+      "0.0.5": {
+        "en": "Added russian translation",
+        "de": "Russische Übersetzung hinzugefügt",
+        "ru": "Added russian translation"
+      },
+      "0.0.4": {
+        "en": "Added basis-testing",
+        "de": "Basistests hinzugefügt",
+        "ru": "Added basis-testing"
+      },
+      "0.0.3": {
+        "en": "on- /off- /onoff-states optimized for vis widgets",
+        "de": "on- /off- /onoff-states für vis widgets optimiert",
+        "ru": "on- /off- /onoff-states optimized for vis widgets"
+      },
+      "0.0.2": {
+        "en": "Bug fix: added parameter in effectMode(...)",
+        "de": "Fehler behoben: Parameter in effectMode(...) hinzugefügt",
+        "ru": "Bug fix: added parameter in effectMode(...)"
+      },
+      "0.0.1": {
+        "en": "initial adapter",
+        "de": "Initiale Version",
+        "ru": "Первоначальный адаптер"
+      }
     },
-    "native": {
-        "controllerType": "v6",
-        "controllerIp": "",
-        "controllerPortLegacy": "8899",
-        "controllerPortV6": "5987",
-        "commandRepeat": "1",
-        "delayBetweenCommands": "100"
+    "title": "milight-smart-light Adapter",
+    "desc": {
+      "en": "Adapter for Milight LED bulbs and LED strips",
+      "de": "Adapter für Milight LED bulbs und LED strips",
+      "ru": "Adapter for Milight LED bulbs and LED strips"
     },
-    "objects": []
+    "platform": "Javascript/Node.js",
+    "mode": "daemon",
+    "icon": "lib/images/milight-smart-light.png",
+    "enabled": true,
+    "messagebox": true,
+    "supportStopInstance": true,
+    "extIcon": "https://raw.githubusercontent.com/Steiger04/ioBroker.milight-smart-light/master/admin/lib/images/milight-smart-light.png",
+    "keywords": [
+      "milight-smart-light",
+      "milight",
+      "bulb",
+      "strip",
+      "LED"
+    ],
+    "readme": "https://github.com/Steiger04/ioBroker.milight-smart-light/blob/master/README.md",
+    "loglevel": "info",
+    "type": "lighting",
+    "authors": [
+      {
+        "name": "Steiger04",
+        "email": "steiger04@posteo.de"
+      }
+    ],
+    "dependencies": [
+      "web"
+    ],
+    "localLink": "%web_protocol%://%ip%:%web_port%/milight-smart-light/index.html",
+    "config": {
+      "height": 800,
+      "width": 1400
+    }
+  },
+  "native": {
+    "controllerType": "v6",
+    "controllerIp": "",
+    "controllerPortLegacy": "8899",
+    "controllerPortV6": "5987",
+    "commandRepeat": "1",
+    "delayBetweenCommands": "100"
+  },
+  "objects": []
 }

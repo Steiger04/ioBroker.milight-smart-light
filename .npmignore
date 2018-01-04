@@ -9,4 +9,5 @@ docs
 appveyor.yml
 bower.json
 .eslintrc.json
+.eslintrc.js
 .jscsrc

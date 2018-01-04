@@ -55,6 +55,11 @@
       'de': 'Werden Einstellungen gespeichert, startet der Adapter sofort neu.',
       'ru': 'Сразу после сохранения настроек драйвер перезапуститься с новыми значениями',
     },
+    'requiredFields': {
+      'en': 'A zone is only created in the object tree if the fields: "active", "Zone", "Name (Zone)" and "Type" have been set.',
+      'de': 'Eine Zone wird im Objektbaum nur angelegt, wenn die Felder: "aktiv", "Zone", "Name(Zone)" und "Typ" gesetzt wurden.',
+      'ru': 'A zone is only created in the object tree if the fields: "active", "Zone", "Name (Zone)" and "Type" have been set.'
+    },
     'selectController': {'en': 'Please select controller . . ', 'de': 'Bitte Controller wählen . . .', 'ru': 'Выберите контроллер'},
 
     // Tabs
@@ -143,13 +148,13 @@
   });
 
   function setValue(id, value, onChange) {
-    if(id === 'controllerPortV6' || id === 'controllerPortLegacy') {
-      id = 'controllerPort'
+    if (id === 'controllerPortV6' || id === 'controllerPortLegacy') {
+      id = 'controllerPort';
     }
 
     if ($('#' + id + '.value').prop('type') === 'checkbox') {
-      $('#' + id + '.value').prop('checked', value).on('change', function () {
-        setTimeout(function () {
+      $('#' + id + '.value').prop('checked', value).on('change', function() {
+        setTimeout(function() {
           mslvalidator.form() ? onChange() : onChange(false);
         }, 0);
       });
@@ -157,12 +162,12 @@
     else {
       $('#' + id + '.value').data('oldValue', $('#' + id + '.value').val());
 
-      $('#' + id + '.value').val(value).on('keydown click', function (event) {
+      $('#' + id + '.value').val(value).on('keydown click', function(event) {
         if (mslvalidator.form()) {
           $(event.currentTarget).data('oldValue', $(event.currentTarget).val());
         }
-      }).on('keyup', function (event) {
-        setTimeout(function () {
+      }).on('keyup', function(event) {
+        setTimeout(function() {
           if (!mslvalidator.form()) {
             onChange(false);
           }
@@ -204,22 +209,22 @@
 
     /*----------------------------------------------------------------------------------------------------------------*/
 
-    values2table('values', devices, onChange, function () {
+    values2table('values', devices, onChange, function() {
       let selectedNumberZones = [];
       let bridgeFlag = false;
 
-      $('select[data-name = numberZone]').each(function (i, el) {
+      $('select[data-name = numberZone]').each(function(i, el) {
         const val = $(el).val();
 
         if (val !== '0') { // numberZone ausgewählt
           selectedNumberZones.push(val);
         }
         $(this).data('oldNumberZone', val);
-      }).on('focus', function () {
+      }).on('focus', function() {
         const valNZ = $(this).val();
 
         $(this).data('oldNumberZone', valNZ);
-      }).on('change', function () {
+      }).on('change', function() {
         const $selectNZ = $(this);
         const index = $selectNZ.data('index');
         const valNZ = $selectNZ.val();
@@ -279,7 +284,7 @@
         }
       });
 
-      $('select[data-name = typeZone]').each(function (i, el) {
+      $('select[data-name = typeZone]').each(function(i, el) {
         const $selectTZ = $(el);
         const valTZ = $selectTZ.val();
 
@@ -291,11 +296,11 @@
         }
 
         $(this).data('oldTypeZone', valTZ);
-      }).on('focus', function () {
+      }).on('focus', function() {
         const val = $(this).val();
 
         $(this).data('oldTypeZone', val);
-      }).on('change', function () {
+      }).on('change', function() {
         const $selectTZ = $(this);
         const index = $selectTZ.data('index');
         const valTZ = $selectTZ.val();
@@ -340,7 +345,7 @@
         minWidth: false,
         multiple: false,
 
-        create: function () {
+        create: function() {
           const $that = $(this);
 
           $($that.multiselect('getButton')).css({'width': '100%', 'color': 'inherit', 'font-weight': 'inherit'});
@@ -348,7 +353,7 @@
           $($that.multiselect('widget')).css('width', 'auto');
 
           $that.multiselect('option', {
-            selectedText: function () {
+            selectedText: function() {
               return $that.children('option:checked').text();
             },
           });
@@ -358,7 +363,7 @@
       $('#tab-1').find('select[data-name=func]').multiselect({
         header: _('select'), noneSelectedText: _('nonefunctions'), minWidth: false, multiple: true,
 
-        create: function () {
+        create: function() {
           const $that = $(this);
 
           $($that.multiselect('getButton')).css({'width': '100%', 'color': 'inherit', 'font-weight': 'inherit'});
@@ -366,9 +371,9 @@
           $($that.multiselect('widget')).css('width', 'auto');
 
           $that.multiselect('option', {
-            selectedText: function () {
+            selectedText: function() {
               selectedText = '';
-              $that.children('option:checked').each(function (index) {
+              $that.children('option:checked').each(function(index) {
                 index < $that.children('option:checked').length - 1 ? selectedText += $(this).text() + ' | ' : selectedText += $(this).text();
               });
               return selectedText;
@@ -378,17 +383,17 @@
       });
     }, maxRaw);
 
-    getIsAdapterAlive(function (isAlive) {
+    getIsAdapterAlive(function(isAlive) {
       if (isAlive || common.enabled) {
         const $discover = $('#discover');
 
         $discover.removeProp('disabled');
-        $discover.click(function () {
+        $discover.click(function() {
           const $controllerFound = $('#controllerFound');
 
           $controllerFound.prop('disabled', true);
 
-          sendTo(null, 'discover', null, function (list) {
+          sendTo(null, 'discover', null, function(list) {
             if (!list || !list.length) {
               showMessage(_('noController'), _('msgWarning'), 'info');
               return;
@@ -413,7 +418,7 @@
       }
     });
 
-    $('#controllerFound').change(function () {
+    $('#controllerFound').change(function() {
       const $selected = $(this).find('option:selected');
       const val = $(this).val();
       const $controllerIp = $('#controllerIp');
@@ -432,14 +437,14 @@
       }
     });
 
-    $('#controllerType').change(function (event, controllerIpOld) {
+    $('#controllerType').change(function(event, controllerIpOld) {
       event.stopPropagation();
 
       const $thTypeZone = $('th[data-name=typeZone]');
       const $thNumberZone = $('th[data-name=numberZone]');
       const ct = $(this).val();
 
-      confirmMessage(_('msgChangeCT'), _('msgWarning'), 'info', ['Ok', 'Cancel'], function (id) {
+      confirmMessage(_('msgChangeCT'), _('msgWarning'), 'info', ['Ok', 'Cancel'], function(id) {
         if (!id) {
           if (ct === 'legacy') {
             maxRaw = 4;
@@ -462,8 +467,8 @@
             $thTypeZone.attr('data-options', '0/' + _('notype') + ';white/White;rgbw/RGB(W);fullColor/RGB + CWWW;bridge/Bridge (iBox1)');
           }
 
-          sendTo(null, 'deletedevices', null, function (count) {
-            values2table('values', [], onChange, function () {
+          sendTo(null, 'deletedevices', null, function(count) {
+            values2table('values', [], onChange, function() {
               $('button#save').trigger('click');
             }, maxRaw);
           });
@@ -493,7 +498,7 @@
   function save(callback) {
     let obj = {};
 
-    $('.value').each(function () {
+    $('.value').each(function() {
       const $this = $(this);
 
       if ($this.prop('type') === 'checkbox') {
@@ -596,7 +601,8 @@
                 </table>
             </div>
             <div class="pure-u-1-1">
-                <div class="translate" style="padding-top: 1em">onSaveAdapter</div>
+                <div class="translate" style="padding-top: 1em">requiredFields</div>
+                <div class="translate" style="padding-top: 2em">onSaveAdapter</div>
             </div>
         </div>
     </div>
