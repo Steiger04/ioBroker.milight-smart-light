@@ -1,8 +1,13 @@
 {
   "common": {
     "name": "milight-smart-light",
-    "version": "0.1.4",
+    "version": "0.1.5",
     "news": {
+      "0.1.5": {
+        "en": "Info about required fields in tab Zones inserted",
+        "de": "Info über Pflichtfelder in Reiter Zonen eingefügt",
+        "ru": "Info about required fields in tab Zones inserted"
+      },
       "0.1.4": {
         "en": "Set configuration option fullSync to false in milight instance",
         "de": "Setzt fullSync auf false in der milight Instanz",
