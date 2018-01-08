@@ -1,8 +1,13 @@
 {
   "common": {
     "name": "milight-smart-light",
-    "version": "0.1.5",
+    "version": "0.1.6",
     "news": {
+      "0.1.6": {
+        "en": "Bug fix: rgbToHsv(...)",
+        "de": "Fehler behoben: rgbToHsv(...)",
+        "ru": "Bug fix: rgbToHsv(...)"
+      },
       "0.1.5": {
         "en": "Info about required fields in tab Zones inserted",
         "de": "Info über Pflichtfelder in Reiter Zonen eingefügt",

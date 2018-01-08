@@ -33,9 +33,12 @@ With adapter you can use both: **v6 Bridge** and **Legacy Bridge**.
 - **iobroker.admin**: use v. 1.8.2 or higher
 
 
+### 0.1.6 (2018-01-08)
+- (steiger04): Bug fix: rgbToHsv(...)
+
 ### 0.1.5 (2018-01-05)
 - (steiger04): Info about required fields in tab Zones inserted
-- 
+
 ### 0.1.4 (2017-11-05)
 - (steiger04): Set configuration option fullSync to false in milight instance
 
