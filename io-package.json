@@ -1,8 +1,13 @@
 {
   "common": {
     "name": "milight-smart-light",
-    "version": "0.1.6",
+    "version": "0.1.7",
     "news": {
+      "0.1.7": {
+        "en": "optimized: create states",
+        "de": "Anlegen der states optimiert",
+        "ru": "optimized: create states"
+      },
       "0.1.6": {
         "en": "Bug fix: rgbToHsv(...)",
         "de": "Fehler behoben: rgbToHsv(...)",

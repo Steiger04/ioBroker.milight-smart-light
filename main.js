@@ -254,31 +254,33 @@ function configSync(callback) {
       }).
       then(() => {
         // Channels aus deleteChannelsFromStorage aus dem Speicher löschen
-        Promise.mapSeries(deleteChannelsFromStorage, DCS => adapter.deleteChannelAsync(DCS.device, DCS.channel));
-      }).
-      then(() => {
-        // Devices aus addChannelsToStorage anlegen
-        Promise.mapSeries(addChannelsToStorage, addDevice => adapter.createDeviceAsync(addDevice.nameZone));
-      }).
-      then(() => {
-        // Channels aus addChannelsToStorage anlegen
-        Promise.mapSeries(addChannelsToStorage, addDevice => adapter.createChannelAsync(addDevice.nameZone, addDevice.typeNumberZone,
-            {name: addDevice.nameType, type: addDevice.typeZone, controllerType: addDevice.controllerType}));
-      }).
-      then(() => {
-        // States hinzufügen
-        Promise.mapSeries(addChannelsToStorage, addDevice => Promise.mapSeries(states.statesList(adapter.config.controllerType, addDevice.typeZone),
-            dp => adapter.createStateAsync(addDevice.nameZone, addDevice.typeNumberZone, dp, states.getCommon(dp))));
-      }).
-      then(() => {
-        // Enums löschen und hinzufügen
-        Promise.mapSeries(_.flatten([addChannelsToStorage, devicesFromAdmin]),
-            addDevice => adapter.deleteChannelFromEnumAsync(null, addDevice.nameZone, addDevice.typeNumberZone).
-                then(() => Promise.mapSeries(_.flatten([addDevice.room, addDevice.func]),
-                    enumName => adapter.addChannelToEnumAsync(enumName, enumName, addDevice.nameZone, addDevice.typeNumberZone).then(() => {
-                      adapter.log.debug(
-                          `config_Sync->::${ adapter.namespace }.${addDevice.nameZone }.${addDevice.typeNumberZone}:: wurde Enum->::${enumName }:: zugeordnet!`);
-                    }))));
+        Promise.mapSeries(deleteChannelsFromStorage, DCS => adapter.deleteDeviceAsync(DCS.device)).
+            then(() => {
+              // Devices aus addChannelsToStorage anlegen
+              Promise.mapSeries(addChannelsToStorage, addDevice => adapter.createDeviceAsync(addDevice.nameZone)).
+                  then(() => {
+                    // Channels aus addChannelsToStorage anlegen
+                    Promise.mapSeries(addChannelsToStorage, addDevice => adapter.createChannelAsync(addDevice.nameZone, addDevice.typeNumberZone,
+                        {name: addDevice.nameType, type: addDevice.typeZone, controllerType: addDevice.controllerType})).
+                        then(() => {
+                          // States hinzufügen
+                          Promise.mapSeries(addChannelsToStorage,
+                              addDevice => Promise.mapSeries(states.statesList(adapter.config.controllerType, addDevice.typeZone),
+                                  dp => adapter.createStateAsync(addDevice.nameZone, addDevice.typeNumberZone, dp, states.getCommon(dp)))).
+                              then(() => {
+                                // Enums löschen und hinzufügen
+                                Promise.mapSeries(_.flatten([addChannelsToStorage, devicesFromAdmin]),
+                                    addDevice => adapter.deleteChannelFromEnumAsync(null, addDevice.nameZone, addDevice.typeNumberZone).
+                                        then(() => Promise.mapSeries(_.flatten([addDevice.room, addDevice.func]),
+                                            enumName => adapter.addChannelToEnumAsync(enumName, enumName, addDevice.nameZone, addDevice.typeNumberZone).
+                                                then(() => {
+                                                  adapter.log.debug(
+                                                      `config_Sync->::${ adapter.namespace }.${addDevice.nameZone }.${addDevice.typeNumberZone}:: wurde Enum->::${enumName }:: zugeordnet!`);
+                                                }))));
+                              });
+                        });
+                  });
+            });
       }).
       then(() => {
         if (callback) {

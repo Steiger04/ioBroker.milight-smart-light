@@ -32,6 +32,8 @@ With adapter you can use both: **v6 Bridge** and **Legacy Bridge**.
 - **Node.js**: use v. 6.00 or higher
 - **iobroker.admin**: use v. 1.8.2 or higher
 
+### 0.1.7 (2018-01-12)
+- (steiger04): optimized: create states
 
 ### 0.1.6 (2018-01-08)
 - (steiger04): Bug fix: rgbToHsv(...)
