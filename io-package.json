@@ -1,8 +1,13 @@
 {
   "common": {
     "name": "milight-smart-light",
-    "version": "0.1.7",
+    "version": "0.1.8",
     "news": {
+      "0.1.8": {
+        "en": "some optimizations for Alexa",
+        "de": "Einige Optimierungen für Alexa",
+        "ru": "some optimizations for Alexa"
+      },
       "0.1.7": {
         "en": "optimized: create states",
         "de": "Anlegen der states optimiert",
