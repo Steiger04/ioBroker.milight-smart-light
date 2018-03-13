@@ -1,8 +1,13 @@
 {
   "common": {
     "name": "milight-smart-light",
-    "version": "0.1.8",
+    "version": "0.1.9",
     "news": {
+	  "0.1.9": {
+        "en": "Adaption for js-controller > v.1.2.5",
+        "de": "Anpassung für js-controller > v.1.2.5",
+        "ru": "Adaption for js-controller > v.1.2.5"
+      },
       "0.1.8": {
         "en": "some optimizations for Alexa",
         "de": "Einige Optimierungen für Alexa",

@@ -194,7 +194,10 @@ function main() {
   const configSyncAsync = Promise.promisify(configSync);
 
   adapter.log.info('adapter:main->:::milight-smart-light::: wurde gestartet!');
-  adapter = Promise.promisifyAll(adapter); // erst hier möglich wegen initStates(prepareInitAdapter)
+  
+  if( !typeof adapter.getPortAsync) {
+    adapter = Promise.promisifyAll(adapter) // erst hier möglich wegen initStates(prepareInitAdapter)
+  }  
 
   smartLight = new Milight({
     ip: adapter.config.controllerIp,

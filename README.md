@@ -32,6 +32,10 @@ With adapter you can use both: **v6 Bridge** and **Legacy Bridge**.
 - **Node.js**: use v. 6.00 or higher
 - **iobroker.admin**: use v. 1.8.2 or higher
 
+
+### 0.1.9 (2018-03-13)
+- (steiger04): Adaption for js-controller > v.1.2.5
+
 ### 0.1.8 (2018-01-21)
 - (steiger04): some optimizations for Alexa
 
