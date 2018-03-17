@@ -195,7 +195,7 @@ function main() {
 
   adapter.log.info('adapter:main->:::milight-smart-light::: wurde gestartet!');
   
-  if( !typeof adapter.getPortAsync) {
+  if( typeof adapter.getPortAsync !== 'function') {
     adapter = Promise.promisifyAll(adapter) // erst hier möglich wegen initStates(prepareInitAdapter)
   }  
 
