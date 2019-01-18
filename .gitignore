@@ -13,4 +13,4 @@ mslfe-ibr/.editorconfig
 mslfe-ibr/.gitignore
 mslfe-ibr/package-lock.json
 mslfe-ibr/README.md
-middleware/
+middleware

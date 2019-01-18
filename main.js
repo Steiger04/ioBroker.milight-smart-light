@@ -7,7 +7,7 @@ const _ = require ('lodash')
 
 const utils = require (path.join (__dirname, '/lib/utils'))
 
-let adapter = utils.adapter ({ name: 'milight-smart-light' })
+let adapter = utils.Adapter ({ name: 'milight-smart-light' })
 
 let forkedServer = require (path.join (__dirname, '/lib/js/mslfe-fork/mslfeServer'))
 
