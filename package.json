@@ -1,7 +1,7 @@
 {
   "name": "iobroker.milight-smart-light",
   "description": "Adapter for Milight LED bulbs and LED strips",
-  "version": "0.1.9",
+  "version": "0.2.0",
   "author": {
     "name": "Steiger04",
     "email": "steiger04@posteo.de"
@@ -35,9 +35,11 @@
     "url": "https://github.com/Steiger04/ioBroker.milight-smart-light"
   },
   "dependencies": {
-    "bluebird": "^3.5.0",
+    "color-convert": "^1.9.3",
     "lodash": "^4.17.4",
-    "node-milight-promise": "^0.2.32"
+    "node-milight-promise": "https://github.com/mwittig/node-milight-promise.git",
+    "tcp-port-used": "^1.0.0",
+    "tree-kill": "^1.2.1"
   },
   "devDependencies": {
     "chai": "^4.1.2",
@@ -52,11 +54,13 @@
     "grunt-jscs": "^3.0.1",
     "grunt-replace": "^1.0.1",
     "grunt-run-cmd": "^1.0.3",
-    "mocha": "^3.5.3",
+    "gulp": "^4.0.0",
+    "mocha": "^4.1.0",
     "time-grunt": "^1.4.0"
   },
   "main": "main.js",
   "scripts": {
+    "postinstall": "cd mslfe-ibr && npm install",
     "test": "node node_modules/mocha/bin/mocha"
   },
   "bugs": {

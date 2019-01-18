@@ -1,9 +1,14 @@
 {
   "common": {
     "name": "milight-smart-light",
-    "version": "0.1.9",
+    "version": "0.2.0",
     "news": {
-	  "0.1.9": {
+      "0.2.0": {
+        "en": "Adaptation to Admin3, materialzeCSS, general revision, new app",
+        "de": "Anpassung an Admin3, materialzeCSS, generelle Überarbeitung, neue App",
+        "ru": "Adaptation to Admin3, materialzeCSS, general revision, new app"
+      },
+      "0.1.9": {
         "en": "Adaption for js-controller > v.1.2.5",
         "de": "Anpassung für js-controller > v.1.2.5",
         "ru": "Adaption for js-controller > v.1.2.5"
@@ -116,19 +121,23 @@
     "dependencies": [
       "web"
     ],
-    "localLink": "%web_protocol%://%ip%:%web_port%/milight-smart-light/index.html",
-    "config": {
-      "height": 800,
-      "width": 1400
-    }
+    "localLink": "%web_protocol%://%ip%:%serverPort%",
+    "materialize": true
   },
   "native": {
+    "activeApp": false,
+    "serverPort": "4400",
+    "websocketPort": "8082",
     "controllerType": "v6",
     "controllerIp": "",
     "controllerPortLegacy": "8899",
     "controllerPortV6": "5987",
+    "controllerPort": "5987",
     "commandRepeat": "1",
-    "delayBetweenCommands": "100"
+    "delayBetweenCommands": "50",
+    "iBox": "iBox2",
+    "maxZones": "4",
+    "zones": []
   },
   "objects": []
 }

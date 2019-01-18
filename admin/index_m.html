@@ -1,0 +1,531 @@
+<!--suppress HtmlUnknownTarget -->
+<html>
+		<head>
+				<link
+					 rel="stylesheet"
+					 type="text/css"
+					 href="../../lib/css/materialize.css">
+				<link
+					 rel="stylesheet"
+					 type="text/css"
+					 href="../../css/adapter.css"/>
+				
+				<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js"></script>-->
+				<script src="lib/js/vue/vue.min.2.5.21.js"></script>
+				<script src="lib/js/vuelidate/vuelidate.min.js"></script>
+				<script src="lib/js/vuelidate/validators.min.js"></script>
+				
+				<script
+					 type="text/javascript"
+					 src="../../lib/js/jquery-3.2.1.min.js"></script>
+				
+				<script
+					 type="text/javascript"
+					 src="../../lib/js/materialize.js"></script>
+				
+				<script
+					 type="text/javascript"
+					 src="../../js/translate.js"></script>
+				<script
+					 type="text/javascript"
+					 src="words.js"></script>
+				
+				<script
+					 type="text/javascript"
+					 src="lib/js/msl-vue.js"></script>
+				<script
+					 type="text/javascript"
+					 src="lib/js/msl-load-save.js"></script>
+				
+				<script
+					 type="text/javascript"
+					 src="../../socket.io/socket.io.js"></script>
+				
+				<script
+					 type="text/javascript"
+					 src="../../js/adapter-settings.js"></script>
+				
+				<style>
+						.m .col .select-wrapper + label {
+								top: -26px;
+						}
+						
+						.m span {
+								font-size: 0.9em;
+						}
+				</style>
+		</head>
+		
+		<body>
+		<div
+			 id="msl"
+			 class="m adapter-container"
+			 style="height: 100%; overflow: auto;">
+				<!--<p>
+						{{ JSON.stringify($v, null, '|') }} </p>-->
+				<div class="row">
+						<div class="col s6">
+								<img
+									 src="lib/images/milight-smart-light.png"
+									 class="logo"/>
+						</div>
+				</div>
+				
+				<div class="row">
+						<div class="col s12">
+								<ul class="tabs z-depth-1">
+										<li class="tab col s4">
+												<a
+													 :class="['active', {'red-text text-darken-4 red lighten-4':$v.controllerGroup.$anyError}]"
+													 href="#tab-controller">{{ _('tabController') }}</a>
+										</li>
+										<li class="tab col s4">
+												<a
+													 :class="['active', {'red-text text-darken-4 red lighten-4': $v.options.zones.$error}]"
+													 href="#tab-devices">{{ _('tabZones') }}</a>
+										</li>
+										<li class="tab col s4">
+												<a
+													 :class="['active', {'red-text text-darken-4 red lighten-4':$v.mslAppGroup.$anyError}]"
+													 href="#tab-msl-app">{{ _('tabMslApp') }}</a>
+										</li>
+								</ul>
+						</div>
+						
+						<div id="tab-controller">
+								<div
+									 class="col s12 m1 offset-m1 l1 offset-l1"
+									 :class="{ 'z-depth-1': options.controllerType==='v6'}"
+									 style="margin-top: 3em;">
+										<div
+											 class="row"
+											 v-if="options.controllerType==='v6'">
+												<div class="col s12">
+														<p>
+																<label>
+																		<input
+																			 v-model="options.iBox"
+																			 @change="deleteAllDevices()"
+																			 value="iBox1"
+																			 type="radio"/>
+																		<span>iBox1</span>
+																</label>
+														</p>
+														<p>
+																<label>
+																		<input
+																			 v-model="options.iBox"
+																			 @change="deleteAllDevices()"
+																			 value="iBox2"
+																			 type="radio"/>
+																		<span>iBox2</span>
+																</label>
+														</p>
+														<div style="border-bottom: 1px solid rgba(0,0,0,0.14);"></div>
+														<p>
+																<label>
+																		<input
+																			 v-model="options.maxZones"
+																			 @change="deleteAllDevices()"
+																			 value="4"
+																			 type="radio"/>
+																		<span>4 Zonen</span>
+																</label>
+														</p>
+														<p>
+																<label>
+																		<input
+																			 v-model="options.maxZones"
+																			 @change="deleteAllDevices()"
+																			 value="8"
+																			 type="radio"/>
+																		<span>8 Zonen</span>
+																</label>
+														</p>
+												</div>
+										</div>
+								</div>
+								<div
+									 class="col s12 m6 offset-m1 l6 offset-l1 z-depth-1"
+									 style="margin-top: 3em;">
+										<form
+											 action="#"
+											 id="controller">
+												<div class="row">
+														<div class="input-field col s12">
+																<select
+																	 id="controllerType"
+																	 name="controllerType"
+																	 v-model="options.controllerType"
+																	 @change="deleteAllDevices()">
+																		<option value="legacy">Legacy</option>
+																		<option value="v6">Version 6</option>
+																</select>
+																<label
+																	 for="controllerType"
+																	 class="translate">conType</label>
+														</div>
+												</div>
+												
+												<div class="row">
+														<div class="text-field col s10">
+																<label
+																	 for="controllerIp"
+																	 class="translate">conIp</label>
+																<input
+																	 id="controllerIp"
+																	 name="controllerIp"
+																	 type="text"
+																	 v-model.trim="$v.options.controllerIp.$model"
+																	 :class="{'red-text text-darken-4 red lighten-4': $v.options.controllerIp.$error}"
+																	 @input="mslOnChange(true)"/>
+														</div>
+														<div class="center-align col s2">
+																<a
+																	 ref="refreshButton"
+																	 class="waves-effect waves-light btn"
+																	 @click="provideControllerIps()">
+																		<i class="material-icons">refresh</i>
+																</a>
+														</div>
+												</div>
+												
+												<div
+													 class="row grey lighten-2"
+													 v-if="controllerIps.length!=0">
+														<div class="input-field col s12">
+																<select @change="changeControllerIp">
+																		<option
+																			 value=""
+																			 disabled
+																			 selected>{{ _('select') }}</option>
+																		<template v-for="controllerIp in controllerIps">
+																				<optgroup
+																					 v-if="controllerIp.name.length!=0"
+																					 :label="controllerIp.name + ' | ' + controllerIp.type + ' | ' + controllerIp.mac"></optgroup>
+																				<optgroup
+																					 v-if="controllerIp.name.length==0"
+																					 :label="controllerIp.type + ' | ' + controllerIp.mac"></optgroup>
+																				<option>{{ controllerIp.ip }}</option>
+																		</template>
+																</select>
+																<label class="translate">conIp</label>
+														</div>
+												</div>
+												
+												<div class="row">
+														<div class="text-field col s12">
+																<label
+																	 for="controllerPort"
+																	 class="translate">conPort</label>
+																<input
+																	 id="controllerPort"
+																	 name="controllerPort"
+																	 type="text"
+																	 v-model.trim="$v.controllerPort.$model"
+																	 :class="{'red-text text-darken-4 red lighten-4': $v.controllerPort.$error}"
+																	 @input="mslOnChange(true)">
+														</div>
+												</div>
+												
+												<div class="row">
+														<div class="text-field col s12">
+																<label
+																	 for="commandRepeat"
+																	 class="translate">conRepeatCommand</label>
+																<input
+																	 id="commandRepeat"
+																	 name="commandRepeat"
+																	 type="text"
+																	 v-model.trim="$v.options.commandRepeat.$model"
+																	 :class="{'red-text text-darken-4 red lighten-4': $v.options.commandRepeat.$error}"
+																	 @input="mslOnChange(true)">
+														</div>
+												</div>
+												
+												<div class="row">
+														<div class="text-field col s12">
+																<label
+																	 for="delayBetweenCommands"
+																	 class="translate">conPauseBetweenCommands</label>
+																<input
+																	 id="delayBetweenCommands"
+																	 name="delayBetweenCommands"
+																	 type="text"
+																	 v-model.trim="$v.options.delayBetweenCommands.$model"
+																	 :class="{'red-text text-darken-4 red lighten-4': $v.options.delayBetweenCommands.$error}"
+																	 @input="mslOnChange(true)">
+														</div>
+												</div>
+										</form>
+								</div>
+						</div>
+						
+						<div
+							 id="tab-devices"
+							 class="col s12"
+							 style="margin-top: 2em;">
+								
+								<div class="row">
+										<div class="col s12">
+												<a
+													 ref="addDeviceButton"
+													 class="waves-effect waves-light btn"
+													 @click="addDevice()">
+														<i class="material-icons">add</i>
+												</a>
+										</div>
+								</div>
+								
+								<div class="row">
+										<div class="col s12">
+												<table
+													 id="zones"
+													 class="responsive-table">
+														<thead>
+														<tr>
+																<th data-name="_index"></th>
+																<th
+																	 name="mslZoneActive"
+																	 class="translate">thactive</th>
+																<th
+																	 name="mslZoneNumber"
+																	 class="translate">thzonenumber</th>
+																<th
+																	 name="mslGroupName"
+																	 class="translate">thgroupname</th>
+																<th
+																	 name="mslZoneType"
+																	 class="translate">thzonetype</th>
+																<th
+																	 name="mslZoneName"
+																	 class="translate">thzonename</th>
+																<th
+																	 name="mslRoom"
+																	 class="translate">throom</th>
+																<th
+																	 name="mslFunc"
+																	 class="translate">thfunction</th>
+																<th name="delete"></th>
+														</tr>
+														</thead>
+														
+														<tbody>
+														<tr
+															 v-for="(device, index) in $v.options.zones.$each.$iter"
+															 :key="index">
+																<td>{{ +index+1 }}</td>
+																
+																<td>
+																		<div class="switch col s12">
+																				<label :for="'mslZoneActive-' + index">
+																						<input
+																							 :id="'mslZoneActive-' + index"
+																							 type="checkbox"
+																							 v-model="device.$model.mslZoneActive"
+																							 @change="mslOnChange(true)"/>
+																						<span class="lever"></span>
+																				</label>
+																		</div>
+																</td>
+																
+																<td>
+																		<div class="col s12">
+																				<div
+																					 :class="{'red-text text-darken-4 red lighten-4': device.mslZoneNumber.$error}">
+																						<select
+																							 id="'mslZoneNumber' + index"
+																							 v-model="device.mslZoneNumber.$model"
+																							 @change="mslOnChange(true)">
+																								<template v-for="(numberZone, index) in numberZones[options.controllerType]">
+																										<option
+																											 v-if="index==0"
+																											 value=""
+																											 disabled
+																											 selected>{{ _(numberZone) }}</option>
+																										<option
+																											 v-if="index!=0 && index<=maxDevices"
+																											 :value="numberZone[4]">{{ _(numberZone) }}</option>
+																								</template>
+																						</select>
+																						<label></label>
+																				</div>
+																		</div>
+																</td>
+																
+																<td>
+																		<div class="col s12">
+																				<input
+																					 id="'mslGroupName' + index"
+																					 type="text"
+																					 v-model.trim="device.mslGroupName.$model"
+																					 :class="{'red-text text-darken-4 red lighten-4': device.mslGroupName.$error}"
+																					 @input="mslOnChange(true)">
+																		</div>
+																</td>
+																
+																<td>
+																		<div class="col s12">
+																				<div
+																					 :class="{'red-text text-darken-4 red lighten-4': device.mslZoneType.$error}">
+																						<select
+																							 id="'mslZoneType' + index"
+																							 v-model="device.mslZoneType.$model"
+																							 @change="mslOnChange(true)">
+																								<template
+																									 v-for="(mslZoneType, index) in mslZoneTypes[options.controllerType]">
+																										<option
+																											 v-if="index==0"
+																											 value=""
+																											 disabled
+																											 selected>{{ _(mslZoneType) }}</option>
+																										<option
+																											 v-else-if="mslZoneType!='bridge'"
+																											 :value="mslZoneType">{{ _(mslZoneType) }}</option>
+																										<option
+																											 v-else-if="mslZoneType=='bridge' && options.iBox=='iBox1'"
+																											 :value="mslZoneType">{{ _(mslZoneType) }}</option>
+																								</template>
+																						</select>
+																						<label></label>
+																				</div>
+																		</div>
+																</td>
+																
+																<td>
+																		<div class="col s12">
+																				<input
+																					 id="'mslZoneName' + index"
+																					 type="text"
+																					 v-model.trim="device.$model.mslZoneName"
+																					 @input="mslOnChange(true)">
+																		</div>
+																</td>
+																
+																<td>
+																		<div class="col s12">
+																				<select
+																					 id="'mslRoom' + index"
+																					 v-model="device.$model.mslRoom"
+																					 @change="mslOnChange(true)">
+																						<option
+																							 value=""
+																							 disabled
+																							 selected> {{ _('select') }}</option>
+																						<template v-for="(mslRoom, key, index) of mslRooms">
+																								<option :value="key">{{ mslRoom }}</option>
+																						</template>
+																				</select>
+																				<label></label>
+																		</div>
+																</td>
+																<td>
+																		<div class="col s12">
+																				<select
+																					 multiple
+																					 id="'mslFunc' + index"
+																					 v-model="device.$model.mslFunc"
+																					 @change="mslOnChange(true)">
+																						<option
+																							 value=""
+																							 disabled
+																							 selected>{{ _('select') }}</option>
+																						<template v-for="(mslFunc, key, index) of mslFuncs">
+																								<option :value="key">{{ mslFunc }}</option>
+																						</template>
+																				</select>
+																				<label></label>
+																		</div>
+																</td>
+																<td>
+																		<div class="col s12">
+																				<a
+																					 class="btn-floating waves-effect waves-light red"
+																					 @click="delDevice(index)">
+																						<i class="material-icons">delete_forever</i>
+																				</a>
+																		</div>
+																</td>
+														</tr>
+														
+														</tbody>
+												</table>
+										</div>
+								</div>
+						</div>
+						
+						<div id="tab-msl-app">
+								<div
+									 class="col s12 m6 offset-m3 l6 offset-l3 z-depth-1"
+									 style="margin-top: 3em;">
+										<div class="row">
+												<div class="col s12">
+														<div class="text-field col s12">
+																<p>
+																<div
+																	 class="switch"
+																	 style="font-size: .8rem;">
+																		<label>
+																				<input
+																					 id="activeApp"
+																					 name="activeApp"
+																					 type="checkbox"
+																					 v-model="options.activeApp"
+																					 class="filled-in"
+																					 @change="mslOnChange(true)"/>
+																				<span class="lever"></span>
+																				<span class="translate">activeApp</span>
+																		</label>
+																</div>
+																</p>
+														</div>
+												</div>
+										</div>
+										<div class="row">
+												<div class="col s12">
+														<div class="text-field col s12">
+																<label
+																	 for="serverPort"
+																	 class="translate">serverPort</label>
+																<input
+																	 id="serverPort"
+																	 name="serverPort"
+																	 type="text"
+																	 :disabled="!options.activeApp"
+																	 v-model.trim="$v.options.serverPort.$model"
+																	 :class="{'red-text text-darken-4 red lighten-4': $v.options.serverPort.$error}"
+																	 @input="mslOnChange(true)">
+														</div>
+												</div>
+										</div>
+										<div class="row">
+												<div class="col s12">
+														<div class="text-field col s12">
+																<label
+																	 for="websocketPort"
+																	 class="translate">websocketPort</label>
+																<input
+																	 id="websocketPort"
+																	 name="websocketPort"
+																	 type="text"
+																	 :disabled="!options.activeApp"
+																	 v-model.trim="$v.options.websocketPort.$model"
+																	 :class="{'red-text text-darken-4 red lighten-4': $v.options.websocketPort.$error}"
+																	 @input="mslOnChange(true)">
+														</div>
+												</div>
+										</div>
+								</div>
+						</div>
+				</div>
+				
+				<div class="section">
+						<div class="row">
+								<div class="col s12 m6 offset-m3">
+										<blockquote><h6 class="translate">onSaveAdapter</h6></blockquote>
+								</div>
+						</div>
+				</div>
+		</div>
+		</body>
+</html>
