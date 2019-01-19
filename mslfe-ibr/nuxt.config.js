@@ -69,7 +69,7 @@ module.exports = {
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
   },
-  /*manifest: {
+  manifest: {
     name: "milight-smart-light FE for iobroker",
     scope: "/",
     display: "standalone",
@@ -81,7 +81,7 @@ module.exports = {
     dir: "ltr",
     lang: "de",
     short_name: "mslfe"
-  },*/
+  },
   /*
   ** Build configuration
   */
