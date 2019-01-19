@@ -98,7 +98,8 @@ function createVueInstance(settings, onChange) {
                 return i > 1 ? false : true
               },
               isbridge (value, vm) {
-                if(this.options.iBox === 'iBox2') {
+                debugger
+                if(this.options.iBox === 'iBox2' || this.options.controllerType === 'legacy') {
                     return true
                 }
 
@@ -119,15 +120,15 @@ function createVueInstance(settings, onChange) {
             mslZoneType: {
               reqired: validators.required,
               isbridge (value, vm) {
-                if(this.options.iBox === 'iBox2') {
+                if(this.options.iBox === 'iBox2' || this.options.controllerType === 'legacy') {
                   return true
                 }
 
-                if (vm.numberZone == this.maxDevices && value === 'bridge') {
+                if (vm.mslZoneNumber == this.maxDevices && value === 'bridge') {
                   return true
                 }
 
-                if (vm.numberZone != this.maxDevices && value !== 'bridge') {
+                if (vm.mslZoneNumber != this.maxDevices && value !== 'bridge') {
                   return true
                 }
 
