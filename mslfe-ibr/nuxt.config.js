@@ -52,7 +52,7 @@ module.exports = {
   ** Nuxt.js modules
   */
   modules: [
-    ["@nuxtjs/pwa",{ workbox: false, onesignal: false }],
+    // ["@nuxtjs/pwa",{ workbox: false, onesignal: false }],
     "@nuxtjs/axios",
     "@nuxtjs/redirect-module"
   ],

@@ -12,7 +12,6 @@ import { createStore } from './store.js'
 
 /* Plugins */
 
-import nuxt_plugin_nuxticons_9e7d03a6 from 'nuxt_plugin_nuxticons_9e7d03a6' // Source: ./nuxt-icons.js
 import nuxt_plugin_axios_f8d1200a from 'nuxt_plugin_axios_f8d1200a' // Source: ./axios.js
 import nuxt_plugin_vuelogger_0f6fbf22 from 'nuxt_plugin_vuelogger_0f6fbf22' // Source: ..\\plugins\\vuelogger
 import nuxt_plugin_vuetify_e5914fcc from 'nuxt_plugin_vuetify_e5914fcc' // Source: ..\\plugins\\vuetify
@@ -157,7 +156,6 @@ async function createApp(ssrContext) {
 
   // Plugin execution
 
-  if (typeof nuxt_plugin_nuxticons_9e7d03a6 === 'function') await nuxt_plugin_nuxticons_9e7d03a6(app.context, inject)
   if (typeof nuxt_plugin_axios_f8d1200a === 'function') await nuxt_plugin_axios_f8d1200a(app.context, inject)
   if (typeof nuxt_plugin_vuelogger_0f6fbf22 === 'function') await nuxt_plugin_vuelogger_0f6fbf22(app.context, inject)
   if (typeof nuxt_plugin_vuetify_e5914fcc === 'function') await nuxt_plugin_vuetify_e5914fcc(app.context, inject)
