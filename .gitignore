@@ -7,7 +7,6 @@ bower.json
 Gruntfile.js
 package-lock.json
 mslfe-ibr/.idea
-mslfe-ibr/.nuxt
 mslfe-ibr/node_modules
 mslfe-ibr/.editorconfig
 mslfe-ibr/.gitignore
