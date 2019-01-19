@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.0.0",
-    "@nuxtjs/pwa": "^2.0.8",
+    "@nuxtjs/pwa": "^2.6.0",
     "@nuxtjs/redirect-module": "^0.1.0",
     "cross-env": "^5.2.0",
     "express": "^4.15.3",

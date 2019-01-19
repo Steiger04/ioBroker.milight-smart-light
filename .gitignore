@@ -6,6 +6,8 @@ node_modules
 bower.json
 Gruntfile.js
 package-lock.json
+sw.*
+mslfe-ibr/sw.*
 mslfe-ibr/.idea
 mslfe-ibr/node_modules
 mslfe-ibr/.editorconfig
