@@ -12,8 +12,6 @@ import { createStore } from './store.js'
 
 /* Plugins */
 
-import nuxt_plugin_swplugin_1642c014 from 'nuxt_plugin_swplugin_1642c014' // Source: ./sw.plugin.js (ssr: false)
-import nuxt_plugin_nuxticons_9e7d03a6 from 'nuxt_plugin_nuxticons_9e7d03a6' // Source: ./nuxt-icons.js
 import nuxt_plugin_axios_f8d1200a from 'nuxt_plugin_axios_f8d1200a' // Source: ./axios.js
 import nuxt_plugin_vuelogger_0f6fbf22 from 'nuxt_plugin_vuelogger_0f6fbf22' // Source: ..\\plugins\\vuelogger
 import nuxt_plugin_vuetify_e5914fcc from 'nuxt_plugin_vuetify_e5914fcc' // Source: ..\\plugins\\vuetify
@@ -158,13 +156,11 @@ async function createApp(ssrContext) {
 
   // Plugin execution
 
-  if (typeof nuxt_plugin_nuxticons_9e7d03a6 === 'function') await nuxt_plugin_nuxticons_9e7d03a6(app.context, inject)
   if (typeof nuxt_plugin_axios_f8d1200a === 'function') await nuxt_plugin_axios_f8d1200a(app.context, inject)
   if (typeof nuxt_plugin_vuelogger_0f6fbf22 === 'function') await nuxt_plugin_vuelogger_0f6fbf22(app.context, inject)
   if (typeof nuxt_plugin_vuetify_e5914fcc === 'function') await nuxt_plugin_vuetify_e5914fcc(app.context, inject)
 
   if (process.client) {
-    if (typeof nuxt_plugin_swplugin_1642c014 === 'function') await nuxt_plugin_swplugin_1642c014(app.context, inject)
     if (typeof nuxt_plugin_getwebsocketport_621b4b12 === 'function') await nuxt_plugin_getwebsocketport_621b4b12(app.context, inject)
     if (typeof nuxt_plugin_connection_42ee53d2 === 'function') await nuxt_plugin_connection_42ee53d2(app.context, inject)
     if (typeof nuxt_plugin_vuefullscreen_2c642c4d === 'function') await nuxt_plugin_vuefullscreen_2c642c4d(app.context, inject)
