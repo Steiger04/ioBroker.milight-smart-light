@@ -36,7 +36,6 @@
   },
   "dependencies": {
     "color-convert": "^1.9.3",
-    "cross-env": "^5.2.0",
     "lodash": "^4.17.4",
     "node-milight-promise": "https://github.com/mwittig/node-milight-promise.git",
     "tcp-port-used": "^1.0.0",
