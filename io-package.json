@@ -129,7 +129,7 @@
     "dependencies": [
       "web"
     ],
-    "localLink": "%web_protocol%://%ip%:%serverPort%",
+    "localLink": "%web_protocol%://%ip%:%serverPort%"
   },
   "native": {
     "activeApp": false,
