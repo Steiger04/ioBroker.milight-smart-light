@@ -21,6 +21,7 @@ With adapter you can use both: **v6 Bridge** and **Legacy Bridge**.
 - white
 - rgb(w)
 - fullColor
+- fullColor8Zone
 
 
 **Legacy Bridge:**
@@ -28,11 +29,11 @@ With adapter you can use both: **v6 Bridge** and **Legacy Bridge**.
 - rgb(w)
 
 ### Versions
-
 - **Node.js**: use v. 8.15.0 or higher
 - **iobroker.admin**: use v. 3.5.10 or higher
 
 
+## Changelog
 ### 0.2.0 (2019-01-16)
 - (steiger04): Adaptation to Admin3, materialzeCSS, general revision, new app
 

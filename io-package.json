@@ -2,6 +2,18 @@
   "common": {
     "name": "milight-smart-light",
     "version": "0.2.0",
+    "title": "milight-smart-light",
+    "titleLang": {
+      "en": "milight-smart-light",
+      "de": "milight-smart-light",
+      "ru": "milight-smart-light"
+    },
+    "authors": [
+      {
+        "name": "Steiger04",
+        "email": "steiger04@posteo.de"
+      }
+    ],
     "news": {
       "0.2.0": {
         "en": "Adaptation to Admin3, materialzeCSS, general revision, new app",
@@ -89,7 +101,6 @@
         "ru": "Первоначальный адаптер"
       }
     },
-    "title": "milight-smart-light Adapter",
     "desc": {
       "en": "Adapter for Milight LED bulbs and LED strips",
       "de": "Adapter für Milight LED bulbs und LED strips",
@@ -97,10 +108,8 @@
     },
     "platform": "Javascript/Node.js",
     "mode": "daemon",
+    "loglevel": "info",
     "icon": "lib/images/milight-smart-light.png",
-    "enabled": true,
-    "messagebox": true,
-    "supportStopInstance": true,
     "extIcon": "https://raw.githubusercontent.com/Steiger04/ioBroker.milight-smart-light/master/admin/lib/images/milight-smart-light.png",
     "keywords": [
       "milight-smart-light",
@@ -109,20 +118,18 @@
       "strip",
       "LED"
     ],
+    "materialize": true,
     "readme": "https://github.com/Steiger04/ioBroker.milight-smart-light/blob/master/README.md",
-    "loglevel": "info",
+    "enabled": true,
+    "main": "main.js",
+    "license": "MIT",
     "type": "lighting",
-    "authors": [
-      {
-        "name": "Steiger04",
-        "email": "steiger04@posteo.de"
-      }
-    ],
+    "messagebox": true,
+    "supportStopInstance": true,
     "dependencies": [
       "web"
     ],
     "localLink": "%web_protocol%://%ip%:%serverPort%",
-    "materialize": true
   },
   "native": {
     "activeApp": false,
