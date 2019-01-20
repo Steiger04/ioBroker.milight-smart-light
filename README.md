@@ -29,7 +29,7 @@ With adapter you can use both: **v6 Bridge** and **Legacy Bridge**.
 - rgb(w)
 
 ### Versions
-- **Node.js**: use v. 8.15.0 or higher
+- **Node.js**: use v. 8.0.0 or higher
 - **iobroker.admin**: use v. 3.5.10 or higher
 
 
