@@ -6,7 +6,13 @@
     "titleLang": {
       "en": "milight-smart-light",
       "de": "milight-smart-light",
-      "ru": "milight-smart-light"
+      "ru": "milight смарт-свет",
+      "pt": "milight-smart-light",
+      "nl": "milight-smart-light",
+      "fr": "milight-smart-light",
+      "it": "milight-smart-light",
+      "es": "milight-smart-light",
+      "pl": "milight-smart-light"
     },
     "authors": [
       {
@@ -16,14 +22,26 @@
     ],
     "news": {
       "0.2.0": {
-        "en": "Adaptation to Admin3, materialzeCSS, general revision, new app",
-        "de": "Anpassung an Admin3, materialzeCSS, generelle Überarbeitung, neue App",
-        "ru": "Adaptation to Admin3, materialzeCSS, general revision, new app"
+        "en": "Adaptation to Admin3, MaterialzeCSS, general revision, new app",
+        "de": "Anpassung an Admin3, Materialise CSS, allgemeine Überarbeitung, neue App",
+        "ru": "Адаптация к Admin3, материализация CSS, общая редакция, новое приложение",
+        "pt": "Adaptação para Admin3, CSS de materialização, revisão geral, novo aplicativo",
+        "nl": "Aanpassing aan Admin3, CSS materialiseren, algemene revisie, nieuwe app",
+        "fr": "Adaptation à Admin3, Materialise CSS, révision générale, nouvelle application",
+        "it": "Adattamento a Admin3, Materialise CSS, revisione generale, nuova app",
+        "es": "Adaptación a Admin3, Materialise CSS, revisión general, nueva aplicación.",
+        "pl": "Adaptacja do Admin3, Materialise CSS, ogólna wersja, nowa aplikacja"
       },
       "0.1.9": {
         "en": "Adaption for js-controller > v.1.2.5",
-        "de": "Anpassung für js-controller > v.1.2.5",
-        "ru": "Adaption for js-controller > v.1.2.5"
+        "de": "Anpassung für js-controller> v.1.2.5",
+        "ru": "Адаптация для js-controller> v.1.2.5",
+        "pt": "Adaptação para o js-controller> v.1.2.5",
+        "nl": "Aanpassing voor js-controller> v.1.2.5",
+        "fr": "Adaptation pour js-controller> v.1.2.5",
+        "it": "Adattamento per js-controller> v.1.2.5",
+        "es": "Adaptación para js-controller> v.1.2.5",
+        "pl": "Adaptacja dla js-kontrolera> v.1.2.5"
       },
       "0.1.8": {
         "en": "some optimizations for Alexa",
@@ -101,10 +119,16 @@
         "ru": "Первоначальный адаптер"
       }
     },
-    "desc": {
-      "en": "Adapter for Milight LED bulbs and LED strips",
-      "de": "Adapter für Milight LED bulbs und LED strips",
-      "ru": "Adapter for Milight LED bulbs and LED strips"
+    "desc":  {
+      "en": "Adapter für Milight LED bulbs und LED strips",
+      "de": "Adapter für Milight LED-Lampen und LED-Streifen",
+      "ru": "Адаптер для светодиодных ламп Milight и светодиодных лент",
+      "pt": "Adaptador para lâmpadas LED Milight e tiras de LED",
+      "nl": "Adapter voor Milight LED-lampen en LED-strips",
+      "fr": "Adaptateur pour ampoules et bandes LED Milight",
+      "it": "Adattatore per lampadine LED Milight LED e strisce LED",
+      "es": "Adaptador para bombillas LED y tiras LED de Milight.",
+      "pl": "Adapter do energooszczędnych żarówek LED i taśm LED"
     },
     "platform": "Javascript/Node.js",
     "mode": "daemon",

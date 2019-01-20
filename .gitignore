@@ -6,6 +6,7 @@ node_modules
 bower.json
 Gruntfile.js
 package-lock.json
+admin/i18n
 sw.*
 mslfe-ibr/sw.*
 mslfe-ibr/.idea
@@ -13,5 +14,6 @@ mslfe-ibr/node_modules
 mslfe-ibr/.editorconfig
 mslfe-ibr/.gitignore
 mslfe-ibr/package-lock.json
+mslfe-ibr/middleware
 mslfe-ibr/README.md
-middleware
+

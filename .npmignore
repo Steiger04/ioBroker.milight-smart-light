@@ -12,3 +12,4 @@ bower.json
 .eslintrc.json
 .eslintrc.js
 .jscsrc
+admin/i18n
