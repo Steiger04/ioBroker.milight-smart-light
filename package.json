@@ -52,7 +52,7 @@
   "main": "main.js",
   "scripts": {
     "test": "node node_modules/mocha/bin/mocha --exit",
-    "postinstall": "cd mslfe-ibr && npm install --production"
+    "postinstall": "cd mslfe-ibr && npm install --production --save"
   },
   "bugs": {
     "url": "https://github.com/Steiger04/ioBroker.milight-smart-light/issues"
