@@ -1,6 +1,6 @@
 <template>
   <div>
-    <slider v-model="colors1"/>
+    <slider v-model="colors1" />
   </div>
 </template>
 
@@ -10,9 +10,9 @@ import Slider from '@/components/colorpicker/slider/Slider'
 import pickerMixin from '~/components/colorpicker/mixin/picker'
 
 export default {
-  mixins: [pickerMixin],
   components: {
     Slider
-  }
+  },
+  mixins: [pickerMixin]
 }
 </script>

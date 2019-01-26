@@ -3,42 +3,53 @@
     <v-layout column>
       <v-flex xs6>
         <v-layout row>
-
           <v-flex xs6 text-xs-center>
             <msl-slider
               style="padding: 0;"
               class="d-inline-flex"
+              :value="brightness"
+              v-bind="optionsBrightness"
               @callback="b"
-              v-bind:value="brightness"
-              v-bind="optionsBrightness"/>
+            />
           </v-flex>
 
           <v-flex xs6 d-inline-flex align-center>
             <v-layout column text-xs-center>
               <v-flex>
-                <v-btn round large color="white black--text"
-                       @click="whiteMode()">
-                  <v-icon left dark>wb_sunny</v-icon>
+                <v-btn
+                  round
+                  large
+                  color="white black--text"
+                  @click="whiteMode()"
+                >
+                  <v-icon left dark>
+                    wb_sunny
+                  </v-icon>
                   white
                 </v-btn>
               </v-flex>
-              <v-flex></v-flex>
-              <v-flex></v-flex>
+              <v-flex />
+              <v-flex />
               <v-flex>
-                <v-btn round large color="black white--text"
-                       @click="nightMode()">
-                  <v-icon left dark>cloud</v-icon>
+                <v-btn
+                  round
+                  large
+                  color="black white--text"
+                  @click="nightMode()"
+                >
+                  <v-icon left dark>
+                    cloud
+                  </v-icon>
                   night
                 </v-btn>
               </v-flex>
             </v-layout>
           </v-flex>
-
         </v-layout>
       </v-flex>
 
       <v-flex xs6 d-inline-flex align-end>
-        <msl-on-off/>
+        <msl-on-off />
       </v-flex>
     </v-layout>
   </v-container>
@@ -50,6 +61,10 @@ import mslOnOff from '@/components/OnOff'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
+  components: {
+    mslSlider,
+    mslOnOff
+  },
   data() {
     return {
       optionsBrightness: {
@@ -96,10 +111,6 @@ export default {
     whiteMode() {
       this.UPDATE_DP_FROM_CLIENT({ value: true, dp: 'whiteMode', delay: 500 })
     }
-  },
-  components: {
-    mslSlider,
-    mslOnOff
   }
 }
 </script>

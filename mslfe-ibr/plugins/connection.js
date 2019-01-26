@@ -18,7 +18,7 @@ export default async function(context) {
         onConnChange: function(isConnected) {
           if (isConnected) {
             // load all subscribed states
-            let promStates = new Promise((resolve, reject) => {
+            const promStates = new Promise((resolve, reject) => {
               servConn.getStates('milight-smart-light*', function(
                 err,
                 _states
@@ -38,7 +38,7 @@ export default async function(context) {
             })
 
             // load all zones and bridges for all instances
-            let promZones = new Promise((resolve, reject) => {
+            const promZones = new Promise((resolve, reject) => {
               servConn._socket.emit(
                 'getObjectView',
                 'system',
@@ -52,7 +52,7 @@ export default async function(context) {
                     reject(err)
                   }
 
-                  let _channels = {}
+                  const _channels = {}
                   for (let i = 0; i < channels.rows.length; i++) {
                     _channels[channels.rows[i].id] = channels.rows[i].value
                   }

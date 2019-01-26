@@ -1,14 +1,15 @@
 <template>
   <v-container fill-height fluid>
-    <v-layout row
-              v-resize="onResize"
+    <v-layout
+      v-resize="onResize"
+      row
     >
       <v-flex
         layout
         align-center
         justify-center
       >
-        <msl-intro :newsize="windowSize"></msl-intro>
+        <msl-intro :newsize="windowSize" />
       </v-flex>
     </v-layout>
   </v-container>
@@ -18,6 +19,9 @@
 import mslIntro from '~/components/Intro'
 
 export default {
+  components: {
+    mslIntro
+  },
   // middleware: 'connection',
   data() {
     return {
@@ -26,9 +30,6 @@ export default {
   },
   mounted() {
     this.onResize()
-  },
-  components: {
-    mslIntro
   },
   methods: {
     onResize() {

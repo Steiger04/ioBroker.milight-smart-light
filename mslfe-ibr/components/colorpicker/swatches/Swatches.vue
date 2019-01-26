@@ -1,32 +1,40 @@
 <template>
   <v-layout column align-center>
     <v-flex xs12>
-      <v-carousel style="box-shadow: none;"
-                  height="300"
-                  hide-delimiters
-                  hide-controls
-                  :cycle="false">
-        <v-carousel-item
-          v-for="(group, $idx) in palette" :key="$idx"
-          v-if="$idx%4==0"
-        >
-          <div v-for="n in 4"
-               class="vc-swatches-color-group"
+      <v-carousel
+        style="box-shadow: none;"
+        height="300"
+        hide-delimiters
+        hide-controls
+        :cycle="false"
+      >
+        <template v-for="(group, $idx) in palette">
+          <v-carousel-item
+            v-if="$idx%4==0"
+            :key="$idx"
           >
-            <div :class="['vc-swatches-color-it', {'vc-swatches-color--white': c === '#FFFFFF' }]"
-                 v-for="c in palette[$idx+n-1]" :key="c"
-                 :data-color="c"
-                 :style="{background: c}"
-                 @click="handlerClick(c)"
+            <div
+              v-for="n in 4"
+              :key="n"
+              class="vc-swatches-color-group"
             >
-              <div class="vc-swatches-pick" v-show="equal(c)">
-                <svg style="width: 24px; height:24px;" viewBox="0 0 24 24">
-                  <path d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"/>
-                </svg>
+              <div
+                v-for="c in palette[$idx+n-1]"
+                :key="c"
+                :class="['vc-swatches-color-it', {'vc-swatches-color--white': c === '#FFFFFF' }]"
+                :data-color="c"
+                :style="{background: c}"
+                @click="handlerClick(c)"
+              >
+                <div v-show="equal(c)" class="vc-swatches-pick">
+                  <svg style="width: 24px; height:24px;" viewBox="0 0 24 24">
+                    <path d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z" />
+                  </svg>
+                </div>
               </div>
             </div>
-          </div>
-        </v-carousel-item>
+          </v-carousel-item>
+        </template>
       </v-carousel>
     </v-flex>
   </v-layout>
@@ -36,14 +44,14 @@
 import material from 'material-colors'
 import colorMixin from '~/components/colorpicker/mixin/color'
 
-/*var colorMap = [
-    'red', 'pink', 'purple', 'deepPurple',
-    'indigo', 'blue', 'lightBlue', 'cyan',
-    'teal', 'green', 'lightGreen', 'lime',
-    'yellow', 'amber', 'orange', 'deepOrange',
-    'brown', 'blueGrey', 'black'
-  ]*/
-var colorMap = [
+/* var colorMap = [
+          'red', 'pink', 'purple', 'deepPurple',
+          'indigo', 'blue', 'lightBlue', 'cyan',
+          'teal', 'green', 'lightGreen', 'lime',
+          'yellow', 'amber', 'orange', 'deepOrange',
+          'brown', 'blueGrey', 'black'
+        ] */
+const colorMap = [
   'red',
   'pink',
   'purple',
@@ -62,11 +70,11 @@ var colorMap = [
   'deepOrange'
 ]
 
-var colorLevel = ['800', '700', '600', '500', '400', '300', '200', '100']
-var defaultColors = (() => {
-  var colors = []
+const colorLevel = ['800', '700', '600', '500', '400', '300', '200', '100']
+const defaultColors = (() => {
+  const colors = []
   colorMap.forEach(type => {
-    var typeColor = []
+    let typeColor = []
     if (type.toLowerCase() === 'black' || type.toLowerCase() === 'white') {
       typeColor = typeColor.concat(['#000000', '#FFFFFF'])
     } else {

@@ -1,5 +1,5 @@
 <template>
-  <swatches v-model="colors1"/>
+  <swatches v-model="colors1" />
 </template>
 
 
@@ -8,6 +8,9 @@ import Swatches from '@/components/colorpicker/swatches/Swatches'
 import pickerMixin from '~/components/colorpicker/mixin/picker'
 
 export default {
+  components: {
+    Swatches
+  },
   mixins: [pickerMixin],
   data() {
     return {
@@ -18,9 +21,6 @@ export default {
         ['#ffa51a', '#ffb748', '#ffc976', '#ffdba3', '#ffedd1']
       ]
     }
-  },
-  components: {
-    Swatches
   }
 }
 </script>

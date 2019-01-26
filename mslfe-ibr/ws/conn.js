@@ -1,3 +1,4 @@
+/* eslint-disable no-undef,no-throw-literal,handle-callback-err,no-unused-vars,standard/no-callback-literal */
 import Vue from 'vue'
 import io from 'socket.io-client'
 
@@ -61,7 +62,7 @@ export default {
 
     if (this._queueCmdIfRequired(func, _arguments)) return false
 
-    //socket.io
+    // socket.io
     if (this._socket === null) {
       Vue.console.log('socket.io not initialized')
       return false
@@ -70,7 +71,7 @@ export default {
   },
   _monitor: function() {
     if (this._timer) return
-    var ts = new Date().getTime()
+    const ts = new Date().getTime()
     if (
       this._reloadInterval &&
       ts - this._lastTimer > this._reloadInterval * 1000
@@ -80,14 +81,14 @@ export default {
     } else {
       this._lastTimer = ts
     }
-    var that = this
+    const that = this
     this._timer = setTimeout(function() {
       that._timer = null
       that._monitor()
     }, 10000)
   },
   _onAuth: function(objectsRequired, isSecure) {
-    var that = this
+    const that = this
 
     this._isSecure = isSecure
 
@@ -96,7 +97,7 @@ export default {
       this._monitor()
     }
 
-    this._socket.emit('subscribe', that.subscribePattern) //TODO: Auf Instanz verallgemeinern
+    this._socket.emit('subscribe', that.subscribePattern) // TODO: Auf Instanz verallgemeinern
     if (objectsRequired) this._socket.emit('subscribeObjects', '*')
 
     if (this._isConnected === true) {
@@ -116,7 +117,7 @@ export default {
     }
   },
   reconnect: function(connOptions) {
-    var that = this
+    const that = this
     // reconnect
     if (
       (!connOptions.mayReconnect || connOptions.mayReconnect()) &&
@@ -147,7 +148,7 @@ export default {
     }
   },
   init: function(connOptions, connCallbacks, objectsRequired) {
-    var that = this // support of old safary
+    const that = this // support of old safary
     // init namespace
     if (typeof socketNamespace !== 'undefined') this.namespace = socketNamespace
 
@@ -173,7 +174,7 @@ export default {
     }
 
     if (typeof session !== 'undefined') {
-      var user = session.get('user')
+      const user = session.get('user')
       if (user) {
         that._authInfo = {
           user: user,
@@ -185,7 +186,7 @@ export default {
 
     this._connCallbacks = connCallbacks
 
-    var connLink =
+    let connLink =
       connOptions.connLink || window.localStorage.getItem('connLink')
 
     // Connection data from "/_socket/info.js"
@@ -209,7 +210,7 @@ export default {
     } else if (typeof io !== 'undefined') {
       connOptions.socketSession = connOptions.socketSession || 'nokey'
 
-      var url
+      let url
       if (connLink) {
         url = connLink
         if (typeof connLink !== 'undefined') {
@@ -237,7 +238,7 @@ export default {
 
       this._socket.on('connect', function() {
         if (that._disconnectedSince) {
-          var offlineTime = new Date().getTime() - that._disconnectedSince
+          const offlineTime = new Date().getTime() - that._disconnectedSince
           Vue.console.log('was offline for ' + offlineTime / 1000 + 's')
 
           // reload whole page if no connection longer than some period
@@ -255,13 +256,13 @@ export default {
           clearInterval(that._countInterval)
           that._countInterval = null
         }
-        var elem = document.getElementById('server-disconnect')
+        const elem = document.getElementById('server-disconnect')
         if (elem) elem.style.display = 'none'
 
         that._socket.emit('name', connOptions.name)
         Vue.console.log(new Date().toISOString() + ' Connected => authenticate')
         setTimeout(function() {
-          var wait = setTimeout(function() {
+          const wait = setTimeout(function() {
             Vue.console.error('No answer from server')
             window.location.reload()
           }, 3000)
@@ -300,13 +301,13 @@ export default {
         that._isConnected = false
         if (that._connCallbacks.onConnChange) {
           setTimeout(function() {
-            var elem = document.getElementById('server-disconnect')
+            const elem = document.getElementById('server-disconnect')
             if (elem) elem.style.display = ''
             that._connCallbacks.onConnChange(that._isConnected)
             // if (typeof app !== 'undefined') app.onConnChange(that._isConnected);
           }, 5000)
         } else {
-          var elem = document.getElementById('server-disconnect')
+          const elem = document.getElementById('server-disconnect')
           if (elem) elem.style.display = ''
         }
 
@@ -316,7 +317,7 @@ export default {
 
       // after reconnect the "connect" event will be called
       this._socket.on('reconnect', function() {
-        var offlineTime = new Date().getTime() - that._disconnectedSince
+        const offlineTime = new Date().getTime() - that._disconnectedSince
         Vue.console.log('was offline for ' + offlineTime / 1000 + 's')
 
         // reload whole page if no connection longer than one minute
@@ -329,13 +330,11 @@ export default {
       this._socket.on('objectChange', function(id, obj) {
         // If cache used
         if (that._useStorage && typeof storage !== 'undefined') {
-          var objects = that._objects || storage.get('objects')
+          const objects = that._objects || storage.get('objects')
           if (objects) {
             if (obj) {
               objects[id] = obj
-            } else {
-              if (objects[id]) delete objects[id]
-            }
+            } else if (objects[id]) delete objects[id]
             storage.set('objects', objects)
           }
         }
@@ -381,17 +380,15 @@ export default {
               // clear state
               that.setState(id, { val: '', ack: true })
             }
-          } else {
-            if (
-              that._connCallbacks.onCommand(
-                that._cmdInstance,
-                state.val,
-                that._cmdData
-              )
-            ) {
-              // clear state
-              that.setState(id, { val: '', ack: true })
-            }
+          } else if (
+            that._connCallbacks.onCommand(
+              that._cmdInstance,
+              state.val,
+              that._cmdData
+            )
+          ) {
+            // clear state
+            that.setState(id, { val: '', ack: true })
           }
         } else if (id === that.namespace + '.control.data') {
           that._cmdData = state.val
@@ -409,7 +406,7 @@ export default {
            type:
            operation:
            arg:
-           }*/
+           } */
           that._connCallbacks.onError(err)
         } else {
           Vue.console.log('permissionError')
@@ -437,7 +434,7 @@ export default {
       Vue.console.log('No connection!')
       return
     }
-    //socket.io
+    // socket.io
     if (this._socket === null) {
       Vue.console.log('socket.io not initialized')
       return
@@ -453,7 +450,7 @@ export default {
 
     if (this._type === 'local') {
       try {
-        var data = storage.get(filename)
+        const data = storage.get(filename)
         callback(null, data ? JSON.parse(storage.get(filename)) : null)
       } catch (err) {
         callback(err, null)
@@ -464,9 +461,9 @@ export default {
       if (!isRemote && typeof app !== 'undefined') {
         app.readLocalFile(filename.replace(/^\/vis\.0\//, ''), callback)
       } else {
-        var adapter = this.namespace
+        let adapter = this.namespace
         if (filename[0] === '/') {
-          var p = filename.split('/')
+          const p = filename.split('/')
           adapter = p[1]
           p.splice(0, 2)
           filename = p.join('/')
@@ -486,7 +483,7 @@ export default {
   },
   getMimeType: function(ext) {
     if (ext.indexOf('.') !== -1) ext = ext.toLowerCase().match(/\.[^.]+$/)
-    var _mimeType
+    let _mimeType
     if (ext === '.css') {
       _mimeType = 'text/css'
     } else if (ext === '.bmp') {
@@ -529,7 +526,7 @@ export default {
     return _mimeType
   },
   readFile64: function(filename, callback, isRemote) {
-    var that = this
+    const that = this
     if (!callback) {
       throw 'No callback set'
     }
@@ -558,9 +555,9 @@ export default {
         }, 0)
       })
     } else {
-      var adapter = this.namespace
+      let adapter = this.namespace
       if (filename[0] === '/') {
-        var p = filename.split('/')
+        const p = filename.split('/')
         adapter = p[1]
         p.splice(0, 2)
         filename = p.join('/')
@@ -602,8 +599,8 @@ export default {
 
       if (typeof data === 'object') data = JSON.stringify(data, null, 2)
 
-      var parts = filename.split('/')
-      var adapter = parts[1]
+      const parts = filename.split('/')
+      const adapter = parts[1]
       parts.splice(0, 2)
       if (adapter === 'vis') {
         this._socket.emit(
@@ -630,8 +627,8 @@ export default {
   writeFile64: function(filename, data, callback) {
     if (!this._checkConnection('writeFile', arguments)) return
 
-    var parts = filename.split('/')
-    var adapter = parts[1]
+    const parts = filename.split('/')
+    const adapter = parts[1]
     parts.splice(0, 2)
 
     this._socket.emit(
@@ -644,14 +641,14 @@ export default {
     )
   },
   readDir: function(dirname, callback) {
-    //socket.io
+    // socket.io
     if (this._socket === null) {
       Vue.console.log('socket.io not initialized')
       return
     }
     if (!dirname) dirname = '/'
-    var parts = dirname.split('/')
-    var adapter = parts[1]
+    const parts = dirname.split('/')
+    const adapter = parts[1]
     parts.splice(0, 2)
 
     this._socket.emit(
@@ -665,8 +662,8 @@ export default {
     )
   },
   mkdir: function(dirname, callback) {
-    var parts = dirname.split('/')
-    var adapter = parts[1]
+    const parts = dirname.split('/')
+    const adapter = parts[1]
     parts.splice(0, 2)
 
     this._socket.emit('mkdir', adapter, parts.join('/'), function(err) {
@@ -674,8 +671,8 @@ export default {
     })
   },
   unlink: function(name, callback) {
-    var parts = name.split('/')
-    var adapter = parts[1]
+    const parts = name.split('/')
+    const adapter = parts[1]
     parts.splice(0, 2)
 
     this._socket.emit('unlink', adapter, parts.join('/'), function(err) {
@@ -683,10 +680,10 @@ export default {
     })
   },
   renameFile: function(oldname, newname, callback) {
-    var parts1 = oldname.split('/')
-    var adapter = parts1[1]
+    const parts1 = oldname.split('/')
+    const adapter = parts1[1]
     parts1.splice(0, 2)
-    var parts2 = newname.split('/')
+    const parts2 = newname.split('/')
     parts2.splice(0, 2)
     this._socket.emit(
       'rename',
@@ -699,7 +696,7 @@ export default {
     )
   },
   setState: function(pointId, value, callback) {
-    //socket.io
+    // socket.io
     if (this._socket === null) {
       Vue.console.error('setState::socket.io not initialized!')
       return
@@ -727,7 +724,7 @@ export default {
         )
         IDs = []
       }
-      var that = this
+      const that = this
       this._socket.emit('getStates', IDs, function(err, data) {
         that.gettingStates--
         if (err || !data) {
@@ -741,19 +738,19 @@ export default {
     }
   },
   _fillChildren: function(objects) {
-    var items = []
+    const items = []
 
-    for (var id in objects) {
+    for (const id in objects) {
       items.push(id)
     }
     items.sort()
 
-    for (var i = 0; i < items.length; i++) {
+    for (let i = 0; i < items.length; i++) {
       if (objects[items[i]].common) {
-        var j = i + 1
-        var children = []
-        var len = items[i].length + 1
-        var name = items[i] + '.'
+        let j = i + 1
+        const children = []
+        const len = items[i].length + 1
+        const name = items[i] + '.'
         while (j < items.length && items[j].substring(0, len) === name) {
           children.push(items[j++])
         }
@@ -771,7 +768,7 @@ export default {
     // If cache used
     if (this._useStorage && useCache) {
       if (typeof storage !== 'undefined') {
-        var objects = this._objects || storage.get('objects')
+        const objects = this._objects || storage.get('objects')
         if (objects) return callback(null, objects)
       } else if (this._objects) {
         return callback(null, this._objects)
@@ -779,7 +776,7 @@ export default {
     }
 
     if (!this._checkConnection('getObjects', arguments)) return
-    var that = this
+    const that = this
     this._socket.emit('getObjects', function(err, data) {
       // Read all enums
       that._socket.emit(
@@ -792,9 +789,9 @@ export default {
             callback(err)
             return
           }
-          var result = {}
-          var enums = {}
-          for (var i = 0; i < res.rows.length; i++) {
+          const result = {}
+          const enums = {}
+          for (let i = 0; i < res.rows.length; i++) {
             data[res.rows[i].id] = res.rows[i].value
             enums[res.rows[i].id] = res.rows[i].value
           }
@@ -810,8 +807,8 @@ export default {
                 callback(err)
                 return
               }
-              var result = {}
-              for (var i = 0; i < res.rows.length; i++) {
+              const result = {}
+              for (let i = 0; i < res.rows.length; i++) {
                 data[res.rows[i].id] = res.rows[i].value
               }
               // find out default file mode
@@ -820,10 +817,8 @@ export default {
                 data['system.adapter.' + that.namespace].native &&
                 data['system.adapter.' + that.namespace].native.defaultFileMode
               ) {
-                that._defaultMode =
-                  data[
-                    'system.adapter.' + that.namespace
-                  ].native.defaultFileMode
+                // eslint-disable-next-line prettier/prettier
+                that._defaultMode = data['system.adapter.' + that.namespace].native.defaultFileMode
               }
 
               // Read all channels for images
@@ -837,8 +832,8 @@ export default {
                     callback(err)
                     return
                   }
-                  var result = {}
-                  for (var i = 0; i < res.rows.length; i++) {
+                  const result = {}
+                  for (let i = 0; i < res.rows.length; i++) {
                     data[res.rows[i].id] = res.rows[i].value
                   }
 
@@ -853,8 +848,8 @@ export default {
                         callback(err)
                         return
                       }
-                      var result = {}
-                      for (var i = 0; i < res.rows.length; i++) {
+                      const result = {}
+                      for (let i = 0; i < res.rows.length; i++) {
                         data[res.rows[i].id] = res.rows[i].value
                       }
 
@@ -899,14 +894,15 @@ export default {
       useCache = false
     }
 
+    // eslint-disable-next-line standard/no-callback-literal
     if (!id) return callback('getChildren: no id given')
 
-    var that = this
-    var data = []
+    const that = this
+    const data = []
 
     if (this._useStorage && useCache) {
       if (typeof storage !== 'undefined') {
-        var objects = storage.get('objects')
+        const objects = storage.get('objects')
         if (objects && objects[id] && objects[id].children) {
           return callback(null, objects[id].children)
         }
@@ -930,8 +926,8 @@ export default {
           callback(err)
           return
         }
-        var result = {}
-        for (var i = 0; i < res.rows.length; i++) {
+        const result = {}
+        for (let i = 0; i < res.rows.length; i++) {
           data[res.rows[i].id] = res.rows[i].value
         }
 
@@ -945,8 +941,8 @@ export default {
               callback(err)
               return
             }
-            var result = {}
-            for (var i = 0; i < res.rows.length; i++) {
+            const result = {}
+            for (let i = 0; i < res.rows.length; i++) {
               data[res.rows[i].id] = res.rows[i].value
             }
 
@@ -961,17 +957,17 @@ export default {
                   callback(err)
                   return
                 }
-                var result = {}
-                for (var i = 0; i < res.rows.length; i++) {
+                const result = {}
+                for (let i = 0; i < res.rows.length; i++) {
                   data[res.rows[i].id] = res.rows[i].value
                 }
-                var list = []
+                const list = []
 
-                var count = id.split('.').length
+                const count = id.split('.').length
 
                 // find direct children
-                for (var _id in data) {
-                  var parts = _id.split('.')
+                for (const _id in data) {
+                  const parts = _id.split('.')
                   if (count + 1 === parts.length) {
                     list.push(_id)
                   }
@@ -979,27 +975,27 @@ export default {
                 list.sort()
 
                 if (this._useStorage && typeof storage !== 'undefined') {
-                  var objects = storage.get('objects') || {}
+                  const objects = storage.get('objects') || {}
 
-                  for (var id_ in data) {
+                  for (const id_ in data) {
                     objects[id_] = data[id_]
                   }
                   if (objects[id] && objects[id].common) {
                     objects[id].children = list
                   }
                   // Store for every element theirs children
-                  var items = []
-                  for (var __id in data) {
+                  const items = []
+                  for (const __id in data) {
                     items.push(__id)
                   }
                   items.sort()
 
-                  for (var k = 0; k < items.length; k++) {
+                  for (let k = 0; k < items.length; k++) {
                     if (objects[items[k]].common) {
-                      var j = k + 1
-                      var children = []
-                      var len = items[k].length + 1
-                      var name = items[k] + '.'
+                      let j = k + 1
+                      const children = []
+                      const len = items[k].length + 1
+                      const name = items[k] + '.'
                       while (
                         j < items.length &&
                         items[j].substring(0, len) === name
@@ -1042,7 +1038,7 @@ export default {
     // If cache used
     if (this._useStorage && useCache && typeof storage !== 'undefined') {
       if (typeof storage !== 'undefined') {
-        var objects = this._objects || storage.get('objects')
+        const objects = this._objects || storage.get('objects')
         if (objects && objects[id]) return callback(null, objects[id])
       } else if (this._enums) {
         return callback(null, this._enums)
@@ -1058,7 +1054,7 @@ export default {
           return
         }
         if (this._useStorage && typeof storage !== 'undefined') {
-          var objects = storage.get('objects') || {}
+          const objects = storage.get('objects') || {}
           objects[id] = obj
           storage.set('objects', objects)
         }
@@ -1085,7 +1081,7 @@ export default {
     // If cache used
     if (this._useStorage && useCache) {
       if (typeof storage !== 'undefined') {
-        var enums = this._enums || storage.get('enums')
+        const enums = this._enums || storage.get('enums')
         if (enums) return callback(null, enums)
       } else if (this._enums) {
         return callback(null, this._enums)
@@ -1108,9 +1104,9 @@ export default {
             callback(err)
             return
           }
-          var enums = {}
-          for (var i = 0; i < res.rows.length; i++) {
-            var obj = res.rows[i].value
+          const enums = {}
+          for (let i = 0; i < res.rows.length; i++) {
+            const obj = res.rows[i].value
             enums[obj._id] = obj
           }
           if (this._useStorage && typeof storage !== 'undefined') {
@@ -1124,7 +1120,7 @@ export default {
   // return time when the objects were synchronized
   getSyncTime: function() {
     if (this._useStorage && typeof storage !== 'undefined') {
-      var timeSync = storage.get('timeSync')
+      const timeSync = storage.get('timeSync')
       if (timeSync) return new Date(timeSync)
     }
     return null
@@ -1134,10 +1130,9 @@ export default {
       Vue.console.log('No connection!')
       return
     }
-    //socket.io
+    // socket.io
     if (this._socket === null) {
       Vue.console.log('socket.io not initialized')
-      return
     }
   },
   delObject: function(objId) {
@@ -1150,7 +1145,7 @@ export default {
       Vue.console.log('No connection!')
       return
     }
-    //socket.io
+    // socket.io
     if (this._socket === null) {
       Vue.console.log('socket.io not initialized')
       return
@@ -1162,10 +1157,10 @@ export default {
   logError: function(errorText) {
     Vue.console.log('Error: ' + errorText)
     if (!this._isConnected) {
-      //Vue.console.log('No connection!');
+      // Vue.console.log('No connection!');
       return
     }
-    //socket.io
+    // socket.io
     if (this._socket === null) {
       Vue.console.log('socket.io not initialized')
       return
@@ -1173,7 +1168,7 @@ export default {
     this._socket.emit('log', 'error', 'Addon DashUI  ' + errorText)
   },
   _queueCmdIfRequired: function(func, args) {
-    var that = this
+    const that = this
     if (!this._isAuthDone) {
       // Queue command
       this._cmdQueue.push({ func: func, args: args })
@@ -1187,11 +1182,11 @@ export default {
           if (version) {
             that._isAuthDone = true
             // Repeat all stored requests
-            var __cmdQueue = that._cmdQueue
+            const __cmdQueue = that._cmdQueue
             // Trigger GC
             that._cmdQueue = null
             that._cmdQueue = []
-            for (var t = 0, len = __cmdQueue.length; t < len; t++) {
+            for (let t = 0, len = __cmdQueue.length; t < len; t++) {
               that[__cmdQueue[t].func].apply(that, __cmdQueue[t].args)
             }
           } else {
@@ -1236,7 +1231,7 @@ export default {
     }
     if (this._useStorage && useCache) {
       if (typeof storage !== 'undefined') {
-        var objects = storage.get('objects')
+        const objects = storage.get('objects')
         if (objects && objects['system.config']) {
           return callback(null, objects['system.config'].common)
         }
@@ -1244,11 +1239,11 @@ export default {
         return callback(null, this._objects['system.config'].common)
       }
     }
-    var that = this
+    const that = this
     this._socket.emit('getObject', 'system.config', function(err, obj) {
       if (callback && obj && obj.common) {
         if (that._useStorage && typeof storage !== 'undefined') {
-          var objects = storage.get('objects') || {}
+          const objects = storage.get('objects') || {}
           objects['system.config'] = obj
           storage.set('objects', objects)
         }
@@ -1273,7 +1268,7 @@ export default {
   _detectViews: function(projectDir, callback) {
     this.readDir('/' + this.namespace + '/' + projectDir, function(err, dirs) {
       // find vis-views.json
-      for (var f = 0; f < dirs.length; f++) {
+      for (let f = 0; f < dirs.length; f++) {
         if (
           dirs[f].file === 'vis-views.json' &&
           (!dirs[f].acl || dirs[f].acl.read)
@@ -1289,11 +1284,11 @@ export default {
     })
   },
   readProjects: function(callback) {
-    var that = this
+    const that = this
     this.readDir('/' + this.namespace, function(err, dirs) {
-      var result = []
-      var count = 0
-      for (var d = 0; d < dirs.length; d++) {
+      const result = []
+      let count = 0
+      for (let d = 0; d < dirs.length; d++) {
         if (dirs[d].isDir) {
           count++
           that._detectViews(dirs[d].file, function(subErr, project) {
@@ -1307,7 +1302,7 @@ export default {
     })
   },
   chmodProject: function(projectDir, mode, callback) {
-    //socket.io
+    // socket.io
     if (this._socket === null) {
       Vue.console.log('socket.io not initialized')
       return
@@ -1333,7 +1328,7 @@ export default {
     if (!options) options = {}
     if (!options.timeout) options.timeout = 2000
 
-    var timeout = setTimeout(function() {
+    let timeout = setTimeout(function() {
       timeout = null
       callback('timeout')
     }, options.timeout)
@@ -1346,15 +1341,15 @@ export default {
     })
   },
   getLiveHost: function(cb) {
-    var that = this
+    const that = this
     this._socket.emit(
       'getObjectView',
       'system',
       'host',
       { startkey: 'system.host.', endkey: 'system.host.\u9999' },
       function(err, res) {
-        var _hosts = []
-        for (var h = 0; h < res.rows.length; h++) {
+        const _hosts = []
+        for (let h = 0; h < res.rows.length; h++) {
           _hosts.push(res.rows[h].id + '.alive')
         }
         if (!_hosts.length) {
@@ -1362,7 +1357,7 @@ export default {
           return
         }
         that.getStates(_hosts, function(err, states) {
-          for (var h in states) {
+          for (const h in states) {
             if (states[h].val) {
               cb(h.substring(0, h.length - '.alive'.length))
               return
@@ -1382,13 +1377,13 @@ export default {
       Vue.console.log('No connection!')
       return
     }
-    //socket.io
+    // socket.io
     if (this._socket === null) {
       Vue.console.log('socket.io not initialized')
       return
     }
     if (project.match(/\/$/)) project = project.substring(0, project.length - 1)
-    var that = this
+    const that = this
     this.getLiveHost(function(host) {
       if (!host) {
         window.alert('No active host found')
@@ -1418,13 +1413,13 @@ export default {
       Vue.console.log('No connection!')
       return
     }
-    //socket.io
+    // socket.io
     if (this._socket === null) {
       Vue.console.log('socket.io not initialized')
       return
     }
     if (project.match(/\/$/)) project = project.substring(0, project.length - 1)
-    var that = this
+    const that = this
     this.getLiveHost(function(host) {
       if (!host) {
         window.alert('No active host found')

@@ -1,11 +1,14 @@
 <template>
   <div :class="['vc-hue', directionClass]">
-    <div class="vc-hue-container" ref="container"
-         @mousedown="handleMouseDown"
-         @touchmove="handleChange"
-         @touchstart="handleChange">
+    <div
+      ref="container"
+      class="vc-hue-container"
+      @mousedown="handleMouseDown"
+      @touchmove="handleChange"
+      @touchstart="handleChange"
+    >
       <div class="vc-hue-pointer" :style="{top: pointerTop, left: pointerLeft}">
-        <div class="vc-hue-picker"></div>
+        <div class="vc-hue-picker" />
       </div>
     </div>
   </div>
@@ -64,19 +67,20 @@ export default {
     handleChange(e, skip) {
       !skip && e.preventDefault()
 
-      var container = this.$refs.container
-      var containerWidth = container.clientWidth
-      var containerHeight = container.clientHeight
+      const container = this.$refs.container
+      const containerWidth = container.clientWidth
+      const containerHeight = container.clientHeight
 
-      var xOffset = container.getBoundingClientRect().left + window.pageXOffset
-      var yOffset = container.getBoundingClientRect().top + window.pageYOffset
-      var pageX = e.pageX || (e.touches ? e.touches[0].pageX : 0)
-      var pageY = e.pageY || (e.touches ? e.touches[0].pageY : 0)
-      var left = pageX - xOffset
-      var top = pageY - yOffset
+      const xOffset =
+        container.getBoundingClientRect().left + window.pageXOffset
+      const yOffset = container.getBoundingClientRect().top + window.pageYOffset
+      const pageX = e.pageX || (e.touches ? e.touches[0].pageX : 0)
+      const pageY = e.pageY || (e.touches ? e.touches[0].pageY : 0)
+      const left = pageX - xOffset
+      const top = pageY - yOffset
 
-      var h
-      var percent
+      let h
+      let percent
 
       if (this.direction === 'vertical') {
         if (top < 0) {

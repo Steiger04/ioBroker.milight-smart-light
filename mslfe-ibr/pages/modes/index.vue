@@ -4,37 +4,38 @@
       <v-flex xs12 sm6 offset-sm3>
         <v-list three-line>
           <template v-for="(item, index) in items">
-            <v-divider v-if="item.divider" :inset="item.inset" :key="index"></v-divider>
+            <v-divider v-if="item.divider" :key="index" :inset="item.inset" />
 
-              <v-list-tile to="/modes/effect"
-                           :key="item.title"
-                           @click.native="setEffectMode(item.modeNumber)"
-                           ripple
-                           active-class
-              >
-                <!--<v-list-tile-avatar color="blue">
+            <v-list-tile
+              :key="item.title"
+              to="/modes/effect"
+              ripple
+              active-class
+              @click.native="setEffectMode(item.modeNumber)"
+            >
+              <!--<v-list-tile-avatar color="blue">
                   <span class="white&#45;&#45;text headline">{{ item.avatar }}</span>
                 </v-list-tile-avatar>-->
-                <v-list-tile-content>
-                  <v-list-tile-sub-title
-                     class="body-1 font-weight-regular"
-                     v-if="LOADED_ZONE.common.mslZoneType==='fullColor'"
-                     v-html="item.subtitleFullColor">
-                  </v-list-tile-sub-title>
+              <v-list-tile-content>
+                <v-list-tile-sub-title
+                  v-if="LOADED_ZONE.common.mslZoneType==='fullColor'"
+                  class="body-1 font-weight-regular"
+                  v-html="item.subtitleFullColor"
+                />
 
-                  <v-list-tile-sub-title
-                     class="body-1 font-weight-regular"
-                     v-if="LOADED_ZONE.common.mslZoneType==='rgbw'"
-                     v-html="item.subtitleRgbW">
-                  </v-list-tile-sub-title>
+                <v-list-tile-sub-title
+                  v-if="LOADED_ZONE.common.mslZoneType==='rgbw'"
+                  class="body-1 font-weight-regular"
+                  v-html="item.subtitleRgbW"
+                />
   
-                  <v-list-tile-sub-title
-                     class="body-1 font-weight-regular"
-                     v-if="LOADED_ZONE.common.mslZoneType==='fullColor8Zone'"
-                     v-html="item.subtitleRgbW8">
-                  </v-list-tile-sub-title>
-                </v-list-tile-content>
-              </v-list-tile>
+                <v-list-tile-sub-title
+                  v-if="LOADED_ZONE.common.mslZoneType==='fullColor8Zone'"
+                  class="body-1 font-weight-regular"
+                  v-html="item.subtitleRgbW8"
+                />
+              </v-list-tile-content>
+            </v-list-tile>
           </template>
         </v-list>
       </v-flex>
@@ -43,7 +44,6 @@
 </template>
 
 <script>
-import Vue from 'vue'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
@@ -146,6 +146,9 @@ export default {
       ]
     }
   },
+  computed: {
+    ...mapGetters(['SHOW_BOTTOM_NAV', 'LOADED_ZONE'])
+  },
   methods: {
     ...mapActions(['UPDATE_DP_FROM_CLIENT', 'UPDATE_DP']),
     setEffectMode(payload) {
@@ -155,9 +158,6 @@ export default {
         delay: 500
       })
     }
-  },
-  computed: {
-    ...mapGetters(['SHOW_BOTTOM_NAV', 'LOADED_ZONE'])
   }
 }
 </script>

@@ -1,8 +1,12 @@
+/* eslint-disable no-unused-vars */
 import tinycolor from 'tinycolor2'
 
+import Vue from 'vue'
+import { mapGetters, mapActions } from 'vuex'
+
 function _colorChange(data, oldHue) {
-  var alpha = data && data.a
-  var color
+  const alpha = data && data.a
+  let color
 
   // hsl is better than hex between conversions
   if (data && data.hsl) {
@@ -21,8 +25,8 @@ function _colorChange(data, oldHue) {
     color.setAlpha(alpha || 1)
   }
 
-  var hsl = color.toHsl()
-  var hsv = color.toHsv()
+  const hsl = color.toHsl()
+  const hsv = color.toHsv()
 
   if (hsl.s === 0) {
     hsv.h = hsl.h = data.h || (data.hsl && data.hsl.h) || oldHue || 0
@@ -53,9 +57,6 @@ function _colorChange(data, oldHue) {
     a: data.a || color.getAlpha()
   }
 }
-
-import Vue from 'vue'
-import { mapGetters, mapActions } from 'vuex'
 
 export default {
   model: {
@@ -95,12 +96,12 @@ export default {
       return tinycolor(hex).isValid()
     },
     simpleCheckForValidColor(data) {
-      var keysToCheck = ['r', 'g', 'b', 'a', 'h', 's', 'l', 'v']
-      var checked = 0
-      var passed = 0
+      const keysToCheck = ['r', 'g', 'b', 'a', 'h', 's', 'l', 'v']
+      let checked = 0
+      let passed = 0
 
-      for (var i = 0; i < keysToCheck.length; i++) {
-        var letter = keysToCheck[i]
+      for (let i = 0; i < keysToCheck.length; i++) {
+        const letter = keysToCheck[i]
         if (data[letter]) {
           checked++
           if (!isNaN(data[letter])) {

@@ -1,3 +1,4 @@
+<!--suppress HtmlRequiredAltAttribute -->
 <template>
   <v-avatar tile :size="resize + 'px'">
     <img src="~assets/msl-start-web-alpha.png">
@@ -6,11 +7,13 @@
 
 <script>
 export default {
+  name: 'Intro',
+  props: {
+    // eslint-disable-next-line vue/require-default-prop,vue/require-prop-type-constructor
+    newsize: 0
+  },
   data() {
     return {}
-  },
-  props: {
-    newsize: 0
   },
   computed: {
     resize() {

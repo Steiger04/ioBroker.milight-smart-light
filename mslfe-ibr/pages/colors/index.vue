@@ -1,19 +1,19 @@
 <template>
-    <v-container fill-height fluid grid-list-xl>
-      <v-layout column>
-        <v-flex xs6>
-          <msl-slider
-            v-if="LOADED_PICKER=='Slider'"
-          />
-          <msl-swatches
-            v-if="LOADED_PICKER=='Swatches'"
-          />
-        </v-flex>
-        <v-flex xs6 d-inline-flex align-end>
-          <msl-on-off/>
-        </v-flex>
-      </v-layout>
-    </v-container>
+  <v-container fill-height fluid grid-list-xl>
+    <v-layout column>
+      <v-flex xs6>
+        <msl-slider
+          v-if="LOADED_PICKER=='Slider'"
+        />
+        <msl-swatches
+          v-if="LOADED_PICKER=='Swatches'"
+        />
+      </v-flex>
+      <v-flex xs6 d-inline-flex align-end>
+        <msl-on-off />
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>

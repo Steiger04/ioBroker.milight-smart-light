@@ -3,7 +3,7 @@ import Vuelogger from 'vue-logger'
 
 Vue.use(Vuelogger, {
   prefix: () => {
-    let ts = new Date()
+    const ts = new Date()
     return (
       ts.toDateString() +
       ' :: ' +

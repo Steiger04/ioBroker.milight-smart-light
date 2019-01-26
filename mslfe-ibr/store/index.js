@@ -1,4 +1,4 @@
-import Vue from 'vue'
+/* eslint-disable eqeqeq */
 import Vuex from 'vuex'
 import servConn from '~/ws/conn.js'
 
@@ -58,10 +58,11 @@ const createStore = () => {
         }
       },
       LOAD_ZONES_AND_BRIDGES(state, payload) {
-        let tmp = new Set()
+        const tmp = new Set()
 
         state.zones = payload
 
+        // eslint-disable-next-line no-unused-vars
         for (const [key, value] of Object.entries(payload)) {
           tmp.add(
             JSON.stringify({
@@ -85,10 +86,8 @@ const createStore = () => {
       SET_LOADED_ZONE(state, payload) {
         state.loadedZone = payload
 
-        if (
-          ['fullColor', 'fullColor8Zone'].indexOf(payload.common.mslZoneType) !=
-          -1
-        ) {
+        // eslint-disable-next-line prettier/prettier
+        if (['fullColor', 'fullColor8Zone'].indexOf(payload.common.mslZoneType) != -1) {
           state.showBottomNav = {
             colors: true,
             kelvin: true,

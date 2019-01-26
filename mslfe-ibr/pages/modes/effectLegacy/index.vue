@@ -4,10 +4,16 @@
       <v-flex xs4 d-inline-flex align-center>
         <v-layout row justify-space-around text-xs-center>
           <v-flex xs12>
-            <v-btn round dark large color="blue darken-2"
-               @click="UPDATE_DP_FROM_CLIENT({value: true, dp: 'effectModeNext', delay: 500})"
+            <v-btn
+              round
+              dark
+              large
+              color="blue darken-2"
+              @click="UPDATE_DP_FROM_CLIENT({value: true, dp: 'effectModeNext', delay: 500})"
             >
-              <v-icon left dark>arrow_upward</v-icon>
+              <v-icon left dark>
+                arrow_upward
+              </v-icon>
               next mode
             </v-btn>
           </v-flex>
@@ -16,46 +22,44 @@
   
       <v-flex xs4 d-inline-flex align-center>
         <msl-slider
-           style="padding:0;"
-           @callback="bo"
-           v-bind:value="brightnessOnly"
-           v-bind="sliderSettings"/>
+          style="padding:0;"
+          :value="brightnessOnly"
+          v-bind="sliderSettings"
+          @callback="bo"
+        />
       </v-flex>
       
       <v-flex xs4 d-inline-flex align-center>
         <v-layout row justify-space-around text-xs-center>
           <v-flex xs4>
-            <v-btn fab dark large color="light-blue lighten-2"
-               @click="UPDATE_DP_FROM_CLIENT({value: true, dp: 'effectSpeedUp', delay: 500})"
+            <v-btn
+              fab
+              dark
+              large
+              color="light-blue lighten-2"
+              @click="UPDATE_DP_FROM_CLIENT({value: true, dp: 'effectSpeedUp', delay: 500})"
             >
-              <v-icon dark>keyboard_arrow_up</v-icon>
+              <v-icon dark>
+                keyboard_arrow_up
+              </v-icon>
             </v-btn>
           </v-flex>
           
           <v-flex xs4>
-            <v-btn fab dark large color="blue darken-4"
-               @click="UPDATE_DP_FROM_CLIENT({value: true, dp: 'effectSpeedDown', delay: 500})"
+            <v-btn
+              fab
+              dark
+              large
+              color="blue darken-4"
+              @click="UPDATE_DP_FROM_CLIENT({value: true, dp: 'effectSpeedDown', delay: 500})"
             >
-              <v-icon dark>keyboard_arrow_down</v-icon>
+              <v-icon dark>
+                keyboard_arrow_down
+              </v-icon>
             </v-btn>
           </v-flex>
         </v-layout>
       </v-flex>
-
-     
-
-      <!--<v-flex xs4 d-inline-flex align-end>
-        <v-layout row justify-space-around text-xs-center>
-          <v-flex xs12>
-            <v-btn round dark large color="blue darken-2"
-                   @click="$router.push('/modes')"
-            >
-              <v-icon left dark>undo</v-icon>
-              modes
-            </v-btn>
-          </v-flex>
-        </v-layout>
-      </v-flex>-->
     </v-layout>
   </v-container>
 </template>
@@ -65,6 +69,9 @@ import mslSlider from 'vue-slider-component'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
+  components: {
+    mslSlider
+  },
   data() {
     return {
       sliderSettings: {
@@ -89,9 +96,6 @@ export default {
         }
       }
     }
-  },
-  components: {
-    mslSlider
   },
   computed: {
     ...mapGetters(['LOADED_ZONE', 'DPS']),

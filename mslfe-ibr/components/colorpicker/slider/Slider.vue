@@ -2,25 +2,30 @@
   <v-flex>
     <div class="vc-slider">
       <div class="vc-slider-hue-warp">
-        <hue v-model="colors2" @change="hueChange"></hue>
+        <hue v-model="colors2" @change="hueChange" />
       </div>
       <div class="vc-margin">
-        <div class="vc-slider-swatches"
-             v-for="(offset, index) in swatches" :data-index="index"
-             v-if="index%3==0"
-        >
+        <template v-for="(offset, index) in swatches">
           <div
-            class="vc-slider-swatch"
-            @click="handleSwClick(index+n-1, swatches[index+n-1])"
-            v-for="n in 3"
+            v-if="index%3==0"
+            :key="index"
+            class="vc-slider-swatches"
+            :data-index="index"
           >
-            <div class="vc-slider-swatch-picker"
-                 :class="{'vc-slider-swatch-picker--active': swatches[index+n-1] == activeOffset}"
-                 :style="{background: 'hsl(' + colors2.hsl.h + ', 50%, ' + (swatches[index+n-1] * 100) + '%)'}"
-
-            />
+            <div
+              v-for="n in 3"
+              :key="n"
+              class="vc-slider-swatch"
+              @click="handleSwClick(index+n-1, swatches[index+n-1])"
+            >
+              <div
+                class="vc-slider-swatch-picker"
+                :class="{'vc-slider-swatch-picker--active': swatches[index+n-1] == activeOffset}"
+                :style="{background: 'hsl(' + colors2.hsl.h + ', 50%, ' + (swatches[index+n-1] * 100) + '%)'}"
+              />
+            </div>
           </div>
-        </div>
+        </template>
       </div>
     </div>
   </v-flex>
@@ -32,25 +37,26 @@ import hue from '~/components/colorpicker/common/Hue.vue'
 
 export default {
   name: 'Slider',
-  mixins: [colorMixin],
-  props: {
-    direction: String
-  },
   components: {
     hue
   },
-  computed: {
-    activeOffset() {
-      if (Math.round(this.colors2.hsl.s * 100) >= 0.49) {
-        //TODO: Warum 0.49 ok?
-        return Math.round(this.colors2.hsl.l * 100) / 100
-      }
-      return 0
-    }
+  mixins: [colorMixin],
+  props: {
+    // eslint-disable-next-line vue/require-default-prop
+    direction: String
   },
   data() {
     return {
       swatches: ['.95', '.80', '.70', '.60', '.50', '.40', '.30', '.20', '.05']
+    }
+  },
+  computed: {
+    activeOffset() {
+      if (Math.round(this.colors2.hsl.s * 100) >= 0.49) {
+        // TODO: Warum 0.49 ok?
+        return Math.round(this.colors2.hsl.l * 100) / 100
+      }
+      return 0
     }
   },
   methods: {
