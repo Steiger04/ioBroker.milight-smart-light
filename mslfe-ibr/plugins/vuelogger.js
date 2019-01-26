@@ -4,7 +4,14 @@ import Vuelogger from 'vue-logger'
 Vue.use(Vuelogger, {
   prefix: () => {
     let ts = new Date()
-    return ts.toDateString() + ' :: ' + ts.toLocaleTimeString() + ' (' + ts.getMilliseconds() + ')'
+    return (
+      ts.toDateString() +
+      ' :: ' +
+      ts.toLocaleTimeString() +
+      ' (' +
+      ts.getMilliseconds() +
+      ')'
+    )
   },
   dev: process.env.NODE_ENV !== 'production',
   shortname: true,

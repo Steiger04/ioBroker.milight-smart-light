@@ -33,118 +33,128 @@
 </template>
 
 <script>
-  import material from 'material-colors'
-  import colorMixin from '~/components/colorpicker/mixin/color'
+import material from 'material-colors'
+import colorMixin from '~/components/colorpicker/mixin/color'
 
-  /*var colorMap = [
+/*var colorMap = [
     'red', 'pink', 'purple', 'deepPurple',
     'indigo', 'blue', 'lightBlue', 'cyan',
     'teal', 'green', 'lightGreen', 'lime',
     'yellow', 'amber', 'orange', 'deepOrange',
     'brown', 'blueGrey', 'black'
   ]*/
-  var colorMap = [
-    'red', 'pink', 'purple', 'deepPurple',
-    'indigo', 'blue', 'lightBlue', 'cyan',
-    'teal', 'green', 'lightGreen', 'lime',
-    'yellow', 'amber', 'orange', 'deepOrange'
-  ]
+var colorMap = [
+  'red',
+  'pink',
+  'purple',
+  'deepPurple',
+  'indigo',
+  'blue',
+  'lightBlue',
+  'cyan',
+  'teal',
+  'green',
+  'lightGreen',
+  'lime',
+  'yellow',
+  'amber',
+  'orange',
+  'deepOrange'
+]
 
-  var colorLevel = ['800', '700', '600', '500', '400', '300', '200', '100']
-  var defaultColors = (() => {
-    var colors = []
-    colorMap.forEach((type) => {
-      var typeColor = []
-      if (type.toLowerCase() === 'black' || type.toLowerCase() === 'white') {
-        typeColor = typeColor.concat(['#000000', '#FFFFFF'])
-      } else {
-        colorLevel.forEach((level) => {
-          const color = material[type][level]
-          typeColor.push(color.toUpperCase())
-        })
-      }
-      colors.push(typeColor)
-    })
-    return colors
-  })()
+var colorLevel = ['800', '700', '600', '500', '400', '300', '200', '100']
+var defaultColors = (() => {
+  var colors = []
+  colorMap.forEach(type => {
+    var typeColor = []
+    if (type.toLowerCase() === 'black' || type.toLowerCase() === 'white') {
+      typeColor = typeColor.concat(['#000000', '#FFFFFF'])
+    } else {
+      colorLevel.forEach(level => {
+        const color = material[type][level]
+        typeColor.push(color.toUpperCase())
+      })
+    }
+    colors.push(typeColor)
+  })
+  return colors
+})()
 
-  export default {
-    name: 'Swatches',
-    mixins: [colorMixin],
-    props: {
-      palette: {
-        type: Array,
-        default() {
-          return defaultColors
-        }
-      }
-    },
-    computed: {
-      pick() {
-        return this.colors2.hex
-      }
-    },
-    methods: {
-      equal(color) {
-        return color.toLowerCase() === this.colors2.hex.toLowerCase()
-      },
-      handlerClick(c) {
-        this.colorChange({
-          hex: c,
-          source: 'hex'
-        })
+export default {
+  name: 'Swatches',
+  mixins: [colorMixin],
+  props: {
+    palette: {
+      type: Array,
+      default() {
+        return defaultColors
       }
     }
-
+  },
+  computed: {
+    pick() {
+      return this.colors2.hex
+    }
+  },
+  methods: {
+    equal(color) {
+      return color.toLowerCase() === this.colors2.hex.toLowerCase()
+    },
+    handlerClick(c) {
+      this.colorChange({
+        hex: c,
+        source: 'hex'
+      })
+    }
   }
+}
 </script>
 
 <style>
-  .vc-swatches {
-    width: auto;
-    height: auto;
-    /*background-color: #fff;*/
-  }
+.vc-swatches {
+  width: auto;
+  height: auto;
+  /*background-color: #fff;*/
+}
 
-  .vc-swatches-box {
-    padding: 0;
+.vc-swatches-box {
+  padding: 0;
+}
 
-  }
+.vc-swatches-color-group {
+  width: 50px;
+  float: left;
+  margin-right: 5px;
+  margin-left: 5px;
+}
 
-  .vc-swatches-color-group {
-    width: 50px;
-    float: left;
-    margin-right: 5px;
-    margin-left: 5px;
-  }
+.vc-swatches-color-it {
+  box-sizing: border-box;
+  width: 50px;
+  height: 34px;
+  cursor: pointer;
+  background: #880e4f;
+  margin-bottom: 10px;
+  overflow: hidden;
+  -ms-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -o-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+}
 
-  .vc-swatches-color-it {
-    box-sizing: border-box;
-    width: 50px;
-    height: 34px;
-    cursor: pointer;
-    background: #880e4f;
-    margin-bottom: 10px;
-    overflow: hidden;
-    -ms-border-radius: 6px;
-    -moz-border-radius: 6px;
-    -o-border-radius: 6px;
-    -webkit-border-radius: 6px;
-    border-radius: 6px;
-  }
+.vc-swatches-color--white {
+  border: 1px solid #ddd;
+}
 
-  .vc-swatches-color--white {
-    border: 1px solid #DDD;
-  }
+.vc-swatches-pick {
+  fill: rgb(255, 255, 255);
+  margin-left: 14px;
+  margin-top: 4px;
+  display: block;
+}
 
-  .vc-swatches-pick {
-    fill: rgb(255, 255, 255);
-    margin-left: 14px;
-    margin-top: 4px;
-    display: block;
-  }
-
-  .vc-swatches-color--white .vc-swatches-pick {
-    fill: rgb(51, 51, 51);
-  }
+.vc-swatches-color--white .vc-swatches-pick {
+  fill: rgb(51, 51, 51);
+}
 </style>

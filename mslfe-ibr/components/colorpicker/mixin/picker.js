@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import {mapGetters, mapActions} from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   computed: {
@@ -9,7 +9,11 @@ export default {
         return this.DPS[this.LOADED_ZONE._id + '.rgb'].val
       },
       set(options) {
-        this.UPDATE_DP_FROM_CLIENT({value: options.hex.toLowerCase(), dp: 'rgb', delay: 500})
+        this.UPDATE_DP_FROM_CLIENT({
+          value: options.hex.toLowerCase(),
+          dp: 'rgb',
+          delay: 500
+        })
       }
     }
   },

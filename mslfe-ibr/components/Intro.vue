@@ -5,21 +5,21 @@
 </template>
 
 <script>
-  export default {
-    data () {
-      return {}
-    },
-    props: {
-      newsize: 0
-    },
-    computed: {
-      resize () {
-        if (this.newsize > 600) {
-          return 600
-        }
-
-        return this.newsize
+export default {
+  data() {
+    return {}
+  },
+  props: {
+    newsize: 0
+  },
+  computed: {
+    resize() {
+      if (this.newsize > 600) {
+        return 600
       }
+
+      return this.newsize
     }
   }
+}
 </script>

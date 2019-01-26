@@ -10,9 +10,9 @@ function _colorChange(data, oldHue) {
   } else if (data && data.hex && data.hex.length > 0) {
     color = tinycolor(data.hex)
   } else {
-    if(data.s === 0) {
+    if (data.s === 0) {
       data.s = 0.6649
-      data.v = 0.7490
+      data.v = 0.749
     }
     color = tinycolor(data)
   }
@@ -54,9 +54,8 @@ function _colorChange(data, oldHue) {
   }
 }
 
-
 import Vue from 'vue'
-import {mapGetters, mapActions} from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   model: {

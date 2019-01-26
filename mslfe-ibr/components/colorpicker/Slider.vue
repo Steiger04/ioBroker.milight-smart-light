@@ -6,13 +6,13 @@
 
 
 <script>
-  import Slider from '@/components/colorpicker/slider/Slider'
-  import pickerMixin from '~/components/colorpicker/mixin/picker'
+import Slider from '@/components/colorpicker/slider/Slider'
+import pickerMixin from '~/components/colorpicker/mixin/picker'
 
-  export default {
-    mixins: [pickerMixin],
-    components: {
-      Slider
-    }
+export default {
+  mixins: [pickerMixin],
+  components: {
+    Slider
   }
+}
 </script>

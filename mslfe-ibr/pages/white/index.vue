@@ -45,90 +45,94 @@
 </template>
 
 <script>
-  import mslSlider from 'vue-slider-component'
-  import mslOnOff from '@/components/OnOff'
-  import {mapGetters, mapActions} from 'vuex'
+import mslSlider from 'vue-slider-component'
+import mslOnOff from '@/components/OnOff'
+import { mapGetters, mapActions } from 'vuex'
 
-  export default {
-    data() {
-      return {
-        optionsBrightness: {
-          width: 90,
-          height: 340,
-          dotHeight: 30,
-          dotWidth: 86,
-          tooltip: false,
-          direction: "vertical",
-          processStyle: {
-            backgroundColor: "transparent"
-          },
-          bgStyle: {
-            borderRadius: "5px",
-            backgroundImage: "-webkit-linear-gradient(bottom, #000000, #ffffff)",
-            boxShadow: "inset 0.5px 0.5px 3px 1px rgba(0,0,0,.36)"
-          },
-          sliderStyle: {
-            borderRadius: "5px",
-            backgroundColor: "transparent",
-            boxShadow: "1px 1px 8px 1px rgba(0, 0, 0, 0.6)"
-          }
+export default {
+  data() {
+    return {
+      optionsBrightness: {
+        width: 90,
+        height: 340,
+        dotHeight: 30,
+        dotWidth: 86,
+        tooltip: false,
+        direction: 'vertical',
+        processStyle: {
+          backgroundColor: 'transparent'
+        },
+        bgStyle: {
+          borderRadius: '5px',
+          backgroundImage: '-webkit-linear-gradient(bottom, #000000, #ffffff)',
+          boxShadow: 'inset 0.5px 0.5px 3px 1px rgba(0,0,0,.36)'
+        },
+        sliderStyle: {
+          borderRadius: '5px',
+          backgroundColor: 'transparent',
+          boxShadow: '1px 1px 8px 1px rgba(0, 0, 0, 0.6)'
         }
       }
-    },
-    computed: {
-      ...mapGetters(['LOADED_ZONE', 'DPS']),
-      brightness() {
-        return this.DPS[this.LOADED_ZONE._id + '.brightness'].val
-      }
-    },
-    methods: {
-      ...mapActions(['UPDATE_DP_FROM_CLIENT', 'UPDATE_DP']),
-      b(options) {
-        this.UPDATE_DP_FROM_CLIENT({value: options, dp: 'brightness', delay: 500})
-      },
-      nightMode() {
-        this.UPDATE_DP_FROM_CLIENT({value: true, dp: 'nightMode', delay: 500})
-      },
-      whiteMode() {
-        this.UPDATE_DP_FROM_CLIENT({value: true, dp: 'whiteMode', delay: 500})
-      }
-    },
-    components: {
-      mslSlider,
-      mslOnOff
     }
+  },
+  computed: {
+    ...mapGetters(['LOADED_ZONE', 'DPS']),
+    brightness() {
+      return this.DPS[this.LOADED_ZONE._id + '.brightness'].val
+    }
+  },
+  methods: {
+    ...mapActions(['UPDATE_DP_FROM_CLIENT', 'UPDATE_DP']),
+    b(options) {
+      this.UPDATE_DP_FROM_CLIENT({
+        value: options,
+        dp: 'brightness',
+        delay: 500
+      })
+    },
+    nightMode() {
+      this.UPDATE_DP_FROM_CLIENT({ value: true, dp: 'nightMode', delay: 500 })
+    },
+    whiteMode() {
+      this.UPDATE_DP_FROM_CLIENT({ value: true, dp: 'whiteMode', delay: 500 })
+    }
+  },
+  components: {
+    mslSlider,
+    mslOnOff
   }
+}
 </script>
 
 <style scoped>
-  #slider-white-temperature .rs-bg-color {
-    background-color: #303030;
-  }
+#slider-white-temperature .rs-bg-color {
+  background-color: #303030;
+}
 
-  #slider-white-temperature .rs-handle {
-    background-color: #bbdefb;
-    padding: 7px;
-    border: 2px solid #C2E9F7;
-  }
+#slider-white-temperature .rs-handle {
+  background-color: #bbdefb;
+  padding: 7px;
+  border: 2px solid #c2e9f7;
+}
 
-  #slider-white-temperature .rs-handle.rs-focus {
-    border-color: #C2E9F7;
-  }
+#slider-white-temperature .rs-handle.rs-focus {
+  border-color: #c2e9f7;
+}
 
-  #slider-white-temperature .rs-handle:after {
-    border-color: #1e88e5;
-    background-color: #1e88e5;
-  }
+#slider-white-temperature .rs-handle:after {
+  border-color: #1e88e5;
+  background-color: #1e88e5;
+}
 
-  #slider-white-temperature .rs-border {
-    border-color: #1e88e5;
-  }
+#slider-white-temperature .rs-border {
+  border-color: #1e88e5;
+}
 
-  #slider-white-temperature .rs-range-color {
-    background-color: #1e88e5;
-  }
+#slider-white-temperature .rs-range-color {
+  background-color: #1e88e5;
+}
 
-  #slider-white-temperature .slider-tooltip {
-    color: #1e88e5;
-  }
+#slider-white-temperature .slider-tooltip {
+  color: #1e88e5;
+}
 </style>

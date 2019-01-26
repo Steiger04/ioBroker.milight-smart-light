@@ -30,7 +30,7 @@ const createStore = () => {
         return state.zones
       },
       BRIDGES(state) {
-        return state.bridges.map((payload) => JSON.parse(payload))
+        return state.bridges.map(payload => JSON.parse(payload))
       },
       LOADED_BRIDGE(state) {
         return state.loadedBridge
@@ -63,16 +63,20 @@ const createStore = () => {
         state.zones = payload
 
         for (const [key, value] of Object.entries(payload)) {
-          tmp.add(JSON.stringify({
-            type: value.common.controllerType,
-            box: value.common.iBox,
-            number: value.common.instanceNumber,
-            instance: value.common.instance,
-            name: 'Bridge::' + value.common.instanceNumber
-          }))
+          tmp.add(
+            JSON.stringify({
+              type: value.common.controllerType,
+              box: value.common.iBox,
+              number: value.common.instanceNumber,
+              instance: value.common.instance,
+              name: 'Bridge::' + value.common.instanceNumber
+            })
+          )
         }
 
-        state.bridges = [...tmp].sort((a, b) => JSON.parse(a).number - JSON.parse(b).number)
+        state.bridges = [...tmp].sort(
+          (a, b) => JSON.parse(a).number - JSON.parse(b).number
+        )
       },
       SET_LOADED_BRIDGE(state, payload) {
         state.loadedBridge = payload
@@ -81,7 +85,10 @@ const createStore = () => {
       SET_LOADED_ZONE(state, payload) {
         state.loadedZone = payload
 
-        if (['fullColor', 'fullColor8Zone'].indexOf(payload.common.mslZoneType) != -1) {
+        if (
+          ['fullColor', 'fullColor8Zone'].indexOf(payload.common.mslZoneType) !=
+          -1
+        ) {
           state.showBottomNav = {
             colors: true,
             kelvin: true,
@@ -135,22 +142,25 @@ const createStore = () => {
       }
     },
     actions: {
-      UPDATE_DP_FROM_CLIENT({dispatch, state}, options) {
+      UPDATE_DP_FROM_CLIENT({ dispatch, state }, options) {
         if (state.pause) return
 
-        dispatch('UPDATE_DP', {value: options.value, dp: options.dp})
+        dispatch('UPDATE_DP', { value: options.value, dp: options.dp })
 
-        servConn.setState(state.loadedZone._id + '.' + options.dp, options.value)
+        servConn.setState(
+          state.loadedZone._id + '.' + options.dp,
+          options.value
+        )
 
         if (options.delay && options.delay > 0) {
           state.pause = true
-          setTimeout(() => state.pause = false, options.delay)
+          setTimeout(() => (state.pause = false), options.delay)
         }
       },
-      UPDATE_DP({commit}, payload) {
+      UPDATE_DP({ commit }, payload) {
         commit('UPDATE_DP', payload)
       },
-      SET_DP({commit}, payload) {
+      SET_DP({ commit }, payload) {
         commit('SET_DP', payload)
       }
     }

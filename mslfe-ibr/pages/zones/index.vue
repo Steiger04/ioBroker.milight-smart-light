@@ -39,13 +39,14 @@
 </template>
 
 <script>
-  import { mapGetters, mapMutations } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 
-  export default {
-    computed: {
-      ...mapGetters ([ 'LOADED_BRIDGE', 'ZONES' ])
-    }, methods: {
-      ...mapMutations ([ 'SET_LOADED_ZONE' ])
-    }
+export default {
+  computed: {
+    ...mapGetters(['LOADED_BRIDGE', 'ZONES'])
+  },
+  methods: {
+    ...mapMutations(['SET_LOADED_ZONE'])
   }
+}
 </script>

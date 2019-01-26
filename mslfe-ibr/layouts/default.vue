@@ -220,39 +220,39 @@
 </template>
 
 <script>
-  import Vue from 'vue'
-  import { mapGetters, mapMutations } from 'vuex'
+import Vue from 'vue'
+import { mapGetters, mapMutations } from 'vuex'
 
-  export default {
-    data () {
-      return {
-        fullscreen: false,
-	      drawer: false,
-	      listGroupBridges: false,
-	      listGroupPicker: false,
-	      pickers: [ 'Slider', 'Swatches' ]
-      }
-    },
-	  computed: {
-      ...mapGetters ([ 'BRIDGES', 'LOADED_BRIDGE', 'SHOW_BOTTOM_NAV' ])
-    },
-	  methods: {
-      ...mapMutations ([ 'SET_LOADED_BRIDGE', 'SET_LOADED_PICKER' ]),
-		  resetDrawerAndSetLoadedBridge (payload) {
-        this.drawer = false
-        this.listGroupBridges = false
-
-        this.SET_LOADED_BRIDGE (payload)
-      },
-		  resetDrawerAndSetLoadedPicker (payload) {
-        this.drawer = false
-        this.listGroupPicker = false
-
-        this.SET_LOADED_PICKER (payload)
-      }
-    },
-	  props: {
-      source: String
+export default {
+  data() {
+    return {
+      fullscreen: false,
+      drawer: false,
+      listGroupBridges: false,
+      listGroupPicker: false,
+      pickers: ['Slider', 'Swatches']
     }
+  },
+  computed: {
+    ...mapGetters(['BRIDGES', 'LOADED_BRIDGE', 'SHOW_BOTTOM_NAV'])
+  },
+  methods: {
+    ...mapMutations(['SET_LOADED_BRIDGE', 'SET_LOADED_PICKER']),
+    resetDrawerAndSetLoadedBridge(payload) {
+      this.drawer = false
+      this.listGroupBridges = false
+
+      this.SET_LOADED_BRIDGE(payload)
+    },
+    resetDrawerAndSetLoadedPicker(payload) {
+      this.drawer = false
+      this.listGroupPicker = false
+
+      this.SET_LOADED_PICKER(payload)
+    }
+  },
+  props: {
+    source: String
   }
+}
 </script>

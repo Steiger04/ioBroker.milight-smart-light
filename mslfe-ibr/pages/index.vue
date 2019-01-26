@@ -15,25 +15,25 @@
 </template>
 
 <script>
-  import mslIntro from '~/components/Intro'
+import mslIntro from '~/components/Intro'
 
-  export default {
-    // middleware: 'connection',
-    data() {
-      return {
-        windowSize: 0
-      }
-    },
-    mounted() {
-      this.onResize()
-    },
-    components: {
-      mslIntro
-    },
-    methods: {
-      onResize() {
-        this.windowSize = window.innerWidth - 64
-      }
+export default {
+  // middleware: 'connection',
+  data() {
+    return {
+      windowSize: 0
+    }
+  },
+  mounted() {
+    this.onResize()
+  },
+  components: {
+    mslIntro
+  },
+  methods: {
+    onResize() {
+      this.windowSize = window.innerWidth - 64
     }
   }
+}
 </script>

@@ -1,12 +1,14 @@
-'use strict'
+/* eslint-disable no-unused-vars */
+'use strict';
 
-let vm = null
+let vm = null;
 
 function load (settings, onChange) {
-  vm = createVueInstance(settings, onChange)
-  onChange (false)
+    // eslint-disable-next-line no-undef
+    vm = createVueInstance(settings, onChange);
+    onChange(false);
 }
 
 function save (callback) {
-  callback (vm.options)
+    callback(vm.options);
 }

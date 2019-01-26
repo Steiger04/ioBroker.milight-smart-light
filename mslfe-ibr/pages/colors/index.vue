@@ -17,21 +17,21 @@
 </template>
 
 <script>
-  import mslSlider from '@/components/colorpicker/Slider'
-  import mslSwatches from '@/components/colorpicker/Swatches'
-  import mslOnOff from '@/components/OnOff'
-  import {mapGetters} from 'vuex'
+import mslSlider from '@/components/colorpicker/Slider'
+import mslSwatches from '@/components/colorpicker/Swatches'
+import mslOnOff from '@/components/OnOff'
+import { mapGetters } from 'vuex'
 
-  export default {
-    components: {
-      mslSlider,
-      mslSwatches,
-      mslOnOff
-    },
-    computed: {
-      ...mapGetters(['LOADED_PICKER'])
-    }
+export default {
+  components: {
+    mslSlider,
+    mslSwatches,
+    mslOnOff
+  },
+  computed: {
+    ...mapGetters(['LOADED_PICKER'])
   }
+}
 </script>
 
 <style scoped>

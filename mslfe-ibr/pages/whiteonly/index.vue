@@ -97,22 +97,21 @@
 </template>
 
 <script>
-  import {mapGetters, mapActions} from 'vuex'
-  import mslOnOff from '@/components/OnOff'
+import { mapGetters, mapActions } from 'vuex'
+import mslOnOff from '@/components/OnOff'
 
-  export default {
-    data() {
-      return {}
-    },
-    methods: {
-      ...mapActions(['UPDATE_DP_FROM_CLIENT'])
-    },
-    components: {
-      mslOnOff
-    }
+export default {
+  data() {
+    return {}
+  },
+  methods: {
+    ...mapActions(['UPDATE_DP_FROM_CLIENT'])
+  },
+  components: {
+    mslOnOff
   }
+}
 </script>
 
 <style scoped>
-
 </style>

@@ -1,10 +1,7 @@
 .idea
 node_modules
-.eslintrc.js
 .eslintrc.json
-.jscsrc
 bower.json
-Gruntfile.js
 package-lock.json
 admin/i18n
 sw.*
