@@ -7,10 +7,6 @@ admin/i18n
 sw.*
 mslfe-ibr/sw.*
 mslfe-ibr/.idea
-mslfe-ibr/.nuxt/components
-mslfe-ibr/.nuxt/views
-mslfe-ibr/.nuxt/*.js
-mslfe-ibr/.nuxt/loading.html
 mslfe-ibr/node_modules
 mslfe-ibr/.editorconfig
 mslfe-ibr/.gitignore
