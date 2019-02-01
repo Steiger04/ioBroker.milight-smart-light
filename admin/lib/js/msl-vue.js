@@ -94,7 +94,7 @@ function createVueInstance (settings, onChange) {
                             reqired: validators.required,
                             isunique (value) {
                                 let i = 0;
-                                for (let device of this.options.zones) {
+                                for (const device of this.options.zones) {
                                     if (device.mslZoneNumber === value) i++;
                                 }
                                 return !(i > 1);
@@ -240,10 +240,10 @@ function createVueInstance (settings, onChange) {
             this.$nextTick(function () {
                 this.M.updateTextFields();
 
-                let mslTabs = document.querySelectorAll('#msl tabs');
+                const mslTabs = document.querySelectorAll('#msl tabs');
                 this.M.Tabs.init(mslTabs);
 
-                let mslSelect = document.querySelectorAll('#msl select');
+                const mslSelect = document.querySelectorAll('#msl select');
                 this.M.FormSelect.init(mslSelect);
             });
         }
@@ -251,10 +251,10 @@ function createVueInstance (settings, onChange) {
 }
 
 function getMslRooms (list) {
-    let result = {};
-    let nnames = [];
+    const result = {};
+    const nnames = [];
 
-    for (let n in list) {
+    for (const n in list) {
         if (list.hasOwnProperty(n)) {
             nnames.push(n);
         }
@@ -267,7 +267,7 @@ function getMslRooms (list) {
         return 0;
     });
 
-    for (var l = 0; l < nnames.length; l++) {
+    for (let l = 0; l < nnames.length; l++) {
         result[nnames[l]] = list[nnames[l]].common.name || l;
         if (typeof result[nnames[l]] === 'object') {
             result[nnames[l]] = result[nnames[l]][systemLang] || result[nnames[l]].en;
@@ -278,10 +278,10 @@ function getMslRooms (list) {
 }
 
 function getMslFunctions (list) {
-    let result = {};
+    const result = {};
 
-    let nnames = [];
-    for (let n in list) {
+    const nnames = [];
+    for (const n in list) {
         if (list.hasOwnProperty(n)) {
             nnames.push(n);
         }
