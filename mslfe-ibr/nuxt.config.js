@@ -1,15 +1,13 @@
-const nodeExternals = require('webpack-node-externals')
+const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
 const pkg = require('./package')
 
 module.exports = {
   mode: 'universal',
-
   /*
   ** Headers of the page
   */
   head: {
-    // title: pkg.name,
-    title: 'iobroker - milight',
+    title: pkg.name,
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -24,13 +22,11 @@ module.exports = {
       }
     ]
   },
-
   /*
   ** Customize the progress-bar color
   */
   loading: { color: '#fa923f', height: '4px', duration: 5000 },
   loadingIndicator: { name: 'circle', color: '#fa923f', background: '#303030' },
-
   /*
   ** Global CSS
   */
@@ -54,10 +50,6 @@ module.exports = {
     '@nuxtjs/axios',
     '@nuxtjs/redirect-module'
   ],
-  env: {
-    // WS_URL: process.env.WS_URL || "http://192.168.2.110:15756",
-    // dev: process.env.NODE_ENV !== "production"
-  },
   redirect: [
     { from: '^/(.+)$', to: '/' } // Many urls to one
   ],
@@ -84,16 +76,26 @@ module.exports = {
   ** Build configuration
   */
   build: {
+    transpile: ['vuetify/lib'],
+    plugins: [new VuetifyLoaderPlugin()],
+    loaders: {
+      stylus: {
+        import: ['~assets/style/variables.styl']
+      }
+    },
+
     /*
     ** You can extend webpack config here
     */
     extend(config, ctx) {
-      if (ctx.isServer) {
-        config.externals = [
-          nodeExternals({
-            whitelist: [/^vuetify/]
-          })
-        ]
+      // Run ESLint on save
+      if (ctx.isDev && ctx.isClient) {
+        config.module.rules.push({
+          enforce: 'pre',
+          test: /\.(js|vue)$/,
+          loader: 'eslint-loader',
+          exclude: /(node_modules)/
+        })
       }
     }
   }
