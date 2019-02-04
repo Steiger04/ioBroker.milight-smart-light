@@ -1,7 +1,7 @@
 <!--suppress HtmlRequiredAltAttribute -->
 <template>
   <v-avatar tile :size="resize + 'px'">
-    <img src="~assets/msl-start-web-alpha.png">
+    <img src="~/assets/msl-start-web-alpha.png">
   </v-avatar>
 </template>
 
