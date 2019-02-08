@@ -18,7 +18,7 @@
           <v-list class="pa-0">
             <v-list-tile avatar>
               <v-list-tile-avatar>
-                <img src="~/assets/msl-start-web.png">
+                <img src="~assets/msl-start-web.png">
               </v-list-tile-avatar>
               <v-list-tile-content>
                 <v-list-tile-title>Mi.Light for ioBroker</v-list-tile-title>
@@ -33,7 +33,7 @@
           >
             <v-list-tile slot="activator">
               <v-list-tile-avatar tile>
-                <img src="~/assets/msl-bridges-web-alpha.png">
+                <img src="~assets/msl-bridges-web-alpha.png">
               </v-list-tile-avatar>
               <v-list-tile-content>
                 <v-list-tile-title>BRIDGES</v-list-tile-title>
@@ -67,7 +67,7 @@
           >
             <v-list-tile slot="activator">
               <v-list-tile-avatar tile>
-                <img src="~/assets/msl-farbkreis-web-alpha.png">
+                <img src="~assets/msl-farbkreis-web-alpha.png">
               </v-list-tile-avatar>
               <v-list-tile-content>
                 <v-list-tile-title>PICKER</v-list-tile-title>
