@@ -94,7 +94,7 @@ function createVueInstance (settings, onChange) {
                 commandRepeat: {
                     required: validators.required,
                     integer: validators.integer,
-                    minValue: validators.minValue(0),
+                    minValue: validators.minValue(1),
                     maxValue: validators.maxValue(9)
                 },
                 delayBetweenCommands: {
