@@ -69,24 +69,39 @@ function createVueInstance (settings, onChange) {
         },
         validations: {
             controllerPort: {
-                required: validators.required
+                required: validators.required,
+                integer: validators.integer,
+                minValue: validators.minValue(1024),
+                maxValue: validators.maxValue(64738)
             },
             options: {
                 serverPort: {
-                    required: validators.requiredIf((vm) => vm.activeApp)
+                    required: validators.requiredIf((vm) => vm.activeApp),
+                    integer: validators.integer,
+                    minValue: validators.minValue(1024),
+                    maxValue: validators.maxValue(64738)
                 },
                 websocketPort: {
-                    required: validators.requiredIf((vm) => vm.activeApp)
+                    required: validators.requiredIf((vm) => vm.activeApp),
+                    integer: validators.integer,
+                    minValue: validators.minValue(1024),
+                    maxValue: validators.maxValue(64738)
                 },
                 controllerIp: {
                     required: validators.required,
                     ipAddress: validators.ipAddress
                 },
                 commandRepeat: {
-                    required: validators.required
+                    required: validators.required,
+                    integer: validators.integer,
+                    minValue: validators.minValue(0),
+                    maxValue: validators.maxValue(9)
                 },
                 delayBetweenCommands: {
-                    required: validators.required
+                    required: validators.required,
+                    integer: validators.integer,
+                    minValue: validators.minValue(20),
+                    maxValue: validators.maxValue(1000)
                 },
                 zones: {
                     $each: {
