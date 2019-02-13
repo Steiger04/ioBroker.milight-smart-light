@@ -62,8 +62,6 @@ function createVueInstance (settings, onChange) {
                         this.options.controllerPortLegacy = value;
                         this.options.controllerPort = value;
                     }
-
-                    this.options.controllerPort = value;
                 }
             }
         },

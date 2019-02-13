@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "milight-smart-light",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "title": "milight-smart-light",
     "titleLang": {
       "en": "milight-smart-light",
@@ -21,6 +21,17 @@
       }
     ],
     "news": {
+      "0.2.1": {
+        "en": "Integration von node-milight-promise v0.3.2",
+        "de": "Integration von node-milight-promise v0.3.2",
+        "ru": "Интеграция von node-milight-promise v0.3.2",
+        "pt": "Integração von node-milight-promise v0.3.2",
+        "nl": "Integratie van node-milight-promise v0.3.2",
+        "fr": "Intégration de node-milight-promise v0.3.2",
+        "it": "Integrazione di node-milight-promise v0.3.2",
+        "es": "Integración de node-milight-promise v0.3.2",
+        "pl": "Integracja von node-milight-promise v0.3.2"
+      },
       "0.2.0": {
         "en": "Adaptation to Admin3, MaterialzeCSS, general revision, new app",
         "de": "Anpassung an Admin3, Materialise CSS, allgemeine Überarbeitung, neue App",
