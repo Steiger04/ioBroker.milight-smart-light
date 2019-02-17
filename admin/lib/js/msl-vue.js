@@ -239,22 +239,22 @@ function createVueInstance (settings, onChange) {
             this.$v.$touch();
         },
         mounted () {
-            /* this.$nextTick (function () {
-              this.M.updateTextFields();
 
-              let mslTabs = document.querySelectorAll('#msl tabs')
-              this.M.Tabs.init(mslTabs)
+            this.M.updateTextFields();
 
-              let mslSelect = document.querySelectorAll('#msl select')
-              this.M.FormSelect.init(mslSelect)
-            }) */
+            const mslTabs = document.querySelectorAll('#msl tabs');
+            this.M.Tabs.init(mslTabs);
+
+            const mslSelect = document.querySelectorAll('#msl select');
+            this.M.FormSelect.init(mslSelect);
+
         },
         updated () {
             this.$nextTick(function () {
                 this.M.updateTextFields();
 
-                const mslTabs = document.querySelectorAll('#msl tabs');
-                this.M.Tabs.init(mslTabs);
+                /*const mslTabs = document.querySelectorAll('#msl tabs');
+                this.M.Tabs.init(mslTabs);*/
 
                 const mslSelect = document.querySelectorAll('#msl select');
                 this.M.FormSelect.init(mslSelect);

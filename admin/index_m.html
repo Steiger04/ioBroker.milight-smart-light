@@ -317,10 +317,13 @@
                                                         disabled
                                                         selected>{{ _(mslZoneType) }}
                                                 </option>
-                                                <option v-else-if="mslZoneType!='bridge'"
+                                                <option v-else-if="mslZoneType!=='bridge' && mslZoneType!=='fullColor8Zone'"
                                                         :value="mslZoneType">{{ _(mslZoneType) }}
                                                 </option>
-                                                <option v-else-if="mslZoneType=='bridge' && options.iBox=='iBox1'"
+                                                <option v-else-if="mslZoneType==='bridge' && options.iBox==='iBox1'"
+                                                        :value="mslZoneType">{{ _(mslZoneType) }}
+                                                </option>
+                                                <option v-else-if="mslZoneType==='fullColor8Zone' && maxDevices>5"
                                                         :value="mslZoneType">{{ _(mslZoneType) }}
                                                 </option>
                                             </template>
