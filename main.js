@@ -265,6 +265,7 @@ async function configAsync () {
             await adapter.createChannelAsync(addZone.mslGroupName, addZone.mslZoneTypeNumber, addZone);
             adapter.log.debug(`configAsync->::MiLight zone :${adapter.namespace}.${addZone.mslGroupName}.${addZone.mslZoneTypeNumber}: was created!`);
 
+            await adapter.deleteChannelFromEnumAsync(null, addZone.mslGroupName, addZone.mslZoneTypeNumber);
             for (const enumName of _.concat(addZone.mslFunc, addZone.mslRoom)) {
                 if (enumName) {
                     await adapter.addChannelToEnumAsync(enumName, enumName, addZone.mslGroupName, addZone.mslZoneTypeNumber);

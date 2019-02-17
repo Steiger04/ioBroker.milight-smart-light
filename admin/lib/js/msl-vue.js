@@ -249,12 +249,9 @@ function createVueInstance (settings, onChange) {
             this.M.FormSelect.init(mslSelect);
 
         },
-        updated () {
+        beforeUpdate () {
             this.$nextTick(function () {
                 this.M.updateTextFields();
-
-                /*const mslTabs = document.querySelectorAll('#msl tabs');
-                this.M.Tabs.init(mslTabs);*/
 
                 const mslSelect = document.querySelectorAll('#msl select');
                 this.M.FormSelect.init(mslSelect);
