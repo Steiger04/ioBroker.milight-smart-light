@@ -34,6 +34,9 @@ With adapter you can use both: **v6 Bridge** and **Legacy Bridge**.
 
 
 ## Changelog
+### 0.2.2 (2019-02-28)
+- (steiger04): Optimization of the App
+
 ### 0.2.1 (2019-02-13)
 - (steiger04): 
 Integration of  node-milight-promise v0.3.2

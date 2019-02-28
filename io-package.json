@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "milight-smart-light",
-    "version": "0.2.1",
+    "version": "0.2.2",
     "title": "milight-smart-light",
     "titleLang": {
       "en": "milight-smart-light",
@@ -21,6 +21,17 @@
       }
     ],
     "news": {
+      "0.2.2": {
+        "en": "Optimization of the App",
+        "de": "Optimierung der App",
+        "ru": "Оптимизация приложения",
+        "pt": "Otimização do aplicativo",
+        "nl": "Optimalisatie van de app",
+        "fr": "Optimisation de l'application",
+        "it": "Ottimizzazione dell'app",
+        "es": "Optimización de la aplicación.",
+        "pl": "Optymalizacja aplikacji"
+      },
       "0.2.1": {
         "en": "Integration von node-milight-promise v0.3.2",
         "de": "Integration von node-milight-promise v0.3.2",
