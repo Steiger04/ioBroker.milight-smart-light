@@ -129,7 +129,10 @@ function createVueInstance (settings, onChange) {
                             }
                         },
                         mslGroupName: {
-                            required: validators.required
+                            required: validators.required,
+                            areNotForbiddenChars(value)  {
+                                return !RegExp('[\\]\\[*,;\'"`<>\\\\?]').test(value);
+                            }
                         },
                         mslZoneType: {
                             reqired: validators.required,
@@ -240,18 +243,18 @@ function createVueInstance (settings, onChange) {
         },
         mounted () {
 
-            this.M.updateTextFields();
+            /*this.M.updateTextFields();
 
             const mslTabs = document.querySelectorAll('#msl tabs');
             this.M.Tabs.init(mslTabs);
 
             const mslSelect = document.querySelectorAll('#msl select');
-            this.M.FormSelect.init(mslSelect);
+            this.M.FormSelect.init(mslSelect);*/
 
         },
         beforeUpdate () {
             this.$nextTick(function () {
-                this.M.updateTextFields();
+                // this.M.updateTextFields();
 
                 const mslSelect = document.querySelectorAll('#msl select');
                 this.M.FormSelect.init(mslSelect);

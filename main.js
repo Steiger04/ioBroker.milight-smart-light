@@ -21,9 +21,6 @@ const states = require(path.join(__dirname, '/lib/js/mslstates'));
 const Milight = require('node-milight-promise').MilightController;
 let smartLight = null;
 
-// eslint-disable-next-line no-useless-escape
-const FORBIDDEN_CHARS = /[\]\[\s*,;'"`<>\\?]/g;
-
 // Some message was sent to adapter instance over message box. Used by email, pushover, text2speech
 adapter.on('message', (obj) => {
     if (typeof obj === 'object') {
@@ -82,7 +79,7 @@ adapter.on('objectChange', (id, obj) => {
     adapter.log.debug(`on:objectChange->${id} ${JSON.stringify(obj)}`);
 });
 
-adapter.on('stateChange', (_id, state) => {
+adapter.on('stateChange', async (_id, state) => {
     // you can use the ack flag to detect if it is status (true) or command (false)
     const start = Date.now();
 
@@ -116,12 +113,12 @@ adapter.on('stateChange', (_id, state) => {
     options.val = state.val;
     options.ack = state.ack;
 
-    mslStatestore.setState({ dp: options.dp, val: state.val, params: options });
+    await mslStatestore.setState({ dp: options.dp, val: state.val, params: options });
     adapter.log.debug('mslStatestore.setState->::' + (Date.now() - start) + 'ms');
 
     switch (adapter.config.controllerType) {
         case 'v6':
-            smartLight.sendCommands(mslcommandsV6[mslZoneType][dp](options)).then(() => {
+            smartLight.sendCommands(await mslcommandsV6[mslZoneType][dp](options)).then(() => {
                 adapter.log.debug('mslcommandsV6 executed::' + (Date.now() - start) + 'ms');
             }).catch((err) => {
                 adapter.log.error(`on:stateChange:mslcommandsV6->${err.message}`);
@@ -196,7 +193,8 @@ async function configAsync () {
 
                 mslZoneActive: zone.mslZoneActive,
                 mslZoneNumber: zone.mslZoneNumber,
-                mslGroupName: zone.mslGroupName,
+                mslGroupNameCommon: zone.mslGroupName,
+                mslGroupName: zone.mslGroupName.replace(/\s+/g,'_'),
                 mslZoneType: zone.mslZoneType,
                 mslZoneName: _.isEmpty(zone.mslZoneName) ? `${zone.mslZoneType}-${zone.mslZoneNumber}` : zone.mslZoneName,
 
@@ -205,9 +203,8 @@ async function configAsync () {
 
                 mslZoneTypeNumber: `${zone.mslZoneType}-${zone.mslZoneNumber}`,
 
-                channelPath: `${zone.mslGroupName}.${zone.mslZoneType}-${zone.mslZoneNumber}.`.replace(/\s+/g, ' ').replace(FORBIDDEN_CHARS, '_'),
-                fullChannelPath: `${adapter.namespace}.${zone.mslGroupName}.${zone.mslZoneType}-${zone.mslZoneNumber}.`.replace(/\s+/g, ' ')
-                    .replace(FORBIDDEN_CHARS, '_'),
+                channelPath: `${zone.mslGroupName}.${zone.mslZoneType}-${zone.mslZoneNumber}.`.replace(/\s+/g,'_'),
+                fullChannelPath: `${adapter.namespace}.${zone.mslGroupName}.${zone.mslZoneType}-${zone.mslZoneNumber}.`.replace(/\s+/g,'_'),
 
                 name: _.isEmpty(zone.mslZoneName) ? `${zone.mslZoneType}-${zone.mslZoneNumber}` : zone.mslZoneName
             });
@@ -217,13 +214,10 @@ async function configAsync () {
     }
 
     const groupsFromStorage = await adapter.getDevicesAsync();
-
     const zonesFromStorage = _.flatten(await Promise.all(groupsFromStorage.map((device) => adapter.getChannelsOfAsync(device._id))));
-
     let deleteZonesFromStorage = _.differenceWith(zonesFromStorage, zonesFromAdmin, (zoneStorage, zoneAdmin) => _.isEqual(zoneStorage.common, zoneAdmin));
 
     deleteZonesFromStorage = _.map(deleteZonesFromStorage, zone => adapter.idToDCS(zone._id));
-
     addZonesToStorage = _.differenceWith(zonesFromAdmin, zonesFromStorage, (zoneAdmin, zoneStorage) => _.isEqual(zoneStorage.common, zoneAdmin));
 
     const zonesInStorage = _.differenceWith(zonesFromAdmin, addZonesToStorage, (zoneAdmin, zoneStorage) => _.isEqual(zoneStorage, zoneAdmin));
@@ -233,7 +227,7 @@ async function configAsync () {
         for (const zone of zonesInStorage) {
             for (const dp of states.statesList(adapter.config.controllerType, zone.mslZoneType)) {
                 const state = await adapter.getStateAsync(zone.fullChannelPath + dp);
-                mslStatestore.initState({ dp: dp, val: state.val, params: zone });
+                await mslStatestore.initState({ dp: dp, val: state.val, params: zone });
             }
         }
     }
@@ -259,11 +253,20 @@ async function configAsync () {
     // MiLight-Zonen und Enums aus addZonesToStorage anlegen
     if (addZonesToStorage.length > 0) {
         for (const addZone of addZonesToStorage) {
-            await adapter.createDeviceAsync(addZone.mslGroupName);
+
+            // device für addZonesToStorage anlegen
+            await adapter.createDeviceAsync(addZone.mslGroupName, { name: addZone.mslGroupNameCommon });
             adapter.log.debug(`configAsync->::MiLight group :${adapter.namespace}.${addZone.mslGroupName}: was created!`);
 
+            // channel für addZonesToStorage anlegen
             await adapter.createChannelAsync(addZone.mslGroupName, addZone.mslZoneTypeNumber, addZone);
             adapter.log.debug(`configAsync->::MiLight zone :${adapter.namespace}.${addZone.mslGroupName}.${addZone.mslZoneTypeNumber}: was created!`);
+
+            // States für addZonesToStorage anlegen und mslStatestore initialisieren
+            for (const dp of states.statesList(adapter.config.controllerType, addZone.mslZoneType)) {
+                await adapter.createStateAsync(addZone.mslGroupName, addZone.mslZoneTypeNumber, dp, states.getCommon(dp));
+                await mslStatestore.initState({ dp: dp, val: states.getCommon(dp)._def, params: addZone });
+            }
 
             await adapter.deleteChannelFromEnumAsync(null, addZone.mslGroupName, addZone.mslZoneTypeNumber);
             for (const enumName of _.concat(addZone.mslFunc, addZone.mslRoom)) {
@@ -272,14 +275,6 @@ async function configAsync () {
                     adapter.log.debug(
                         `configAsync->::${adapter.namespace}.${addZone.mslGroupName}.${addZone.mslZoneTypeNumber}: was assigned to enum->::${enumName}`);
                 }
-            }
-
-            // States für addZonesToStorage anlegen und mslStatestore initialisieren
-            for (const dp of states.statesList(adapter.config.controllerType, addZone.mslZoneType)) {
-                await adapter.createStateAsync(addZone.mslGroupName, addZone.mslZoneTypeNumber, dp, states.getCommon(dp));
-                await adapter.setStateAsync(addZone.fullChannelPath + dp, states.getCommon(dp)._def, true);
-
-                mslStatestore.initState({ dp: dp, val: states.getCommon(dp)._def, params: addZone });
             }
         }
     }
