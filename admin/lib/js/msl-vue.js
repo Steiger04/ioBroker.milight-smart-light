@@ -22,6 +22,9 @@ function createVueInstance (settings, onChange) {
             controllerIps: []
         },
         computed: {
+            deviceCount() {
+                return this.options.zones.length;
+            },
             maxDevices () {
                 if (this.options.controllerType === 'legacy') {
                     return 4;
@@ -183,7 +186,7 @@ function createVueInstance (settings, onChange) {
                     mslFunc: []
                 });
 
-                if (this.options.zones.length == this.maxDevices) {
+                if (this.deviceCount == this.maxDevices) {
                     this.$refs.addDeviceButton.setAttribute('disabled', true);
                 }
 
@@ -191,7 +194,7 @@ function createVueInstance (settings, onChange) {
                 this.mslOnChange(false);
             },
             delDevice (index) {
-                if (this.options.zones.length == this.maxDevices) {
+                if (this.deviceCount == this.maxDevices) {
                     this.$refs.addDeviceButton.removeAttribute('disabled');
                 }
 
@@ -242,7 +245,6 @@ function createVueInstance (settings, onChange) {
             this.$v.$touch();
         },
         mounted () {
-
             /*this.M.updateTextFields();
 
             const mslTabs = document.querySelectorAll('#msl tabs');
@@ -250,7 +252,6 @@ function createVueInstance (settings, onChange) {
 
             const mslSelect = document.querySelectorAll('#msl select');
             this.M.FormSelect.init(mslSelect);*/
-
         },
         beforeUpdate () {
             this.$nextTick(function () {

@@ -34,12 +34,14 @@ With adapter you can use both: **v6 Bridge** and **Legacy Bridge**.
 
 
 ## Changelog
+### 0.2.3 (2019-03-02)
+- (steiger04): Fixed a bug in configuration load and save
+
 ### 0.2.2 (2019-02-28)
 - (steiger04): Optimization of the App
 
 ### 0.2.1 (2019-02-13)
-- (steiger04): 
-Integration of  node-milight-promise v0.3.2
+- (steiger04): Integration of  node-milight-promise v0.3.2
 
 ### 0.2.0 (2019-01-16)
 - (steiger04): Adaptation to Admin3, materialzeCSS, general revision, new app

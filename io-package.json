@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "milight-smart-light",
-    "version": "0.2.2",
+    "version": "0.2.3",
     "title": "milight-smart-light",
     "titleLang": {
       "en": "milight-smart-light",
@@ -21,13 +21,24 @@
       }
     ],
     "news": {
+      "0.2.3": {
+        "en": "Fixed a bug in configuration load and save",
+        "de": "Fehler beim Laden und Speichern der Konfiguration behoben",
+        "ru": "Исправлена ​​ошибка в загрузке и сохранении конфигурации",
+        "pt": "Corrigido um erro no carregamento de configuração e salvar",
+        "nl": "Probleem opgelost bij configuratie laden en opslaan",
+        "fr": "Correction d'un bug dans le chargement et la sauvegarde de la configuration",
+        "it": "Risolto un bug nel caricamento della configurazione e salvato",
+        "es": "Se corrigió un error en la carga de configuración y se guardaba.",
+        "pl": "Naprawiono błąd ładowania konfiguracji i zapisywania"
+      },
       "0.2.2": {
         "en": "Optimization of the App",
         "de": "Optimierung der App",
         "ru": "Оптимизация приложения",
+        "fr": "Optimisation de l'application",
         "pt": "Otimização do aplicativo",
         "nl": "Optimalisatie van de app",
-        "fr": "Optimisation de l'application",
         "it": "Ottimizzazione dell'app",
         "es": "Optimización de la aplicación.",
         "pl": "Optymalizacja aplikacji"
