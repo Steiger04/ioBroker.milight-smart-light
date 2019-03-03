@@ -221,9 +221,10 @@
 
             <div class="row">
                 <div class="col s12">
-                    <a ref="addDeviceButton"
-                       class="waves-effect waves-light btn"
-                       @click="addDevice()">
+                    <a class="waves-effect waves-light btn"
+                       @click="addDevice()"
+                       :disabled="deviceCount===maxDevices"
+                    >
                         <i class="material-icons">add</i>
                     </a>
                 </div>

@@ -34,6 +34,9 @@ With adapter you can use both: **v6 Bridge** and **Legacy Bridge**.
 
 
 ## Changelog
+### 0.2.4 (2019-03-03)
+- (steiger04): Fixed a bug in adapter admin
+
 ### 0.2.3 (2019-03-02)
 - (steiger04): Fixed a bug in configuration load and save
 

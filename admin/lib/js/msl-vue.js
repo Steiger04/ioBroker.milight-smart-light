@@ -186,24 +186,15 @@ function createVueInstance (settings, onChange) {
                     mslFunc: []
                 });
 
-                if (this.deviceCount == this.maxDevices) {
-                    this.$refs.addDeviceButton.setAttribute('disabled', true);
-                }
-
                 this.$v.options.zones.$touch();
                 this.mslOnChange(false);
             },
             delDevice (index) {
-                if (this.deviceCount == this.maxDevices) {
-                    this.$refs.addDeviceButton.removeAttribute('disabled');
-                }
-
                 this.options.zones.splice(index, 1);
                 this.$v.options.zones.$touch();
                 this.mslOnChange(true);
             },
             deleteAllDevices () {
-                this.$refs.addDeviceButton.removeAttribute('disabled');
                 this.options.zones = [];
                 this.mslOnChange(true);
             },

@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "milight-smart-light",
-    "version": "0.2.3",
+    "version": "0.2.4",
     "title": "milight-smart-light",
     "titleLang": {
       "en": "milight-smart-light",
@@ -21,6 +21,17 @@
       }
     ],
     "news": {
+      "0.2.4": {
+        "en": "Bug for addDeviceButton fixed in Admin",
+        "de": "Fehler für addDeviceButton in Admin behoben",
+        "ru": "Исправлена ​​ошибка для addDeviceButton в Admin",
+        "pt": "Bug para addDeviceButton corrigido no Admin",
+        "nl": "Bug voor addDeviceButton opgelost in Admin",
+        "fr": "Bug pour addDeviceButton corrigé dans Admin",
+        "it": "Bug per addDeviceButton corretto in Admin",
+        "es": "Error para addDeviceButton corregido en Admin",
+        "pl": "Błąd dla addDeviceButton poprawiony w Admin"
+      },
       "0.2.3": {
         "en": "Fixed a bug in configuration load and save",
         "de": "Fehler beim Laden und Speichern der Konfiguration behoben",
