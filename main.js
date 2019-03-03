@@ -5,7 +5,7 @@ const kill = require('tree-kill');
 // const os = require('os'); // win32? -> supportStopInstance erforderlich in common{...}
 const _ = require('lodash');
 
-const utils = require(path.join(__dirname, '/lib/utils'));
+const utils = require('@iobroker/adapter-core');
 
 const adapter = utils.Adapter({ name: 'milight-smart-light' });
 
