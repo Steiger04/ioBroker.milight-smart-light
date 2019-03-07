@@ -34,8 +34,11 @@ With adapter you can use both: **v6 Bridge** and **Legacy Bridge**.
 
 
 ## Changelog
+### 0.2.5 (2019-03-07)
+- (steiger04): Core Files/Testing Update and introduce adapter-core
+
 ### 0.2.4 (2019-03-03)
-- (steiger04): Fixed a bug in adapter admin
+- (steiger04): Bug for addDeviceButton fixed in Admin
 
 ### 0.2.3 (2019-03-02)
 - (steiger04): Fixed a bug in configuration load and save

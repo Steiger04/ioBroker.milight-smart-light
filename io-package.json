@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "milight-smart-light",
-    "version": "0.2.4",
+    "version": "0.2.5",
     "title": "milight-smart-light",
     "titleLang": {
       "en": "milight-smart-light",
@@ -21,6 +21,17 @@
       }
     ],
     "news": {
+      "0.2.5": {
+        "en": "Core Files/Testing Update and introduce adapter-core",
+        "de": "Core-Dateien / Testing-Update und Einführung des Adapter-Core",
+        "ru": "Основные файлы / Тестирование Обновление и внедрение ядра адаптера",
+        "pt": "Core Files / Testing Update e introduza o adapter-core",
+        "nl": "Kernbestanden / testen Update en introduceer adapter-core",
+        "fr": "Fichiers de base / Mise à jour de test et introduction de l'adaptateur-core",
+        "it": "Core Files / Test Aggiornamento e introduzione dell'adattatore-core",
+        "es": "Archivos principales / Actualización de prueba e introducción del núcleo del adaptador",
+        "pl": "Pliki podstawowe / Testowanie Zaktualizuj i wprowadź adapter-core"
+      },
       "0.2.4": {
         "en": "Bug for addDeviceButton fixed in Admin",
         "de": "Fehler für addDeviceButton in Admin behoben",
@@ -209,7 +220,7 @@
     "controllerPortV6": "5987",
     "controllerPort": "5987",
     "commandRepeat": "1",
-    "delayBetweenCommands": "50",
+    "delayBetweenCommands": "30",
     "iBox": "iBox2",
     "maxZones": "4",
     "zones": []

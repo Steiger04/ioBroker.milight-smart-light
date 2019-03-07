@@ -5,9 +5,11 @@ const kill = require('tree-kill');
 // const os = require('os'); // win32? -> supportStopInstance erforderlich in common{...}
 const _ = require('lodash');
 
-const utils = require(path.join(__dirname, '/lib/utils'));
+// const utils = require(path.join(__dirname, '/lib/utils'));
+const utils = require('@iobroker/adapter-core');
 
 const adapter = utils.Adapter({ name: 'milight-smart-light' });
+
 
 let forkedServer = require(path.join(__dirname, '/lib/js/mslfe-fork/mslfeServer'));
 
@@ -80,13 +82,16 @@ adapter.on('objectChange', (id, obj) => {
 });
 
 adapter.on('stateChange', async (_id, state) => {
+    let start;
     // you can use the ack flag to detect if it is status (true) or command (false)
-    const start = Date.now();
+    if(adapter.common.loglevel === 'debug') {
+        start = Date.now();
+    }
 
     if (!state || state.ack) {
         /* if (state.ack) {
-                      adapter.log.debug (`on:stateChange:ack=true->${_id}::state->${JSON.stringify (state)}`)
-                    } */
+                adapter.log.debug (`on:stateChange:ack=true->${_id}::state->${JSON.stringify (state)}`)
+           } */
         return;
     }
 
@@ -113,12 +118,12 @@ adapter.on('stateChange', async (_id, state) => {
     options.val = state.val;
     options.ack = state.ack;
 
-    await mslStatestore.setState({ dp: options.dp, val: state.val, params: options });
-    adapter.log.debug('mslStatestore.setState->::' + (Date.now() - start) + 'ms');
+    mslStatestore.setState({ dp: options.dp, val: state.val, params: options });
+    adapter.log.debug('on:stateChange:mslStatestore.setState->::' + (Date.now() - start) + 'ms');
 
     switch (adapter.config.controllerType) {
         case 'v6':
-            smartLight.sendCommands(await mslcommandsV6[mslZoneType][dp](options)).then(() => {
+            smartLight.sendCommands(mslcommandsV6[mslZoneType][dp](options)).then(() => {
                 adapter.log.debug('mslcommandsV6 executed::' + (Date.now() - start) + 'ms');
             }).catch((err) => {
                 adapter.log.error(`on:stateChange:mslcommandsV6->${err.message}`);
