@@ -1,7 +1,7 @@
 ![milight-smart-light Logo](admin/lib/images/milight-smart-light-md.png)
 
 # ioBroker.milight-smart-light
-
+![Number of Installations](http://iobroker.live/badges/milight-smart-light-installed.svg) ![Number of Installations](http://iobroker.live/badges/milight-smart-light-stable.svg) 
 **Tests:** Linux/Mac:
 [![Travis-CI](http://img.shields.io/travis/Steiger04/ioBroker.milight-smart-light/master.svg)](https://travis-ci.org/Steiger04/ioBroker.milight-smart-light)
 Windows:
