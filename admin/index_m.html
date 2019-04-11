@@ -68,7 +68,7 @@
         </div>
 
         <div id="tab-controller">
-            <div class="col s12 m1 offset-m1 l1 offset-l1"
+            <div class="col s12 m3 offset-m1 l2 offset-l1"
                  :class="{ 'z-depth-1': options.controllerType==='v6'}"
                  style="margin-top: 3em;">
                 <div class="row"
@@ -114,9 +114,7 @@
                     </div>
                 </div>
             </div>
-            <div
-                    class="col s12 m6 offset-m1 l6 offset-l1 z-depth-1"
-                    style="margin-top: 3em;">
+            <div class="col s12 m6 offset-m1 l6 offset-l1 z-depth-1" style="margin-top: 3em;">
                 <form action="#"
                       id="controller">
                     <div class="row">
@@ -134,7 +132,7 @@
                     </div>
 
                     <div class="row">
-                        <div class="text-field col s10">
+                        <div class="text-field col s9">
                             <label for="controllerIp"
                                    class="translate">conIp</label>
                             <input id="controllerIp"
@@ -144,7 +142,7 @@
                                    :class="{'red-text text-darken-4 red lighten-4': $v.options.controllerIp.$error}"
                                    @input="mslOnChange(true)"/>
                         </div>
-                        <div class="center-align col s2">
+                        <div class="right-align col s2">
                             <a ref="refreshButton"
                                class="waves-effect waves-light btn"
                                @click="provideControllerIps()">

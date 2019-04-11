@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "milight-smart-light",
-    "version": "0.2.5",
+    "version": "0.2.6",
     "title": "milight-smart-light",
     "titleLang": {
       "en": "milight-smart-light",
@@ -21,6 +21,17 @@
       }
     ],
     "news": {
+      "0.2.6": {
+        "en": "Updated the CI test and some MaterialiseCSS optimizations",
+        "de": "Der CI-Test und einige MaterialiseCSS-Optimierungen wurden aktualisiert",
+        "ru": "Обновлен тест CI и некоторые оптимизации MaterialiseCSS",
+        "pt": "Atualizado o teste do IC e algumas otimizações do MaterialiseCSS",
+        "nl": "De CI-test en enkele MaterialiseCSS-optimalisaties bijgewerkt",
+        "fr": "Mise à jour du test de CI et de certaines optimisations MaterialiseCSS",
+        "it": "Aggiornato il test CI e alcune ottimizzazioni MaterialiseCSS",
+        "es": "Actualización de la prueba de CI y algunas optimizaciones de MaterialiseCSS.",
+        "pl": "Zaktualizowano test CI i niektóre optymalizacje MaterialiseCSS"
+      },
       "0.2.5": {
         "en": "Core Files/Testing Update and introduce adapter-core",
         "de": "Core-Dateien / Testing-Update und Einführung des Adapter-Core",
