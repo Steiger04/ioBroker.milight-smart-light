@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "milight-smart-light",
-    "version": "0.2.6",
+    "version": "0.2.7",
     "title": "milight-smart-light",
     "titleLang": {
       "en": "milight-smart-light",
@@ -21,6 +21,17 @@
       }
     ],
     "news": {
+      "0.2.7": {
+        "en": "Additions to the Stable Repository",
+        "de": "Ergänzungen zum Stable Repository",
+        "ru": "Дополнения к Стабильному Хранилищу",
+        "pt": "Adições ao Repositório Estável",
+        "nl": "Toevoegingen aan de stabiele repository",
+        "fr": "Ajouts au référentiel stable",
+        "it": "Aggiunte al deposito stabile",
+        "es": "Adiciones al repositorio estable",
+        "pl": "Dodatki do stabilnego repozytorium"
+      },
       "0.2.6": {
         "en": "Updated the CI test and some MaterialiseCSS optimizations",
         "de": "Der CI-Test und einige MaterialiseCSS-Optimierungen wurden aktualisiert",
@@ -108,93 +119,7 @@
         "it": "Adattamento per js-controller> v.1.2.5",
         "es": "Adaptación para js-controller> v.1.2.5",
         "pl": "Adaptacja dla js-kontrolera> v.1.2.5"
-      },
-      "0.1.8": {
-        "en": "some optimizations for Alexa",
-        "de": "Einige Optimierungen für Alexa",
-        "ru": "some optimizations for Alexa"
-      },
-      "0.1.7": {
-        "en": "optimized: create states",
-        "de": "Anlegen der states optimiert",
-        "ru": "optimized: create states"
-      },
-      "0.1.6": {
-        "en": "Bug fix: rgbToHsv(...)",
-        "de": "Fehler behoben: rgbToHsv(...)",
-        "ru": "Bug fix: rgbToHsv(...)"
-      },
-      "0.1.5": {
-        "en": "Info about required fields in tab Zones inserted",
-        "de": "Info über Pflichtfelder in Reiter Zonen eingefügt",
-        "ru": "Info about required fields in tab Zones inserted"
-      },
-      "0.1.4": {
-        "en": "Set configuration option fullSync to false in milight instance",
-        "de": "Setzt fullSync auf false in der milight Instanz",
-        "ru": "Set configuration option fullSync to false in milight instance"
-      },
-      "0.1.3": {
-        "en": "Added start image",
-        "de": "Startbild hinzugefügt",
-        "ru": "Added start image"
-      },
-      "0.1.2": {
-        "en": "Bug fix: socketio",
-        "de": "Fehler behoben: socketio",
-        "ru": "Bug fix: socketio"
-      },
-      "0.1.1": {
-        "en": "Bug fix: Fixed EffectMode for Legacy",
-        "de": "Fehler behoben: EffectMode für Legacy",
-        "ru": "Bug fix: Fixed EffectMode for Legacy"
-      },
-      "0.1.0": {
-        "en": "Added Small FE for milight-smart-light",
-        "de": "Small FE for milight-smart-light hinzugefügt",
-        "ru": "Added Small FE for milight-smart-light"
-      },
-      "0.0.6": {
-        "en": "Bug fix: All four zones can be created for the instance (via iobroker.admin) and remain after a reload. There are no more problems with umlauts.",
-        "de": "Fehler behoben: Alle vier Zonen können für die Instanz (via iobroker.admin) angelegt werden und gehen nach einem Reload nicht verloren. Umlaute können ebenfalls genutzt werden.",
-        "ru": "Bug fix: All four zones can be created for the instance (via iobroker.admin) and remain after a reload. There are no more problems with umlauts."
-      },
-      "0.0.5": {
-        "en": "Added russian translation",
-        "de": "Russische Übersetzung hinzugefügt",
-        "ru": "Added russian translation"
-      },
-      "0.0.4": {
-        "en": "Added basis-testing",
-        "de": "Basistests hinzugefügt",
-        "ru": "Added basis-testing"
-      },
-      "0.0.3": {
-        "en": "on- /off- /onoff-states optimized for vis widgets",
-        "de": "on- /off- /onoff-states für vis widgets optimiert",
-        "ru": "on- /off- /onoff-states optimized for vis widgets"
-      },
-      "0.0.2": {
-        "en": "Bug fix: added parameter in effectMode(...)",
-        "de": "Fehler behoben: Parameter in effectMode(...) hinzugefügt",
-        "ru": "Bug fix: added parameter in effectMode(...)"
-      },
-      "0.0.1": {
-        "en": "initial adapter",
-        "de": "Initiale Version",
-        "ru": "Первоначальный адаптер"
       }
-    },
-    "desc": {
-      "en": "Adapter für Milight LED bulbs und LED strips",
-      "de": "Adapter für Milight LED-Lampen und LED-Streifen",
-      "ru": "Адаптер для светодиодных ламп Milight и светодиодных лент",
-      "pt": "Adaptador para lâmpadas LED Milight e tiras de LED",
-      "nl": "Adapter voor Milight LED-lampen en LED-strips",
-      "fr": "Adaptateur pour ampoules et bandes LED Milight",
-      "it": "Adattatore per lampadine LED Milight LED e strisce LED",
-      "es": "Adaptador para bombillas LED y tiras LED de Milight.",
-      "pl": "Adapter do energooszczędnych żarówek LED i taśm LED"
     },
     "platform": "Javascript/Node.js",
     "mode": "daemon",

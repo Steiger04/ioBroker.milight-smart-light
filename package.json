@@ -1,7 +1,7 @@
 {
   "name": "iobroker.milight-smart-light",
   "description": "Adapter for Milight LED bulbs and LED strips",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "author": {
     "name": "Steiger04",
     "email": "steiger04@posteo.de"
@@ -14,12 +14,6 @@
   ],
   "homepage": "https://github.com/Steiger04/ioBroker.milight-smart-light",
   "license": "MIT",
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/Steiger04/ioBroker.admin/blob/master/LICENSE"
-    }
-  ],
   "keywords": [
     "ioBroker",
     "milight-smart-light",
