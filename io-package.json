@@ -185,26 +185,6 @@
         "en": "Added russian translation",
         "de": "Russische Übersetzung hinzugefügt",
         "ru": "Added russian translation"
-      },
-      "0.0.4": {
-        "en": "Added basis-testing",
-        "de": "Basistests hinzugefügt",
-        "ru": "Added basis-testing"
-      },
-      "0.0.3": {
-        "en": "on- /off- /onoff-states optimized for vis widgets",
-        "de": "on- /off- /onoff-states für vis widgets optimiert",
-        "ru": "on- /off- /onoff-states optimized for vis widgets"
-      },
-      "0.0.2": {
-        "en": "Bug fix: added parameter in effectMode(...)",
-        "de": "Fehler behoben: Parameter in effectMode(...) hinzugefügt",
-        "ru": "Bug fix: added parameter in effectMode(...)"
-      },
-      "0.0.1": {
-        "en": "initial adapter",
-        "de": "Initiale Version",
-        "ru": "Первоначальный адаптер"
       }
     },
     "platform": "Javascript/Node.js",
