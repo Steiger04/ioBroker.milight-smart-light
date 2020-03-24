@@ -20,7 +20,7 @@ const createStore = () => {
       },
       pause: false,
       loadedPicker: 'Slider',
-      websocketPort: null
+      socketPort: null
     },
     getters: {
       DPS(state) {
@@ -44,8 +44,8 @@ const createStore = () => {
       LOADED_PICKER(state) {
         return state.loadedPicker
       },
-      WEBSOCKET_PORT(state) {
-        return state.websocketPort
+      SOCKET_PORT(state) {
+        return state.socketPort
       }
     },
     mutations: {
@@ -136,7 +136,7 @@ const createStore = () => {
       SET_LOADED_PICKER(state, payload) {
         state.loadedPicker = payload
       },
-      SET_WEBSOCKET_PORT(state, payload) {
+      SET_SOCKET_PORT(state, payload) {
         state.websocketPort = payload
       }
     },

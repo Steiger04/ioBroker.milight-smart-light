@@ -82,11 +82,16 @@ function createVueInstance (settings, onChange) {
                     minValue: validators.minValue(1024),
                     maxValue: validators.maxValue(64738)
                 },
-                websocketPort: {
+                socketPort: {
                     required: validators.requiredIf((vm) => vm.activeApp),
                     integer: validators.integer,
                     minValue: validators.minValue(1024),
                     maxValue: validators.maxValue(64738)
+                },
+                debounceTime: {
+                    required: validators.requiredIf((vm) => vm.activeApp),
+                    integer: validators.integer,
+                    minValue: validators.minValue(100)
                 },
                 controllerIp: {
                     required: validators.required,
@@ -138,7 +143,7 @@ function createVueInstance (settings, onChange) {
                             }
                         },
                         mslZoneType: {
-                            reqired: validators.required,
+                            required: validators.required,
                             isbridge (value, vm) {
                                 if (this.options.iBox === 'iBox2' || this.options.controllerType === 'legacy') {
                                     return true;
@@ -154,12 +159,15 @@ function createVueInstance (settings, onChange) {
 
                                 return false;
                             }
+                        },
+                        mslColorOffset: {
+                            // required: validators.required
                         }
                     }
                 }
             },
             controllerGroup: ['controllerPort', 'options.controllerIp', 'options.commandRepeat', 'options.delayBetweenCommands'],
-            mslAppGroup: ['options.serverPort', 'options.websocketPort']
+            mslAppGroup: ['options.serverPort', 'options.socketPort', 'options.debounceTime']
         },
         methods: {
             __: _,

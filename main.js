@@ -201,6 +201,9 @@ async function configAsync () {
                 mslGroupNameCommon: zone.mslGroupName,
                 mslGroupName: zone.mslGroupName.replace(/\s+/g,'_'),
                 mslZoneType: zone.mslZoneType,
+
+                mslColorOffset: zone.mslColorOffset,
+
                 mslZoneName: _.isEmpty(zone.mslZoneName) ? `${zone.mslZoneType}-${zone.mslZoneNumber}` : zone.mslZoneName,
 
                 mslRoom: zone.mslRoom === null ? [] : [zone.mslRoom],

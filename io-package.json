@@ -215,7 +215,7 @@
   "native": {
     "activeApp": false,
     "serverPort": "4400",
-    "websocketPort": "8082",
+    "socketPort": "8082",
     "controllerType": "v6",
     "controllerIp": "",
     "controllerPortLegacy": "8899",
@@ -225,7 +225,8 @@
     "delayBetweenCommands": "30",
     "iBox": "iBox2",
     "maxZones": "4",
-    "zones": []
+    "zones": [],
+    "debounceTime": "200"
   },
   "objects": []
 }

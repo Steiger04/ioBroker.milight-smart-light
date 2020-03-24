@@ -180,26 +180,26 @@ systemDictionary = {
         'pl': 'Utwórz strefy'
     },
     'fullColor': {
-        'en': 'RGB + CWWW',
-        'de': 'RGB + CWWW',
-        'ru': 'RGB + CWWW',
-        'pt': 'RGB + CWWW',
-        'nl': 'RGB + CWWW',
-        'fr': 'RVB + CWWW',
-        'it': 'RGB + CWWW',
-        'es': 'RGB + CWWW',
-        'pl': 'RGB + CWWW'
+        'en': 'RGB + CCT',
+        'de': 'RGB + CCT',
+        'ru': 'RGB + CCT',
+        'pt': 'RGB + CCT',
+        'nl': 'RGB + CCT',
+        'fr': 'RVB + CCT',
+        'it': 'RGB + CCT',
+        'es': 'RGB + CCT',
+        'pl': 'RGB + CCT'
     },
     'fullColor8Zone': {
-        'en': 'RGB (8) + CWWW',
-        'de': 'RGB(8) + CWWW',
-        'ru': 'RGB (8) + CWWW',
-        'pt': 'RGB (8) + CWWW',
-        'nl': 'RGB (8) + CWWW',
-        'fr': 'RVB (8) + CWWW',
-        'it': 'RGB (8) + CWWW',
-        'es': 'RGB (8) + CWWW',
-        'pl': 'RGB (8) + CWWW'
+        'en': 'RGB(8) + CCT',
+        'de': 'RGB(8) + CCT',
+        'ru': 'RGB(8) + CCT',
+        'pt': 'RGB(8) + CCT',
+        'nl': 'RGB(8) + CCT',
+        'fr': 'RVB(8) + CCT',
+        'it': 'RGB(8) + CCT',
+        'es': 'RGB(8) + CCT',
+        'pl': 'RGB(8) + CCT'
     },
     'msgChangeCT': {
         'en': 'Changing the controller type clears all zones.',
@@ -301,15 +301,15 @@ systemDictionary = {
         'pl': 'Strefa jest tworzona tylko w drzewie obiektów, jeśli zostały ustawione pola "aktywne", "strefa", "nazwa (strefa)" i "typ".'
     },
     'rgbw': {
-        'en': 'RGB (W)',
+        'en': 'RGB(W)',
         'de': 'RGB(W)',
-        'ru': 'RGB (W)',
-        'pt': 'RGB (W)',
-        'nl': 'RGB (W)',
-        'fr': 'RGB (W)',
-        'it': 'RGB (W)',
-        'es': 'RGB (W)',
-        'pl': 'RGB (W)'
+        'ru': 'RGB(W)',
+        'pt': 'RGB(W)',
+        'nl': 'RGB(W)',
+        'fr': 'RGB(W)',
+        'it': 'RGB(W)',
+        'es': 'RGB(W)',
+        'pl': 'RGB(W)'
     },
     'select': {
         'en': 'Please select',
@@ -344,16 +344,16 @@ systemDictionary = {
         'es': 'Puerto del servidor',
         'pl': 'Port serwera'
     },
-    'tabController': {
-        'en': 'controller',
-        'de': 'Controller',
-        'ru': 'контроллер',
-        'pt': 'controlador',
-        'nl': 'controleur',
-        'fr': 'contrôleur',
-        'it': 'controllore',
-        'es': 'controlador',
-        'pl': 'kontroler'
+    'tabBridge': {
+        'en': 'bridge',
+        'de': 'Bridge',
+        'ru': 'мост',
+        'pt': 'ponte',
+        'nl': 'brug',
+        'fr': 'pont',
+        'it': 'ponte',
+        'es': 'puente',
+        'pl': 'most'
     },
     'tabMslApp': {
         'en': 'MSL App',
@@ -454,16 +454,38 @@ systemDictionary = {
         'es': 'Tipo (zona)',
         'pl': 'Typ (strefa)'
     },
-    'websocketPort': {
-        'en': 'Websocket port',
-        'de': 'Websocket Port',
-        'ru': 'Порт веб-сокета',
-        'pt': 'Porta Websocket',
-        'nl': 'Websocketpoort',
-        'fr': 'Port Websocket',
-        'it': 'Porta Websocket',
-        'es': 'Puerto websocket',
-        'pl': 'Port sieci Web'
+    'thcoloroffset': {
+        'en': 'color offset',
+        'de': 'Farboffset',
+        'ru': 'смещение цвета',
+        'pt': 'deslocamento de cor',
+        'nl': 'kleur offset',
+        'fr': 'décalage de couleur',
+        'it': 'offset colore',
+        'es': 'desplazamiento de color',
+        'pl': 'przesunięcie koloru'
+    },
+    'socketPort': {
+        'en': 'socket port',
+        'de': 'Socket Port',
+        'ru': 'порт сокета',
+        'pt': 'porta soquete',
+        'nl': 'socket poort',
+        'fr': 'port de socket',
+        'it': 'porta socket',
+        'es': 'puerto de enchufe',
+        'pl': 'port gniazda'
+    },
+    'debounceTime': {
+        'en': 'debounce time (ms)',
+        'de': 'Entprellzeit (ms)',
+        'ru': 'время отката (мс)',
+        'pt': 'tempo de debounce (ms)',
+        'nl': 'stuitertijd (ms)',
+        'fr': 'temps de rebond (ms)',
+        'it': 'tempo di rimbalzo (ms)',
+        'es': 'tiempo de rebote (ms)',
+        'pl': 'czas odbicia (ms)'
     },
     'white': {
         'en': 'White',

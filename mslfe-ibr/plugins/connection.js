@@ -10,7 +10,7 @@ export default async function(context) {
           'http://' +
           document.domain +
           ':' +
-          context.store.getters.WEBSOCKET_PORT,
+          context.store.getters.SOCKET_PORT,
         socketSession: '', // optional - used by authentication
         subscribePattern: 'milight-smart-light*'
       },

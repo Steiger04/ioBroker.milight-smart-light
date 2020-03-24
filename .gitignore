@@ -13,4 +13,5 @@ mslfe-ibr/.gitignore
 mslfe-ibr/package-lock.json
 mslfe-ibr/middleware
 mslfe-ibr/README.md
+/mslfe-ibr-quasar
 
