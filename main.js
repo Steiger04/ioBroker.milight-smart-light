@@ -1,7 +1,4 @@
-'use strict';
-
 const path = require('path');
-const kill = require('tree-kill');
 // const os = require('os'); // win32? -> supportStopInstance erforderlich in common{...}
 const _ = require('lodash');
 
@@ -10,8 +7,7 @@ const utils = require('@iobroker/adapter-core');
 
 const adapter = utils.Adapter({ name: 'milight-smart-light' });
 
-
-let forkedServer = require(path.join(__dirname, '/lib/js/mslfe-fork/mslfeServer'));
+const startAppServer = require(path.join(__dirname, '/lib/js/mslfeServer/mslfeServer')).startAppServer;
 
 const mslStatestore = new (require(path.join(__dirname, '/lib/js/mslstatestore/mslstatestore')))(adapter);
 
@@ -56,10 +52,6 @@ adapter.on('message', (obj) => {
                     adapter.log.debug('on:message:stopInstance->All command have been executed - closing MiLight!');
                 });
             }
-
-            if (forkedServer) {
-                kill(forkedServer.pid);
-            }
         } else {
             adapter.log.warn(`on:message:Unknown command->${obj.command}`);
         }
@@ -84,14 +76,14 @@ adapter.on('objectChange', (id, obj) => {
 adapter.on('stateChange', async (_id, state) => {
     let start;
     // you can use the ack flag to detect if it is status (true) or command (false)
-    if(adapter.common.loglevel === 'debug') {
+    if (adapter.common.loglevel === 'debug') {
         start = Date.now();
     }
 
     if (!state || state.ack) {
         /* if (state.ack) {
-                adapter.log.debug (`on:stateChange:ack=true->${_id}::state->${JSON.stringify (state)}`)
-           } */
+                    adapter.log.debug (`on:stateChange:ack=true->${_id}::state->${JSON.stringify (state)}`)
+               } */
         return;
     }
 
@@ -118,24 +110,26 @@ adapter.on('stateChange', async (_id, state) => {
     options.val = state.val;
     options.ack = state.ack;
 
-    mslStatestore.setState({ dp: options.dp, val: state.val, params: options });
+    await mslStatestore.setState({ dp: options.dp, val: state.val, params: options });
     adapter.log.debug('on:stateChange:mslStatestore.setState->::' + (Date.now() - start) + 'ms');
 
     switch (adapter.config.controllerType) {
         case 'v6':
-            smartLight.sendCommands(mslcommandsV6[mslZoneType][dp](options)).then(() => {
+            try {
+                await smartLight.sendCommands(await mslcommandsV6[mslZoneType][dp](options));
                 adapter.log.debug('mslcommandsV6 executed::' + (Date.now() - start) + 'ms');
-            }).catch((err) => {
+            } catch (err) {
                 adapter.log.error(`on:stateChange:mslcommandsV6->${err.message}`);
-            });
+            }
             break;
 
         case 'legacy':
-            smartLight.sendCommands(mslcommands2[mslZoneType][dp](options)).then(() => {
+            try {
+                await smartLight.sendCommands(mslcommands2[mslZoneType][dp](options));
                 adapter.log.debug('mslcommands2 executed::' + (Date.now() - start) + 'ms');
-            }).catch((err) => {
+            } catch (err) {
                 adapter.log.error(`on:stateChange:mslcommands2->::${err.message}`);
-            });
+            }
             break;
 
         default:
@@ -147,7 +141,7 @@ adapter.on('ready', () => {
     main();
 });
 
-function main () {
+async function main () {
     smartLight = new Milight({
         ip: adapter.config.controllerIp,
         type: adapter.config.controllerType,
@@ -157,30 +151,39 @@ function main () {
         fullSync: true
     });
 
-    configAsync()
-        .then(() => {
-            adapter.log.info('main->::all MiLight zones and states were created!');
+    /*    await configAsync()
+            .then(() => {
+                adapter.log.info('main->::all MiLight zones and states were created!');
 
-            return adapter.subscribeStatesAsync('*').then(() => {
-                adapter.log.info('main->::all states were subscribed!');
-            });
-        })
-        .then(() => {
-            if (adapter.config.activeApp) {
-                return forkedServer(adapter);
-            }
-        })
-        .then((server) => {
-            forkedServer = server;
+                return adapter.subscribeStatesAsync('*').then(() => {
+                    adapter.log.info('main->::all states were subscribed!');
+                });
+            })
+            .then(() => {
+                if (adapter.config.activeApp) {
+                    return startAppServer(adapter);
+                }
+            })
+            .then(() => adapter.log.info('main->::milight-smart-light adapter was started successfully!'))
+            .catch((err) => {
+                adapter.log.error(`main->::${err}`);
+            });*/
 
-            if (forkedServer) {
-                adapter.log.info('main->::server for app was started!');
-            }
-        })
-        .then(() => adapter.log.info('main->::milight-smart-light adapter was started successfully!'))
-        .catch((err) => {
-            adapter.log.error(`main->::${err}`);
-        });
+    try {
+        await configAsync();
+        adapter.log.info('main->::all MiLight zones and states were created!');
+
+        await adapter.subscribeStatesAsync('*');
+        adapter.log.info('main->::all states were subscribed!');
+
+        if (adapter.config.activeApp) {
+            await startAppServer(adapter);
+        }
+
+        adapter.log.info('main->::milight-smart-light adapter was started successfully!');
+    } catch (err) {
+        adapter.log.error(`main->::${err}`);
+    }
 }
 
 const zonesFromAdmin = [];
@@ -192,6 +195,7 @@ async function configAsync () {
             zonesFromAdmin.push({
                 instance: adapter.namespace,
                 instanceNumber: adapter.instance,
+                group_id: `${adapter.namespace}.${zone.mslGroupName.replace(/\s+/g, '_')}`,
 
                 controllerType: adapter.config.controllerType,
                 iBox: adapter.config.iBox,
@@ -199,7 +203,7 @@ async function configAsync () {
                 mslZoneActive: zone.mslZoneActive,
                 mslZoneNumber: zone.mslZoneNumber,
                 mslGroupNameCommon: zone.mslGroupName,
-                mslGroupName: zone.mslGroupName.replace(/\s+/g,'_'),
+                mslGroupName: zone.mslGroupName.replace(/\s+/g, '_'),
                 mslZoneType: zone.mslZoneType,
 
                 mslColorOffset: zone.mslColorOffset,
@@ -211,8 +215,8 @@ async function configAsync () {
 
                 mslZoneTypeNumber: `${zone.mslZoneType}-${zone.mslZoneNumber}`,
 
-                channelPath: `${zone.mslGroupName}.${zone.mslZoneType}-${zone.mslZoneNumber}.`.replace(/\s+/g,'_'),
-                fullChannelPath: `${adapter.namespace}.${zone.mslGroupName}.${zone.mslZoneType}-${zone.mslZoneNumber}.`.replace(/\s+/g,'_'),
+                channelPath: `${zone.mslGroupName}.${zone.mslZoneType}-${zone.mslZoneNumber}.`.replace(/\s+/g, '_'),
+                fullChannelPath: `${adapter.namespace}.${zone.mslGroupName}.${zone.mslZoneType}-${zone.mslZoneNumber}.`.replace(/\s+/g, '_'),
 
                 name: _.isEmpty(zone.mslZoneName) ? `${zone.mslZoneType}-${zone.mslZoneNumber}` : zone.mslZoneName
             });
@@ -261,7 +265,6 @@ async function configAsync () {
     // MiLight-Zonen und Enums aus addZonesToStorage anlegen
     if (addZonesToStorage.length > 0) {
         for (const addZone of addZonesToStorage) {
-
             // device für addZonesToStorage anlegen
             await adapter.createDeviceAsync(addZone.mslGroupName, { name: addZone.mslGroupNameCommon });
             adapter.log.debug(`configAsync->::MiLight group :${adapter.namespace}.${addZone.mslGroupName}: was created!`);
