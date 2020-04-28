@@ -225,8 +225,8 @@
     "delayBetweenCommands": "30",
     "iBox": "iBox2",
     "maxZones": "4",
-    "zones": [],
-    "debounceTime": "200"
+    "debounceTime": "200",
+    "zones": []
   },
   "objects": []
 }

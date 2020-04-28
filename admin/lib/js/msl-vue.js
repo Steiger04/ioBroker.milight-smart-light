@@ -1,4 +1,4 @@
-/* eslint-disable no-undef,eqeqeq */
+/* eslint-disable no-undef,eqeqeq,no-prototype-builtins */
 'use strict';
 Vue.use(window.vuelidate.default);
 
@@ -22,7 +22,7 @@ function createVueInstance (settings, onChange) {
             controllerIps: []
         },
         computed: {
-            deviceCount() {
+            deviceCount () {
                 return this.options.zones.length;
             },
             maxDevices () {
@@ -138,12 +138,18 @@ function createVueInstance (settings, onChange) {
                         },
                         mslGroupName: {
                             required: validators.required,
-                            areNotForbiddenChars(value)  {
+                            areNotForbiddenChars (value) {
                                 return !RegExp('[\\]\\[*,;\'"`<>\\\\?]').test(value);
                             }
                         },
                         mslZoneType: {
                             required: validators.required,
+                            defaultColorOffset (value, vm) {
+                                if ((value === 'fullColor' || value === 'fullColor8Zone') && !vm.mslColorOffset) {
+                                    vm.mslColorOffset = '0x48';
+                                }
+                                return true;
+                            },
                             isbridge (value, vm) {
                                 if (this.options.iBox === 'iBox2' || this.options.controllerType === 'legacy') {
                                     return true;
@@ -161,7 +167,15 @@ function createVueInstance (settings, onChange) {
                             }
                         },
                         mslColorOffset: {
-                            // required: validators.required
+                            areNotForbiddenChars (value, vm) {
+                                if (vm.mslZoneType === 'fullColor' || vm.mslZoneType === 'fullColor8Zone') {
+                                    return RegExp('(0x)?[0-9a-f]{2}', 'i').test(value);
+                                }
+
+                                vm.mslColorOffset = null;
+
+                                return true;
+                            }
                         }
                     }
                 }
@@ -189,6 +203,7 @@ function createVueInstance (settings, onChange) {
                     mslZoneNumber: null,
                     mslGroupName: null,
                     mslZoneType: null,
+                    mslColorOffset: null,
                     mslZoneName: null,
                     mslRoom: null,
                     mslFunc: []

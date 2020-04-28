@@ -105,13 +105,14 @@ adapter.on('stateChange', async (_id, state) => {
 
     options.mslZoneType = mslZoneType;
     options.mslZoneNumber = mslZoneNumber - 0;
+
     options.dp = dp;
 
     options.val = state.val;
     options.ack = state.ack;
 
     await mslStatestore.setState({ dp: options.dp, val: state.val, params: options });
-    adapter.log.debug('on:stateChange:mslStatestore.setState->::' + (Date.now() - start) + 'ms');
+    adapter.log.debug('on:stateChange:mslStatestore.setState || ' + (Date.now() - start) + 'ms');
 
     switch (adapter.config.controllerType) {
         case 'v6':
@@ -125,7 +126,7 @@ adapter.on('stateChange', async (_id, state) => {
 
         case 'legacy':
             try {
-                await smartLight.sendCommands(mslcommands2[mslZoneType][dp](options));
+                await smartLight.sendCommands(await mslcommands2[mslZoneType][dp](options));
                 adapter.log.debug('mslcommands2 executed::' + (Date.now() - start) + 'ms');
             } catch (err) {
                 adapter.log.error(`on:stateChange:mslcommands2->::${err.message}`);
@@ -150,24 +151,6 @@ async function main () {
         port: parseInt(adapter.config.controllerPort),
         fullSync: true
     });
-
-    /*    await configAsync()
-            .then(() => {
-                adapter.log.info('main->::all MiLight zones and states were created!');
-
-                return adapter.subscribeStatesAsync('*').then(() => {
-                    adapter.log.info('main->::all states were subscribed!');
-                });
-            })
-            .then(() => {
-                if (adapter.config.activeApp) {
-                    return startAppServer(adapter);
-                }
-            })
-            .then(() => adapter.log.info('main->::milight-smart-light adapter was started successfully!'))
-            .catch((err) => {
-                adapter.log.error(`main->::${err}`);
-            });*/
 
     try {
         await configAsync();
