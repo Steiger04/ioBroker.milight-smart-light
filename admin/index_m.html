@@ -1,10 +1,11 @@
 <html>
 <head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     <link rel="stylesheet" type="text/css" href="../../lib/css/materialize.css">
     <link rel="stylesheet" type="text/css" href="../../css/adapter.css"/>
 
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.21/vue.js"></script>-->
-    <script type="text/javascript" src="lib/js/vue/vue.min.2.5.21.js"></script>
+    <script type="text/javascript" src="lib/js/vue/vue.min.2.6.11.js"></script>
     <script type="text/javascript" src="lib/js/vuelidate/vuelidate.min.js"></script>
     <script type="text/javascript" src="lib/js/vuelidate/validators.min.js"></script>
 
@@ -40,9 +41,15 @@
      style="height: 100%; overflow: auto;">
 
     <div class="row">
-        <div class="col s6">
+        <div class="col s6 valign-wrapper">
             <img src="lib/images/milight-smart-light.png"
                  class="logo" alt=""/>
+            <div class="center-align" style="margin-left: 1rem;">
+                <a target="_blank" href="https://steiger04.github.io/milight-smart-light-doku/">
+                    <i class="small material-icons">import_contacts</i>
+                    <div style="font-size: x-small">Doku</div>
+                </a>
+            </div>
         </div>
     </div>
 
@@ -52,7 +59,7 @@
                 <li class="tab col s4">
                     <a
                             :class="['active', {'red-text text-darken-4 red lighten-4':$v.controllerGroup.$anyError}]"
-                            href="#tab-controller">{{ _('tabController') }}</a>
+                            href="#tab-bridge">{{ _('tabBridge') }}</a>
                 </li>
                 <li class="tab col s4">
                     <a
@@ -67,7 +74,7 @@
             </ul>
         </div>
 
-        <div id="tab-controller">
+        <div id="tab-bridge">
             <div class="col s12 m3 offset-m1 l2 offset-l1"
                  :class="{ 'z-depth-1': options.controllerType==='v6'}"
                  style="margin-top: 3em;">
@@ -243,6 +250,9 @@
 
                             <th name="mslZoneType" class="translate">thzonetype</th>
 
+                            <th v-if="options.controllerType !== 'legacy'"
+                                name="mslColorOffset" class="translate">thcoloroffset</th>
+
                             <th name="mslZoneName" class="translate">thzonename</th>
 
                             <th name="mslRoom" class="translate">throom</th>
@@ -273,7 +283,7 @@
                             <td>
                                 <div class="col s12">
                                     <div :class="{'red-text text-darken-4 red lighten-4': device.mslZoneNumber.$error}">
-                                        <select id="'mslZoneNumber' + index"
+                                        <select :id="'mslZoneNumber' + index"
                                                 v-model="device.mslZoneNumber.$model"
                                                 @change="mslOnChange(true)">
                                             <template
@@ -295,7 +305,7 @@
 
                             <td>
                                 <div class="col s12">
-                                    <input id="'mslGroupName' + index"
+                                    <input :id="'mslGroupName' + index"
                                            type="text"
                                            v-model.trim="device.mslGroupName.$model"
                                            :class="{'red-text text-darken-4 red lighten-4': device.mslGroupName.$error}"
@@ -306,7 +316,7 @@
                             <td>
                                 <div class="col s12">
                                     <div :class="{'red-text text-darken-4 red lighten-4': device.mslZoneType.$error}">
-                                        <select id="'mslZoneType' + index"
+                                        <select :id="'mslZoneType' + index"
                                                 v-model="device.mslZoneType.$model"
                                                 @change="mslOnChange(true)">
                                             <template
@@ -332,9 +342,22 @@
                                 </div>
                             </td>
 
+                            <td v-if="options.controllerType !== 'legacy'">
+                                <div class="col s12">
+                                    <input :id="'mslColorOffset' + index"
+                                           type="text"
+                                           v-model.trim="device.mslColorOffset.$model"
+                                           class="center-align"
+                                           :class="{'red-text text-darken-4 red lighten-4': device.mslColorOffset.$error }"
+                                           :disabled="(device.mslZoneType.$model === 'fullColor' || device.mslZoneType.$model === 'fullColor8Zone') ? false : true"
+                                           :placeholder="!(device.mslZoneType.$model === 'fullColor' || device.mslZoneType.$model === 'fullColor8Zone') ? '-x-x-x-' : ''"
+                                           @input="mslOnChange(true)">
+                                </div>
+                            </td>
+
                             <td>
                                 <div class="col s12">
-                                    <input id="'mslZoneName' + index"
+                                    <input :id="'mslZoneName' + index"
                                            type="text"
                                            v-model.trim="device.$model.mslZoneName"
                                            @input="mslOnChange(true)">
@@ -343,7 +366,7 @@
 
                             <td>
                                 <div class="col s12">
-                                    <select id="'mslRoom' + index"
+                                    <select :id="'mslRoom' + index"
                                             v-model="device.$model.mslRoom"
                                             @change="mslOnChange(true)">
                                         <option value=""
@@ -360,7 +383,7 @@
                             <td>
                                 <div class="col s12">
                                     <select multiple
-                                            id="'mslFunc' + index"
+                                            :id="'mslFunc' + index"
                                             v-model="device.$model.mslFunc"
                                             @change="mslOnChange(true)">
                                         <option value=""
@@ -428,14 +451,29 @@
                 <div class="row">
                     <div class="col s12">
                         <div class="text-field col s12">
-                            <label for="websocketPort"
-                                   class="translate">websocketPort</label>
-                            <input id="websocketPort"
-                                   name="websocketPort"
+                            <label for="socketPort"
+                                   class="translate">socketPort</label>
+                            <input id="socketPort"
+                                   name="socketPort"
                                    type="text"
                                    :disabled="!options.activeApp"
-                                   v-model.trim="$v.options.websocketPort.$model"
-                                   :class="{'red-text text-darken-4 red lighten-4': $v.options.websocketPort.$error}"
+                                   v-model.trim="$v.options.socketPort.$model"
+                                   :class="{'red-text text-darken-4 red lighten-4': $v.options.socketPort.$error}"
+                                   @input="mslOnChange(true)">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12">
+                        <div class="text-field col s12">
+                            <label for="debounceTime"
+                                   class="translate">debounceTime</label>
+                            <input id="debounceTime"
+                                   name="debounceTime"
+                                   type="text"
+                                   :disabled="!options.activeApp"
+                                   v-model.trim="$v.options.debounceTime.$model"
+                                   :class="{'red-text text-darken-4 red lighten-4': $v.options.debounceTime.$error}"
                                    @input="mslOnChange(true)">
                         </div>
                     </div>
