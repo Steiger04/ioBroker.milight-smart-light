@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "milight-smart-light",
-    "version": "0.2.7",
+    "version": "0.3.0",
     "title": "milight-smart-light",
     "titleLang": {
       "en": "milight-smart-light",
@@ -32,6 +32,17 @@
       }
     ],
     "news": {
+      "0.3.0": {
+        "en": "Optimizations, bug fixes and new app.",
+        "de": "Optimierungen, Fehlerbehebungen und neue App.",
+        "ru": "Оптимизация, исправление ошибок и новое приложение.",
+        "pt": "Otimizações, correções de bugs e novo aplicativo.",
+        "nl": "Optimalisaties, bugfixes en nieuwe app.",
+        "fr": "Optimisations, corrections de bugs et nouvelle application.",
+        "it": "Ottimizzazioni, correzioni di bug e nuova app.",
+        "es": "Optimizaciones, correcciones de errores y nueva aplicación.",
+        "pl": "Optymalizacje, poprawki błędów i nowa aplikacja."
+      },
       "0.2.7": {
         "en": "Additions to the Stable Repository",
         "de": "Ergänzungen zum Stable Repository",
