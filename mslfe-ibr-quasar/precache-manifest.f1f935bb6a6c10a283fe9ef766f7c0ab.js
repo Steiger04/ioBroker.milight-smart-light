@@ -4,7 +4,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "css/2.e68e42b0.css"
   },
   {
-    "revision": "6075a8684201de036afc",
+    "revision": "223191e9c154478adbd2",
     "url": "css/app.120a72bd.css"
   },
   {
@@ -88,7 +88,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "img/mslfe-onoff-button-green.1a13fbb8.svg"
   },
   {
-    "revision": "bf2758c6d4bd4a2d701ab4af3f5e260c",
+    "revision": "496c8ccf125a64393946833535e0487d",
     "url": "index.html"
   },
   {
@@ -96,20 +96,20 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "js/2.4d31b377.js"
   },
   {
-    "revision": "2202c46061115533fe9c",
-    "url": "js/3.2202c460.js"
+    "revision": "5e40f912510df5ea1f8c",
+    "url": "js/3.5e40f912.js"
   },
   {
-    "revision": "9f09ea19bfab3c80b7ef",
-    "url": "js/4.9f09ea19.js"
+    "revision": "7f922a8c48ced7d40cf3",
+    "url": "js/4.7f922a8c.js"
   },
   {
     "revision": "22a8e8e4b306e476fbd7",
     "url": "js/5.22a8e8e4.js"
   },
   {
-    "revision": "6075a8684201de036afc",
-    "url": "js/app.b9ad0244.js"
+    "revision": "223191e9c154478adbd2",
+    "url": "js/app.34e7a835.js"
   },
   {
     "revision": "b4270f0b572c4c6d554b",
