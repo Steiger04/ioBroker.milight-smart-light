@@ -2,12 +2,13 @@
 
 # ioBroker.milight-smart-light
 
-![Number of Installations](http://iobroker.live/badges/milight-smart-light-installed.svg) ![Number of Installations](http://iobroker.live/badges/milight-smart-light-stable.svg) 
-**Tests:** Linux/Mac:
-[![Travis-CI](http://img.shields.io/travis/Steiger04/ioBroker.milight-smart-light/master.svg)](https://travis-ci.org/Steiger04/ioBroker.milight-smart-light)
-Windows:
-[![AppVeyor](https://ci.appveyor.com/api/projects/status/github/Steiger04/ioBroker.milight-smart-light?branch=master&svg=true)](https://ci.appveyor.com/project/Steiger04/ioBroker-milight-smart-light/)
+[![NPM version](http://img.shields.io/npm/v/iobroker.milight-smart-light.svg)](https://www.npmjs.com/package/milight-smart-light)
+[![Downloads](https://img.shields.io/npm/dm/iobroker.milight-smart-light.svg)](https://www.npmjs.com/package/iobroker.milight-smart-light)
+[![Tests](http://img.shields.io/travis/Steiger04/ioBroker.milight-smart-light/master.svg)](https://travis-ci.org/ioBroker/ioBroker.milight-smart-light.svg)
+[![stable](http://iobroker.live/badges/milight-smart-light-stable.svg)](http://iobroker.live/badges/milight-smart-light-stable.svg)
+[![installed](http://iobroker.live/badges/milight-smart-light-installed.svg)](http://iobroker.live/badges/milight-smart-light-installed.svg)
 
+[![NPM](https://nodei.co/npm/iobroker.milight-smart-light.png?downloads=true)](https://nodei.co/npm/milight-smart-light/)
 
 This adapter for ioBroker controls Milight LED bulbs and LED strips and
 based on the node module from mwittig.
