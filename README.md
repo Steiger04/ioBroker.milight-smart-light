@@ -117,4 +117,4 @@ With adapter you can use both: **v6 Bridge** and **Legacy Bridge**.
 
 The MIT License (MIT)
 
-Copyright (c) 2017-2019 Steiger04 <steiger04@posteo.de>
+Copyright (c) 2017-2020 Steiger04 <steiger04@posteo.de>
