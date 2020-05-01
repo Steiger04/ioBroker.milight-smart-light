@@ -35,10 +35,15 @@ With adapter you can use both: **v6 Bridge** and **Legacy Bridge**.
 
 
 ## Changelog
+### 0.3.0 (2020-04-30)
+- (steiger04): Optimizations, bug fixes and new app.
+
 ### 0.2.7 (2019-04-15)
 - (steiger04): Additions to the Stable Repository
+
 ### 0.2.6 (2019-04-11)
 - (steiger04): Updated the CI test and some MaterialiseCSS optimizations
+
 ### 0.2.5 (2019-03-07)
 - (steiger04): Core Files/Testing Update and introduce adapter-core
 
