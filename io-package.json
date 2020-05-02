@@ -152,6 +152,7 @@
     "type": "lighting",
     "messagebox": true,
     "supportStopInstance": true,
+    "connectionType": "local",
     "dependencies": [
       "web"
     ],

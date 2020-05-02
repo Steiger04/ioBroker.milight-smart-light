@@ -1,149 +1,159 @@
 const path = require('path');
 const _ = require('lodash');
-
-// const utils = require(path.join(__dirname, '/lib/utils'));
 const utils = require('@iobroker/adapter-core');
 
-const adapter = utils.Adapter({ name: 'milight-smart-light' });
+let smartLight = null;
+
+class Adapter extends utils.Adapter {
+    constructor (options) {
+        super({
+            ...options,
+            name: 'milight-smart-light'
+        });
+
+        this.on('ready', this.onReady.bind(this));
+        this.on('objectChange', this.onObjectChange.bind(this));
+        this.on('stateChange', this.onStateChange.bind(this));
+        this.on('message', this.onMessage.bind(this));
+        this.on('unload', this.onUnload.bind(this));
+    }
+
+    async onReady () {
+        await main();
+    }
+
+    onObjectChange (id, obj) {
+        // Warning, obj can be null if it was deleted
+        adapter.log.debug(`on:objectChange->${id} ${JSON.stringify(obj)}`);
+    }
+
+    async onStateChange (_id, state) {
+        let start;
+        // you can use the ack flag to detect if it is status (true) or command (false)
+        if (adapter.common.loglevel === 'debug') {
+            start = Date.now();
+        }
+
+        if (!state || state.ack) {
+            /* if (state.ack) {
+                        adapter.log.debug (`on:stateChange:ack=true->${_id}::state->${JSON.stringify (state)}`)
+                   } */
+            return;
+        }
+
+        adapter.log.debug(`on:stateChange:ack=false->${_id}::state->${JSON.stringify(state)}`);
+
+        const options = {};
+
+        const _dcs = adapter.idToDCS(_id);
+
+        const mslZoneType = _.split(_dcs.channel, '-')[0];
+        const mslZoneNumber = _.split(_dcs.channel, '-')[1];
+        const dp = _dcs.state;
+
+        const channelPath = adapter._DCS2ID(_dcs.device, _dcs.channel, '') + '.';
+        const fullChannelPath = adapter.namespace + '.' + channelPath;
+
+        options.channelPath = channelPath;
+        options.fullChannelPath = fullChannelPath;
+
+        options.mslZoneType = mslZoneType;
+        options.mslZoneNumber = mslZoneNumber - 0;
+
+        options.dp = dp;
+
+        options.val = state.val;
+        options.ack = state.ack;
+
+        await mslStatestore.setState({ dp: options.dp, val: state.val, params: options });
+        adapter.log.debug('on:stateChange:mslStatestore.setState || ' + (Date.now() - start) + 'ms');
+
+        switch (adapter.config.controllerType) {
+            case 'v6':
+                try {
+                    await smartLight.sendCommands(await mslcommandsV6[mslZoneType][dp](options));
+                    adapter.log.debug('mslcommandsV6 executed::' + (Date.now() - start) + 'ms');
+                } catch (err) {
+                    adapter.log.error(`on:stateChange:mslcommandsV6->${err.message}`);
+                }
+                break;
+
+            case 'legacy':
+                try {
+                    await smartLight.sendCommands(await mslcommands2[mslZoneType][dp](options));
+                    adapter.log.debug('mslcommands2 executed::' + (Date.now() - start) + 'ms');
+                } catch (err) {
+                    adapter.log.error(`on:stateChange:mslcommands2->::${err.message}`);
+                }
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    async onMessage (obj) {
+        if (typeof obj === 'object') {
+            if (obj.command === 'discover') {
+                let discoverIp = adapter.config.controllerIp;
+
+                if (discoverIp === '') {
+                    discoverIp = '255.255.255.255';
+                } else {
+                    discoverIp = discoverIp.split('.');
+                    discoverIp.pop();
+                    discoverIp.push('255');
+                    discoverIp = discoverIp.join('.');
+                }
+
+                const discoverBridges = require('node-milight-promise').discoverBridges;
+
+                try {
+                    const results = await discoverBridges({ type: 'all', address: discoverIp, timeout: 1000 });
+                    adapter.log.debug(`on:message:discover bridges->${JSON.stringify(results)}`);
+
+                    if (obj.callback) {
+                        adapter.sendTo(obj.from, obj.command, results, obj.callback);
+                    }
+                } catch (err) {
+                    adapter.log.error(`on:message:discover bridges->${err}`);
+                }
+            } else if (obj.command === 'stopInstance') { // "supportStopInstance" : true in common{...}
+                // deleteEnums ()
+                if (smartLight) {
+                    try {
+                        await smartLight.close();
+                        adapter.log.info('on:message:stopInstance->All command have been executed - closing MiLight!');
+                    } catch (err) {
+                        adapter.log.error(`on:message:stopInstance->${err}`);
+                    }
+                }
+            } else {
+                adapter.log.warn(`on:message:Unknown command->${obj.command}`);
+            }
+        }
+    }
+
+    onUnload (callback) {
+        try {
+            // deleteEnums ()
+
+            callback();
+        } catch (err) {
+            callback();
+        }
+    }
+}
+
+const adapter = new Adapter();
 
 const startAppServer = require(path.join(__dirname, '/lib/js/mslfeServer/mslfeServer')).startAppServer;
-
 const mslStatestore = new (require(path.join(__dirname, '/lib/js/mslstatestore/mslstatestore')))(adapter);
-
 const mslcommandsV6 = require(path.join(__dirname, '/lib/js/mslcommandsV6'))(adapter, mslStatestore);
 const mslcommands2 = require(path.join(__dirname, '/lib/js/mslcommands2'))(adapter, mslStatestore);
 
 const states = require(path.join(__dirname, '/lib/js/mslstates'));
-
 const Milight = require('node-milight-promise').MilightController;
-let smartLight = null;
-
-// Some message was sent to adapter instance over message box. Used by email, pushover, text2speech
-adapter.on('message', async (obj) => {
-    if (typeof obj === 'object') {
-        if (obj.command === 'discover') {
-            let discoverIp = adapter.config.controllerIp;
-
-            if (discoverIp === '') {
-                discoverIp = '255.255.255.255';
-            } else {
-                discoverIp = discoverIp.split('.');
-                discoverIp.pop();
-                discoverIp.push('255');
-                discoverIp = discoverIp.join('.');
-            }
-
-            const discoverBridges = require('node-milight-promise').discoverBridges;
-
-            try {
-                const results = await discoverBridges({ type: 'all', address: discoverIp, timeout: 1000 });
-                adapter.log.debug(`on:message:discover bridges->${JSON.stringify(results)}`);
-
-                if (obj.callback) {
-                    adapter.sendTo(obj.from, obj.command, results, obj.callback);
-                }
-            } catch (err) {
-                adapter.log.error(`on:message:discover bridges->${err}`);
-            }
-        } else if (obj.command === 'stopInstance') { // "supportStopInstance" : true in common{...}
-            // deleteEnums ()
-            if (smartLight) {
-                try {
-                    await smartLight.close();
-                    adapter.log.info('on:message:stopInstance->All command have been executed - closing MiLight!');
-                } catch (err) {
-                    adapter.log.error(`on:message:stopInstance->${err}`);
-                }
-            }
-        } else {
-            adapter.log.warn(`on:message:Unknown command->${obj.command}`);
-        }
-    }
-});
-
-adapter.on('unload', (callback) => {
-    try {
-        // deleteEnums ()
-
-        callback();
-    } catch (err) {
-        callback();
-    }
-});
-
-adapter.on('objectChange', (id, obj) => {
-    // Warning, obj can be null if it was deleted
-    adapter.log.debug(`on:objectChange->${id} ${JSON.stringify(obj)}`);
-});
-
-adapter.on('stateChange', async (_id, state) => {
-    let start;
-    // you can use the ack flag to detect if it is status (true) or command (false)
-    if (adapter.common.loglevel === 'debug') {
-        start = Date.now();
-    }
-
-    if (!state || state.ack) {
-        /* if (state.ack) {
-                    adapter.log.debug (`on:stateChange:ack=true->${_id}::state->${JSON.stringify (state)}`)
-               } */
-        return;
-    }
-
-    adapter.log.debug(`on:stateChange:ack=false->${_id}::state->${JSON.stringify(state)}`);
-
-    const options = {};
-
-    const _dcs = adapter.idToDCS(_id);
-
-    const mslZoneType = _.split(_dcs.channel, '-')[0];
-    const mslZoneNumber = _.split(_dcs.channel, '-')[1];
-    const dp = _dcs.state;
-
-    const channelPath = adapter._DCS2ID(_dcs.device, _dcs.channel, '') + '.';
-    const fullChannelPath = adapter.namespace + '.' + channelPath;
-
-    options.channelPath = channelPath;
-    options.fullChannelPath = fullChannelPath;
-
-    options.mslZoneType = mslZoneType;
-    options.mslZoneNumber = mslZoneNumber - 0;
-
-    options.dp = dp;
-
-    options.val = state.val;
-    options.ack = state.ack;
-
-    await mslStatestore.setState({ dp: options.dp, val: state.val, params: options });
-    adapter.log.debug('on:stateChange:mslStatestore.setState || ' + (Date.now() - start) + 'ms');
-
-    switch (adapter.config.controllerType) {
-        case 'v6':
-            try {
-                await smartLight.sendCommands(await mslcommandsV6[mslZoneType][dp](options));
-                adapter.log.debug('mslcommandsV6 executed::' + (Date.now() - start) + 'ms');
-            } catch (err) {
-                adapter.log.error(`on:stateChange:mslcommandsV6->${err.message}`);
-            }
-            break;
-
-        case 'legacy':
-            try {
-                await smartLight.sendCommands(await mslcommands2[mslZoneType][dp](options));
-                adapter.log.debug('mslcommands2 executed::' + (Date.now() - start) + 'ms');
-            } catch (err) {
-                adapter.log.error(`on:stateChange:mslcommands2->::${err.message}`);
-            }
-            break;
-
-        default:
-            break;
-    }
-});
-
-adapter.on('ready', async() => {
-    await main();
-});
 
 async function main () {
     smartLight = new Milight({
@@ -174,7 +184,7 @@ async function main () {
     process.on('unhandledRejection', function (err) {
         adapter.log.error((new Date).toUTCString() + ' unhandledRejection:', err.message);
         adapter.log.error(err.stack);
-        process.exit(1);
+        // process.exit(1);
     });
 }
 
