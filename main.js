@@ -1,5 +1,4 @@
 const path = require('path');
-// const os = require('os'); // win32? -> supportStopInstance erforderlich in common{...}
 const _ = require('lodash');
 
 // const utils = require(path.join(__dirname, '/lib/utils'));
@@ -20,7 +19,7 @@ const Milight = require('node-milight-promise').MilightController;
 let smartLight = null;
 
 // Some message was sent to adapter instance over message box. Used by email, pushover, text2speech
-adapter.on('message', (obj) => {
+adapter.on('message', async (obj) => {
     if (typeof obj === 'object') {
         if (obj.command === 'discover') {
             let discoverIp = adapter.config.controllerIp;
@@ -35,22 +34,26 @@ adapter.on('message', (obj) => {
             }
 
             const discoverBridges = require('node-milight-promise').discoverBridges;
-            discoverBridges({
-                type: 'all', address: discoverIp, timeout: 5000
-            }).then((results) => {
+
+            try {
+                const results = await discoverBridges({ type: 'all', address: discoverIp, timeout: 1000 });
                 adapter.log.debug(`on:message:discover bridges->${JSON.stringify(results)}`);
+
                 if (obj.callback) {
                     adapter.sendTo(obj.from, obj.command, results, obj.callback);
                 }
-            }).catch((err) => {
+            } catch (err) {
                 adapter.log.error(`on:message:discover bridges->${err}`);
-            });
+            }
         } else if (obj.command === 'stopInstance') { // "supportStopInstance" : true in common{...}
             // deleteEnums ()
             if (smartLight) {
-                smartLight.close().then(() => {
-                    adapter.log.debug('on:message:stopInstance->All command have been executed - closing MiLight!');
-                });
+                try {
+                    await smartLight.close();
+                    adapter.log.info('on:message:stopInstance->All command have been executed - closing MiLight!');
+                } catch (err) {
+                    adapter.log.error(`on:message:stopInstance->${err}`);
+                }
             }
         } else {
             adapter.log.warn(`on:message:Unknown command->${obj.command}`);
@@ -138,8 +141,8 @@ adapter.on('stateChange', async (_id, state) => {
     }
 });
 
-adapter.on('ready', () => {
-    main();
+adapter.on('ready', async() => {
+    await main();
 });
 
 async function main () {
@@ -167,6 +170,12 @@ async function main () {
     } catch (err) {
         adapter.log.error(`main->::${err}`);
     }
+
+    process.on('unhandledRejection', function (err) {
+        adapter.log.error((new Date).toUTCString() + ' unhandledRejection:', err.message);
+        adapter.log.error(err.stack);
+        process.exit(1);
+    });
 }
 
 const zonesFromAdmin = [];
