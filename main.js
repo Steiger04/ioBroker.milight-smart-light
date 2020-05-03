@@ -193,7 +193,7 @@ let addZonesToStorage = [];
 
 async function configAsync () {
     if (adapter.config.zones.length > 0) {
-        _.forEach(adapter.config.zones, (zone) => {
+        _.forEach(adapter.config.zones, zone => {
             zonesFromAdmin.push({
                 instance: adapter.namespace,
                 instanceNumber: adapter.instance,
@@ -228,7 +228,7 @@ async function configAsync () {
     }
 
     const groupsFromStorage = await adapter.getDevicesAsync();
-    const zonesFromStorage = _.flatten(await Promise.all(groupsFromStorage.map((device) => adapter.getChannelsOfAsync(device._id))));
+    const zonesFromStorage = _.flatten(await Promise.all(groupsFromStorage.map(device => adapter.getChannelsOfAsync(device._id))));
     let deleteZonesFromStorage = _.differenceWith(zonesFromStorage, zonesFromAdmin, (zoneStorage, zoneAdmin) => _.isEqual(zoneStorage.common, zoneAdmin));
 
     deleteZonesFromStorage = _.map(deleteZonesFromStorage, zone => adapter.idToDCS(zone._id));

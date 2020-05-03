@@ -77,19 +77,19 @@ function createVueInstance (settings, onChange) {
             },
             options: {
                 serverPort: {
-                    required: validators.requiredIf((vm) => vm.activeApp),
+                    required: validators.requiredIf(vm => vm.activeApp),
                     integer: validators.integer,
                     minValue: validators.minValue(1024),
                     maxValue: validators.maxValue(64738)
                 },
                 socketPort: {
-                    required: validators.requiredIf((vm) => vm.activeApp),
+                    required: validators.requiredIf(vm => vm.activeApp),
                     integer: validators.integer,
                     minValue: validators.minValue(1024),
                     maxValue: validators.maxValue(64738)
                 },
                 debounceTime: {
-                    required: validators.requiredIf((vm) => vm.activeApp),
+                    required: validators.requiredIf(vm => vm.activeApp),
                     integer: validators.integer,
                     minValue: validators.minValue(100)
                 },
@@ -116,7 +116,9 @@ function createVueInstance (settings, onChange) {
                             isunique (value) {
                                 let i = 0;
                                 for (const device of this.options.zones) {
-                                    if (device.mslZoneNumber === value) i++;
+                                    if (device.mslZoneNumber === value) {
+                                        i++;
+                                    }
                                 }
                                 return !(i > 1);
                             },
@@ -225,13 +227,13 @@ function createVueInstance (settings, onChange) {
                 this.controllerIps = [];
                 this.$refs.refreshButton.setAttribute('disabled', true);
 
-                this.getIsAdapterAlive((isAlive) => {
+                this.getIsAdapterAlive(isAlive => {
                     if (!isAlive) {
                         this.$refs.refreshButton.removeAttribute('disabled');
                         return this.showMessage(__('noInstance'), __('msgWarning'), 'info'); // TODO: Nachricht anpassen
                     }
 
-                    this.sendTo(null, 'discover', null, (list) => {
+                    this.sendTo(null, 'discover', null, list => {
                         if (!list || !list.length) {
                             this.controllerIps = [];
                             this.$refs.refreshButton.removeAttribute('disabled');
@@ -290,8 +292,12 @@ function getMslRooms (list) {
     nnames.sort(function (a, b) {
         a = a.toLowerCase();
         b = b.toLowerCase();
-        if (a > b) return 1;
-        if (a < b) return -1;
+        if (a > b) {
+            return 1;
+        }
+        if (a < b) {
+            return -1;
+        }
         return 0;
     });
 
@@ -317,8 +323,12 @@ function getMslFunctions (list) {
     nnames.sort(function (a, b) {
         a = a.toLowerCase();
         b = b.toLowerCase();
-        if (a > b) return 1;
-        if (a < b) return -1;
+        if (a > b) {
+            return 1;
+        }
+        if (a < b) {
+            return -1;
+        }
         return 0;
     });
 
