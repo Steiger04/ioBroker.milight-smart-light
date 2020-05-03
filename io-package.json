@@ -168,7 +168,7 @@
     "controllerPortV6": "5987",
     "controllerPort": "5987",
     "commandRepeat": "1",
-    "delayBetweenCommands": "30",
+    "delayBetweenCommands": "25",
     "iBox": "iBox2",
     "maxZones": "4",
     "debounceTime": "200",

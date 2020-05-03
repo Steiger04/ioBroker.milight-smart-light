@@ -24,13 +24,13 @@ class Adapter extends utils.Adapter {
 
     onObjectChange (id, obj) {
         // Warning, obj can be null if it was deleted
-        adapter.log.debug(`on:objectChange->${id} ${JSON.stringify(obj)}`);
+        this.log.debug(`on:objectChange->${id} ${JSON.stringify(obj)}`);
     }
 
     async onStateChange (_id, state) {
         let start;
         // you can use the ack flag to detect if it is status (true) or command (false)
-        if (adapter.common.loglevel === 'debug') {
+        if (this.common.loglevel === 'debug') {
             start = Date.now();
         }
 
@@ -41,18 +41,18 @@ class Adapter extends utils.Adapter {
             return;
         }
 
-        adapter.log.debug(`on:stateChange:ack=false->${_id}::state->${JSON.stringify(state)}`);
+        this.log.debug(`on:stateChange:ack=false->${_id}::state->${JSON.stringify(state)}`);
 
         const options = {};
 
-        const _dcs = adapter.idToDCS(_id);
+        const _dcs = this.idToDCS(_id);
 
         const mslZoneType = _.split(_dcs.channel, '-')[0];
         const mslZoneNumber = _.split(_dcs.channel, '-')[1];
         const dp = _dcs.state;
 
-        const channelPath = adapter._DCS2ID(_dcs.device, _dcs.channel, '') + '.';
-        const fullChannelPath = adapter.namespace + '.' + channelPath;
+        const channelPath = this._DCS2ID(_dcs.device, _dcs.channel, '') + '.';
+        const fullChannelPath = this.namespace + '.' + channelPath;
 
         options.channelPath = channelPath;
         options.fullChannelPath = fullChannelPath;
@@ -66,24 +66,24 @@ class Adapter extends utils.Adapter {
         options.ack = state.ack;
 
         await mslStatestore.setState({ dp: options.dp, val: state.val, params: options });
-        adapter.log.debug('on:stateChange:mslStatestore.setState || ' + (Date.now() - start) + 'ms');
+        this.log.debug('on:stateChange:mslStatestore.setState || ' + (Date.now() - start) + 'ms');
 
-        switch (adapter.config.controllerType) {
+        switch (this.config.controllerType) {
             case 'v6':
                 try {
                     await smartLight.sendCommands(await mslcommandsV6[mslZoneType][dp](options));
-                    adapter.log.debug('mslcommandsV6 executed::' + (Date.now() - start) + 'ms');
+                    this.log.debug('mslcommandsV6 executed::' + (Date.now() - start) + 'ms');
                 } catch (err) {
-                    adapter.log.error(`on:stateChange:mslcommandsV6->${err.message}`);
+                    this.log.error(`on:stateChange:mslcommandsV6->${err.message}`);
                 }
                 break;
 
             case 'legacy':
                 try {
                     await smartLight.sendCommands(await mslcommands2[mslZoneType][dp](options));
-                    adapter.log.debug('mslcommands2 executed::' + (Date.now() - start) + 'ms');
+                    this.log.debug('mslcommands2 executed::' + (Date.now() - start) + 'ms');
                 } catch (err) {
-                    adapter.log.error(`on:stateChange:mslcommands2->::${err.message}`);
+                    this.log.error(`on:stateChange:mslcommands2->::${err.message}`);
                 }
                 break;
 
@@ -95,7 +95,7 @@ class Adapter extends utils.Adapter {
     async onMessage (obj) {
         if (typeof obj === 'object') {
             if (obj.command === 'discover') {
-                let discoverIp = adapter.config.controllerIp;
+                let discoverIp = this.config.controllerIp;
 
                 if (discoverIp === '') {
                     discoverIp = '255.255.255.255';
@@ -110,26 +110,26 @@ class Adapter extends utils.Adapter {
 
                 try {
                     const results = await discoverBridges({ type: 'all', address: discoverIp, timeout: 1000 });
-                    adapter.log.debug(`on:message:discover bridges->${JSON.stringify(results)}`);
+                    this.log.debug(`on:message:discover bridges->${JSON.stringify(results)}`);
 
                     if (obj.callback) {
-                        adapter.sendTo(obj.from, obj.command, results, obj.callback);
+                        this.sendTo(obj.from, obj.command, results, obj.callback);
                     }
                 } catch (err) {
-                    adapter.log.error(`on:message:discover bridges->${err}`);
+                    this.log.error(`on:message:discover bridges->${err}`);
                 }
             } else if (obj.command === 'stopInstance') { // "supportStopInstance" : true in common{...}
                 // deleteEnums ()
                 if (smartLight) {
                     try {
                         await smartLight.close();
-                        adapter.log.info('on:message:stopInstance->All command have been executed - closing MiLight!');
+                        this.log.info('on:message:stopInstance->All command have been executed - closing MiLight!');
                     } catch (err) {
-                        adapter.log.error(`on:message:stopInstance->${err}`);
+                        this.log.error(`on:message:stopInstance->${err}`);
                     }
                 }
             } else {
-                adapter.log.warn(`on:message:Unknown command->${obj.command}`);
+                this.log.warn(`on:message:Unknown command->${obj.command}`);
             }
         }
     }
