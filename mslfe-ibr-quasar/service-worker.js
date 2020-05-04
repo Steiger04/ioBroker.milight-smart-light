@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "precache-manifest.cadc2b704e00a4e02028e9256c08b689.js"
+  "precache-manifest.044f9beba3177f5bfec9a2104e4b8836.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "mslfe-ibr-quasar"});
