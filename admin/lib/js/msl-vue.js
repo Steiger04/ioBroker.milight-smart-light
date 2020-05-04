@@ -106,7 +106,7 @@ function createVueInstance (settings, onChange) {
                 delayBetweenCommands: {
                     required: validators.required,
                     integer: validators.integer,
-                    minValue: validators.minValue(25),
+                    minValue: validators.minValue(20),
                     maxValue: validators.maxValue(1000)
                 },
                 zones: {

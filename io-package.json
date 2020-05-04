@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "milight-smart-light",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "title": "milight-smart-light",
     "titleLang": {
       "en": "milight-smart-light",
@@ -32,6 +32,17 @@
       }
     ],
     "news": {
+      "0.4.0": {
+        "en": "some small bug fixes",
+        "de": "Einige kleine Fehlerbehebungen",
+        "ru": "небольшие исправления ошибок",
+        "pt": "algumas pequenas correções de bugs",
+        "nl": "enkele kleine bugfixes",
+        "fr": "quelques petites corrections de bugs",
+        "it": "alcune piccole correzioni di bug",
+        "es": "algunas pequeñas correcciones de errores",
+        "pl": "kilka drobnych poprawek"
+      },
       "0.3.0": {
         "en": "Optimizations, bug fixes and new app.",
         "de": "Optimierungen, Fehlerbehebungen und neue App.",
@@ -168,7 +179,7 @@
     "controllerPortV6": "5987",
     "controllerPort": "5987",
     "commandRepeat": "1",
-    "delayBetweenCommands": "25",
+    "delayBetweenCommands": "20",
     "iBox": "iBox2",
     "maxZones": "4",
     "debounceTime": "200",

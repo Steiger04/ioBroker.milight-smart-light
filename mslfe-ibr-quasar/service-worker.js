@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "precache-manifest.f1f935bb6a6c10a283fe9ef766f7c0ab.js"
+  "precache-manifest.cadc2b704e00a4e02028e9256c08b689.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "mslfe-ibr-quasar"});
@@ -32,3 +32,5 @@ self.addEventListener('message', (event) => {
  */
 self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
+
+workbox.routing.registerNavigationRoute(workbox.precaching.getCacheKeyForURL("index.html"));

@@ -156,14 +156,16 @@ const states = require(path.join(__dirname, '/lib/js/mslstates'));
 const Milight = require('node-milight-promise').MilightController;
 
 async function main () {
-    smartLight = new Milight({
-        ip: adapter.config.controllerIp,
-        type: adapter.config.controllerType,
-        delayBetweenCommands: parseInt(adapter.config.delayBetweenCommands),
-        commandRepeat: parseInt(adapter.config.commandRepeat),
-        port: parseInt(adapter.config.controllerPort),
-        fullSync: true
-    });
+    if (adapter.config.controllerIp !== '') {
+        smartLight = new Milight({
+            ip: adapter.config.controllerIp,
+            type: adapter.config.controllerType,
+            delayBetweenCommands: parseInt(adapter.config.delayBetweenCommands),
+            commandRepeat: parseInt(adapter.config.commandRepeat),
+            port: parseInt(adapter.config.controllerPort),
+            fullSync: true
+        });
+    }
 
     try {
         await configAsync();
