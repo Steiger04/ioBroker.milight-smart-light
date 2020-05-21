@@ -19,7 +19,11 @@ class Adapter extends utils.Adapter {
     }
 
     async onReady () {
-        await main();
+        if (this.config.controllerIp !== '') {
+            await main();
+        } else {
+            this.log.info(`milight-smart-light Adpter must be configured first!`);
+        }
     }
 
     onObjectChange (id, obj) {
@@ -156,16 +160,15 @@ const states = require(path.join(__dirname, '/lib/js/mslstates'));
 const Milight = require('node-milight-promise').MilightController;
 
 async function main () {
-    if (adapter.config.controllerIp !== '') {
-        smartLight = new Milight({
-            ip: adapter.config.controllerIp,
-            type: adapter.config.controllerType,
-            delayBetweenCommands: parseInt(adapter.config.delayBetweenCommands),
-            commandRepeat: parseInt(adapter.config.commandRepeat),
-            port: parseInt(adapter.config.controllerPort),
-            fullSync: true
-        });
-    }
+
+    smartLight = new Milight({
+        ip: adapter.config.controllerIp,
+        type: adapter.config.controllerType,
+        delayBetweenCommands: parseInt(adapter.config.delayBetweenCommands),
+        commandRepeat: parseInt(adapter.config.commandRepeat),
+        port: parseInt(adapter.config.controllerPort),
+        fullSync: true
+    });
 
     try {
         await configAsync();
@@ -183,9 +186,9 @@ async function main () {
         adapter.log.error(`main->::${err}`);
     }
 
-    process.on('unhandledRejection', function (err) {
-        adapter.log.error((new Date).toUTCString() + ' unhandledRejection:', err.message);
-        adapter.log.error(err.stack);
+    process.on('unhandledRejection', function (reason, promise) {
+        adapter.log.error((new Date).toUTCString() + ' unhandledRejection at:', promise);
+        adapter.log.error((new Date).toUTCString() + ' unhandledRejection reason:', reason);
         // process.exit(1);
     });
 }

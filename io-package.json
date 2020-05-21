@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "milight-smart-light",
-    "version": "0.4.1",
+    "version": "0.5.0",
     "title": "milight-smart-light",
     "titleLang": {
       "en": "milight-smart-light",
@@ -32,6 +32,17 @@
       }
     ],
     "news": {
+      "0.5.0": {
+        "en": "Bug fix in rgb(w)",
+        "de": "Fehlerbehebung in rgb(w)",
+        "ru": "Исправлена ошибка в rgb(w)",
+        "pt": "Correção de bug em rgb(w)",
+        "nl": "Bugfix in RGB (W)",
+        "fr": "Correction d'un bug dans rgb(w)",
+        "it": "Bug fix in rgb (w)",
+        "es": "Corrección de errores en rgb(w)",
+        "pl": "Poprawka błędu w rgb(w)"
+      },
       "0.4.1": {
         "en": "some small bug fixes",
         "de": "Einige kleine Fehlerbehebungen",
@@ -64,94 +75,6 @@
         "it": "Ottimizzazioni, correzioni di bug e nuova app.",
         "es": "Optimizaciones, correcciones de errores y nueva aplicación.",
         "pl": "Optymalizacje, poprawki błędów i nowa aplikacja."
-      },
-      "0.2.7": {
-        "en": "Additions to the Stable Repository",
-        "de": "Ergänzungen zum Stable Repository",
-        "ru": "Дополнения к Стабильному Хранилищу",
-        "pt": "Adições ao Repositório Estável",
-        "nl": "Toevoegingen aan de stabiele repository",
-        "fr": "Ajouts au référentiel stable",
-        "it": "Aggiunte al deposito stabile",
-        "es": "Adiciones al repositorio estable",
-        "pl": "Dodatki do stabilnego repozytorium"
-      },
-      "0.2.6": {
-        "en": "Updated the CI test and some MaterialiseCSS optimizations",
-        "de": "Der CI-Test und einige MaterialiseCSS-Optimierungen wurden aktualisiert",
-        "ru": "Обновлен тест CI и некоторые оптимизации MaterialiseCSS",
-        "pt": "Atualizado o teste do IC e algumas otimizações do MaterialiseCSS",
-        "nl": "De CI-test en enkele MaterialiseCSS-optimalisaties bijgewerkt",
-        "fr": "Mise à jour du test de CI et de certaines optimisations MaterialiseCSS",
-        "it": "Aggiornato il test CI e alcune ottimizzazioni MaterialiseCSS",
-        "es": "Actualización de la prueba de CI y algunas optimizaciones de MaterialiseCSS.",
-        "pl": "Zaktualizowano test CI i niektóre optymalizacje MaterialiseCSS"
-      },
-      "0.2.5": {
-        "en": "Core Files/Testing Update and introduce adapter-core",
-        "de": "Core-Dateien / Testing-Update und Einführung des Adapter-Core",
-        "ru": "Основные файлы / Тестирование Обновление и внедрение ядра адаптера",
-        "pt": "Core Files / Testing Update e introduza o adapter-core",
-        "nl": "Kernbestanden / testen Update en introduceer adapter-core",
-        "fr": "Fichiers de base / Mise à jour de test et introduction de l'adaptateur-core",
-        "it": "Core Files / Test Aggiornamento e introduzione dell'adattatore-core",
-        "es": "Archivos principales / Actualización de prueba e introducción del núcleo del adaptador",
-        "pl": "Pliki podstawowe / Testowanie Zaktualizuj i wprowadź adapter-core"
-      },
-      "0.2.4": {
-        "en": "Bug for addDeviceButton fixed in Admin",
-        "de": "Fehler für addDeviceButton in Admin behoben",
-        "ru": "Исправлена ​​ошибка для addDeviceButton в Admin",
-        "pt": "Bug para addDeviceButton corrigido no Admin",
-        "nl": "Bug voor addDeviceButton opgelost in Admin",
-        "fr": "Bug pour addDeviceButton corrigé dans Admin",
-        "it": "Bug per addDeviceButton corretto in Admin",
-        "es": "Error para addDeviceButton corregido en Admin",
-        "pl": "Błąd dla addDeviceButton poprawiony w Admin"
-      },
-      "0.2.3": {
-        "en": "Fixed a bug in configuration load and save",
-        "de": "Fehler beim Laden und Speichern der Konfiguration behoben",
-        "ru": "Исправлена ​​ошибка в загрузке и сохранении конфигурации",
-        "pt": "Corrigido um erro no carregamento de configuração e salvar",
-        "nl": "Probleem opgelost bij configuratie laden en opslaan",
-        "fr": "Correction d'un bug dans le chargement et la sauvegarde de la configuration",
-        "it": "Risolto un bug nel caricamento della configurazione e salvato",
-        "es": "Se corrigió un error en la carga de configuración y se guardaba.",
-        "pl": "Naprawiono błąd ładowania konfiguracji i zapisywania"
-      },
-      "0.2.2": {
-        "en": "Optimization of the App",
-        "de": "Optimierung der App",
-        "ru": "Оптимизация приложения",
-        "fr": "Optimisation de l'application",
-        "pt": "Otimização do aplicativo",
-        "nl": "Optimalisatie van de app",
-        "it": "Ottimizzazione dell'app",
-        "es": "Optimización de la aplicación.",
-        "pl": "Optymalizacja aplikacji"
-      },
-      "0.2.1": {
-        "en": "Integration von node-milight-promise v0.3.2",
-        "de": "Integration von node-milight-promise v0.3.2",
-        "ru": "Интеграция von node-milight-promise v0.3.2",
-        "pt": "Integração von node-milight-promise v0.3.2",
-        "nl": "Integratie van node-milight-promise v0.3.2",
-        "fr": "Intégration de node-milight-promise v0.3.2",
-        "it": "Integrazione di node-milight-promise v0.3.2",
-        "es": "Integración de node-milight-promise v0.3.2",
-        "pl": "Integracja von node-milight-promise v0.3.2"
-      },
-      "0.2.0": {
-        "en": "Adaptation to Admin3, MaterialzeCSS, general revision, new app",
-        "de": "Anpassung an Admin3, Materialise CSS, allgemeine Überarbeitung, neue App",
-        "ru": "Адаптация к Admin3, материализация CSS, общая редакция, новое приложение",
-        "pt": "Adaptação para Admin3, CSS de materialização, revisão geral, novo aplicativo",
-        "nl": "Aanpassing aan Admin3, CSS materialiseren, algemene revisie, nieuwe app",
-        "fr": "Adaptation à Admin3, Materialise CSS, révision générale, nouvelle application",
-        "it": "Adattamento a Admin3, Materialise CSS, revisione generale, nuova app",
-        "es": "Adaptación a Admin3, Materialise CSS, revisión general, nueva aplicación.",
-        "pl": "Adaptacja do Admin3, Materialise CSS, ogólna wersja, nowa aplikacja"
       }
     },
     "platform": "Javascript/Node.js",

@@ -1,7 +1,7 @@
 {
   "name": "iobroker.milight-smart-light",
   "description": "Adapter for Milight LED bulbs and LED strips",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "author": {
     "name": "Steiger04",
     "email": "steiger04@posteo.de"
@@ -32,7 +32,7 @@
     "@iobroker/adapter-core": "^1.0.3",
     "express": "^4.17.1",
     "lodash": "^4.17.15",
-    "node-milight-promise": "^0.3.2",
+    "node-milight-promise": "github:Steiger04/node-milight-promise",
     "tcp-port-used": "^1.0.1",
     "tinycolor2": "^1.4.1"
   },
