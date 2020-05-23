@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "milight-smart-light",
-    "version": "0.5.0",
+    "version": "0.6.0",
     "title": "milight-smart-light",
     "titleLang": {
       "en": "milight-smart-light",
@@ -32,6 +32,17 @@
       }
     ],
     "news": {
+      "0.6.0": {
+        "en": "Added effectBrightness, effectOn, effectOff, effectOnOff for iBox1 and iBox2.",
+        "de": "EffectBrightness, effectOn, effectOff, effectOnOff für iBox1 und iBox2 hinzugefügt.",
+        "ru": "Добавлены effectBrightness, effectOn, effectOff, effectOnOff для iBox1 и iBox2.",
+        "pt": "Adicionado effectBrightness, effectOn, effectOff, effectOnOff para iBox1 e iBox2.",
+        "nl": "EffectBrightness, effectOn, effectOff, effectOnOff toegevoegd voor iBox1 en iBox2.",
+        "fr": "Ajout de effectBrightness, effectOn, effectOff, effectOnOff pour iBox1 et iBox2.",
+        "it": "Aggiunto effectBrightness, effectOn, effectOff, effectOnOff per iBox1 e iBox2.",
+        "es": "Se agregó effectBrightness, effectOn, effectOff, effectOnOff para iBox1 e iBox2.",
+        "pl": "Dodano efektBrightness, effectOn, effectOff, effectOnOff dla iBox1 i iBox2."
+      },
       "0.5.0": {
         "en": "Bug fix in rgb(w)",
         "de": "Fehlerbehebung in rgb(w)",
