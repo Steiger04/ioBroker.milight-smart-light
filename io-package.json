@@ -1,116 +1,73 @@
 {
   "common": {
     "name": "milight-smart-light",
-    "version": "0.6.0",
+    "version": "1.0.0",
+    "news": {
+      "1.0.0": {
+        "en": "initial release",
+        "de": "Erstveröffentlichung",
+        "ru": "Начальная версия",
+        "pt": "lançamento inicial",
+        "nl": "Eerste uitgave",
+        "fr": "Première version",
+        "it": "Versione iniziale",
+        "es": "Versión inicial",
+        "pl": "Pierwsze wydanie",
+        "zh-cn": "首次出版"
+      }
+    },
     "title": "milight-smart-light",
     "titleLang": {
       "en": "milight-smart-light",
       "de": "milight-smart-light",
-      "ru": "milight смарт-свет",
-      "pt": "milight-smart-light",
-      "nl": "milight-smart-light",
-      "fr": "milight-smart-light",
-      "it": "milight-smart-light",
-      "es": "milight-smart-light",
-      "pl": "milight-smart-light"
+      "ru": "шаблон для vue",
+      "pt": "modelo para vue",
+      "nl": "sjabloon voor vue",
+      "fr": "modèle pour vue",
+      "it": "modello per vue",
+      "es": "plantilla para vue",
+      "pl": "szablon dla vue",
+      "zh-cn": "Vue的模板"
     },
     "desc": {
-      "en": "This adapter for ioBroker controls Milight LED bulbs and LED strips",
-      "de": "Dieser Adapter für ioBroker steuert Milight LED-Lampen und LED-Strips",
-      "ru": "Этот адаптер для ioBroker контролирует светодиодные лампы и светодиодные ленты Milight.",
-      "pt": "Este adaptador para ioBroker controla lâmpadas LED Milight e tiras de LED",
-      "nl": "Deze adapter voor ioBroker regelt de Milight LED-lampen en ledstrips",
-      "fr": "Cet adaptateur pour ioBroker contrôle les ampoules et les bandes de LED Milight",
-      "it": "Questo adattatore per ioBroker controlla le lampadine LED Milight e le strisce LED",
-      "es": "Este adaptador para ioBroker controla las bombillas y tiras de LED Milight",
-      "pl": "Ten adapter do ioBroker steruje żarówkami i taśmami LED Milight"
+      "en": "milight-smart-light",
+      "de": "milight-smart-light",
+      "ru": "Шаблон-вю",
+      "pt": "template-vue",
+      "nl": "sjabloon-vue",
+      "fr": "template-vue",
+      "it": "template-vue",
+      "es": "plantilla-vue",
+      "pl": "szablon-vue",
+      "zh-cn": "范本"
     },
     "authors": [
-      {
-        "name": "Steiger04",
-        "email": "steiger04@posteo.de"
-      }
+      "Steiger04 <steiger04@posteo.de>"
     ],
-    "news": {
-      "0.6.0": {
-        "en": "Added effectBrightness, effectOn, effectOff, effectOnOff for iBox1 and iBox2.",
-        "de": "EffectBrightness, effectOn, effectOff, effectOnOff für iBox1 und iBox2 hinzugefügt.",
-        "ru": "Добавлены effectBrightness, effectOn, effectOff, effectOnOff для iBox1 и iBox2.",
-        "pt": "Adicionado effectBrightness, effectOn, effectOff, effectOnOff para iBox1 e iBox2.",
-        "nl": "EffectBrightness, effectOn, effectOff, effectOnOff toegevoegd voor iBox1 en iBox2.",
-        "fr": "Ajout de effectBrightness, effectOn, effectOff, effectOnOff pour iBox1 et iBox2.",
-        "it": "Aggiunto effectBrightness, effectOn, effectOff, effectOnOff per iBox1 e iBox2.",
-        "es": "Se agregó effectBrightness, effectOn, effectOff, effectOnOff para iBox1 e iBox2.",
-        "pl": "Dodano efektBrightness, effectOn, effectOff, effectOnOff dla iBox1 i iBox2."
-      },
-      "0.5.0": {
-        "en": "Bug fix in rgb(w)",
-        "de": "Fehlerbehebung in rgb(w)",
-        "ru": "Исправлена ошибка в rgb(w)",
-        "pt": "Correção de bug em rgb(w)",
-        "nl": "Bugfix in RGB (W)",
-        "fr": "Correction d'un bug dans rgb(w)",
-        "it": "Bug fix in rgb (w)",
-        "es": "Corrección de errores en rgb(w)",
-        "pl": "Poprawka błędu w rgb(w)"
-      },
-      "0.4.1": {
-        "en": "some small bug fixes",
-        "de": "Einige kleine Fehlerbehebungen",
-        "ru": "небольшие исправления ошибок",
-        "pt": "algumas pequenas correções de bugs",
-        "nl": "enkele kleine bugfixes",
-        "fr": "quelques petites corrections de bugs",
-        "it": "alcune piccole correzioni di bug",
-        "es": "algunas pequeñas correcciones de errores",
-        "pl": "kilka drobnych poprawek"
-      },
-      "0.4.0": {
-        "en": "some small bug fixes",
-        "de": "Einige kleine Fehlerbehebungen",
-        "ru": "небольшие исправления ошибок",
-        "pt": "algumas pequenas correções de bugs",
-        "nl": "enkele kleine bugfixes",
-        "fr": "quelques petites corrections de bugs",
-        "it": "alcune piccole correzioni di bug",
-        "es": "algunas pequeñas correcciones de errores",
-        "pl": "kilka drobnych poprawek"
-      },
-      "0.3.0": {
-        "en": "Optimizations, bug fixes and new app.",
-        "de": "Optimierungen, Fehlerbehebungen und neue App.",
-        "ru": "Оптимизация, исправление ошибок и новое приложение.",
-        "pt": "Otimizações, correções de bugs e novo aplicativo.",
-        "nl": "Optimalisaties, bugfixes en nieuwe app.",
-        "fr": "Optimisations, corrections de bugs et nouvelle application.",
-        "it": "Ottimizzazioni, correzioni di bug e nuova app.",
-        "es": "Optimizaciones, correcciones de errores y nueva aplicación.",
-        "pl": "Optymalizacje, poprawki błędów i nowa aplikacja."
-      }
-    },
-    "platform": "Javascript/Node.js",
-    "mode": "daemon",
-    "loglevel": "info",
-    "icon": "lib/images/milight-smart-light.png",
-    "extIcon": "https://raw.githubusercontent.com/Steiger04/ioBroker.milight-smart-light/master/admin/lib/images/milight-smart-light.png",
     "keywords": [
-      "milight-smart-light",
-      "milight",
-      "bulb",
-      "strip",
-      "LED"
+      "ioBroker",
+      "template",
+      "Smart Home",
+      "home automation"
     ],
-    "materialize": true,
-    "readme": "https://github.com/Steiger04/ioBroker.milight-smart-light/blob/master/README.md",
-    "enabled": true,
-    "main": "main.js",
     "license": "MIT",
-    "type": "lighting",
-    "messagebox": true,
-    "supportStopInstance": true,
-    "connectionType": "local",
+    "platform": "Javascript/Node.js",
+    "main": "main.js",
+    "icon": "milight-smart-light-logo.png",
+    "enabled": true,
+    "extIcon": "https://raw.githubusercontent.com/Steiger04/ioBroker.template-vue/master/admin/milight-smart-light-logo.png",
+    "readme": "https://github.com/Steiger04/ioBroker.template-vue/blob/master/README.md",
+    "loglevel": "info",
+    "mode": "daemon",
+    "type": "general",
+    "compact": true,
+    "connectionType": "cloud",
+    "dataSource": "poll",
+    "materialize": false,
     "dependencies": [
-      "web"
+      {
+        "js-controller": ">=1.4.2"
+      }
     ],
     "localLink": "http://%ip%:%serverPort%"
   },
@@ -130,5 +87,6 @@
     "debounceTime": "200",
     "zones": []
   },
-  "objects": []
+  "objects": [],
+  "instanceObjects": []
 }

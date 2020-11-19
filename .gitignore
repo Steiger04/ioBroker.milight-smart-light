@@ -1,7 +1,44 @@
-.idea
+.DS_Store
+.thumbs.db
 node_modules
-.eslintrc.json
-bower.json
 package-lock.json
-admin/i18n
 
+# Quasar core related directories
+.quasar
+/admin
+
+# Cordova related directories and files
+/src-cordova/node_modules
+/src-cordova/platforms
+/src-cordova/plugins
+/src-cordova/www
+
+# Capacitor related directories and files
+/src-capacitor/www
+/src-capacitor/node_modules
+
+# BEX related directories and files
+/src-bex/www
+/src-bex/js/core
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories and files
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# ioBroker
+.git
+*.code-workspace
+nbproject
+
+# ioBroker: npm package files
+iobroker.*.tgz
+
+Thumbs.db

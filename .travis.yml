@@ -7,6 +7,7 @@ language: node_js
 node_js:
   - '10'
   - '12'
+  - '14'
 
 env:
   - CXX=g++-6
@@ -28,4 +29,4 @@ script:
   - npm run test:package
   - npm run test:unit
   - export DEBUG=testing:*
-  # - npm run test:integration
+  - npm run test:integration

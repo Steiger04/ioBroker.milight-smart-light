@@ -1,26 +1,17 @@
 {
   "name": "iobroker.milight-smart-light",
-  "description": "Adapter for Milight LED bulbs and LED strips",
-  "version": "0.6.0",
+  "version": "1.0.0",
+  "description": "A vue-template for ioBroker based on Quasar Framework",
+  "productName": "milight-smart-light",
   "author": {
     "name": "Steiger04",
     "email": "steiger04@posteo.de"
   },
-  "contributors": [
-    {
-      "name": "Steiger04",
-      "email": "steiger04@posteo.de"
-    }
-  ],
   "homepage": "https://github.com/Steiger04/ioBroker.milight-smart-light",
   "license": "MIT",
   "keywords": [
     "ioBroker",
-    "milight-smart-light",
-    "milight",
-    "bulb",
-    "strip",
-    "LED",
+    "template",
     "Smart Home",
     "home automation"
   ],
@@ -28,44 +19,74 @@
     "type": "git",
     "url": "https://github.com/Steiger04/ioBroker.milight-smart-light"
   },
+  "private": true,
+  "scripts": {
+    "lint-fix-all": "eslint --fix --ext .js,.vue,.html .",
+    "test": "echo \\\"No test specified\\\" && exit 0",
+    "dev": "quasar dev",
+    "build": "quasar build",
+    "testibr:js": "mocha --opts test/mocha.custom.opts",
+    "testibr:package": "mocha test/package --exit",
+    "testibr:unit": "mocha test/unit --exit",
+    "testibr:integration": "mocha test/integration --exit",
+    "testibr": "npm run test:js && npm run test:package"
+  },
   "dependencies": {
-    "@iobroker/adapter-core": "^1.0.3",
+    "@iobroker/adapter-core": "^2.4.0",
+    "@quasar/extras": "^1.9.0",
+    "core-js": "^3.6.5",
     "express": "^4.17.1",
-    "lodash": "^4.17.15",
+    "nanoid": "^3.1.16",
     "node-milight-promise": "github:Steiger04/node-milight-promise",
+    "quasar": "^1.12.13",
     "tcp-port-used": "^1.0.1",
-    "tinycolor2": "^1.4.1"
+    "tinycolor2": "^1.4.1",
+    "vue-i18n": "^8.0.0",
+    "vuelidate": "^0.7.6",
+    "vuelidate-messages": "^0.1.1",
+    "vuex-map-fields": "^1.4.0"
   },
   "devDependencies": {
     "@iobroker/testing": "^2.2.0",
+    "@quasar/app": "^2.0.4",
     "@types/chai": "^4.2.11",
     "@types/chai-as-promised": "^7.1.2",
     "@types/gulp": "^4.0.6",
     "@types/mocha": "^7.0.2",
-    "@types/node": "^13.13.4",
+    "@types/node": "^14.0.14",
     "@types/proxyquire": "^1.3.28",
-    "@types/sinon": "^9.0.0",
+    "@types/sinon": "^9.0.4",
     "@types/sinon-chai": "^3.2.4",
     "axios": "^0.19.2",
+    "babel-eslint": "^10.0.1",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-loader": "^3.0.3",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-vue": "^6.1.2",
     "gulp": "^4.0.2",
-    "mocha": "^7.1.2",
+    "mocha": "^8.0.1",
     "proxyquire": "^2.1.3",
     "sinon": "^9.0.2",
-    "sinon-chai": "^3.5.0",
-    "standard": "^12.0.1",
-    "time-grunt": "^1.4.0"
+    "sinon-chai": "^3.5.0"
   },
-  "main": "main.js",
-  "scripts": {
-    "test:js": "mocha --opts test/mocha.custom.opts",
-    "test:package": "mocha test/package --exit",
-    "test:unit": "mocha test/unit --exit",
-    "test:integration": "mocha test/integration --exit",
-    "test": "npm run test:js && npm run test:package",
-    "lint": "eslint"
+  "browserslist": [
+    "last 10 Chrome versions",
+    "last 10 Firefox versions",
+    "last 4 Edge versions",
+    "last 7 Safari versions",
+    "last 8 Android versions",
+    "last 8 ChromeAndroid versions",
+    "last 8 FirefoxAndroid versions",
+    "last 10 iOS versions",
+    "last 5 Opera versions"
+  ],
+  "engines": {
+    "node": ">= 10.18.1",
+    "npm": ">= 6.13.4",
+    "yarn": ">= 1.21.1"
   },
   "bugs": {
     "url": "https://github.com/Steiger04/ioBroker.milight-smart-light/issues"
