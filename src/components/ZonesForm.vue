@@ -222,7 +222,7 @@
 import { mapMultiRowFields } from 'vuex-map-fields';
 import { mapActions } from 'vuex';
 import { required } from 'vuelidate/lib/validators';
-import { validationMessage, validationMessages } from 'vuelidate-messages';
+import { validationMessage } from 'vuelidate-messages';
 import {
   isunique, defaultColorOffset, isAllowedZoneType, isAllowedZoneNumber, regexColorOffset, regexGroupAndName,
 } from '../js/vuelidate-custom-validators';
@@ -436,7 +436,6 @@ export default {
   },
   methods: {
     validationMsg: validationMessage(messages),
-    validationMsgs: validationMessages(messages),
     ...mapActions('template', ['addZone', 'deleteZone']),
   },
   watch: {

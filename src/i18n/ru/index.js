@@ -20,6 +20,7 @@ module.exports = {
     ibox1: 'iBox1',
     ibox2: 'iBox2',
     legacy: 'Наследие',
+    startInstance: 'Сначала необходимо запустить экземпляр.',
     type: 'Тип',
     v6: 'Версия 6'
   },
@@ -57,11 +58,11 @@ module.exports = {
     ip: '{field} не является действительным IP-адресом.',
     isAllowedZoneNumber: 'Для {field} {value} необходимо выбрать допустимый тип зоны.',
     isAllowedZoneType: 'Для {field} {value} необходимо выбрать допустимую зону.',
-    isunique: 'Каждое {поле} может появиться только один раз.',
+    isunique: 'Каждое {field} может появиться только один раз.',
     max: 'Для поля {field} можно использовать не более {length} цифр.',
     minValue: 'Значение для {field} должно быть не менее {min}.',
     numeric: 'Для {field} разрешены только целые числа.',
-    regexColorOffset: '{поле} {значение} имеет неправильный формат. ',
+    regexColorOffset: '{field} {value} имеет неправильный формат. ',
     regexGroupAndName: '{field}: "{value}" содержит недопустимые символы.',
     required: '{field} необходимо указать.'
   },

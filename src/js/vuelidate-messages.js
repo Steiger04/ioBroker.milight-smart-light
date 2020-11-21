@@ -33,7 +33,7 @@ const messages = {
   isAllowedZoneNumber({ $model }, name) {
     return this.$t('validateMsg.isAllowedZoneNumber', {
       field: name,
-      value: this.$t(`zonesForm.${$model}`)
+      value: this.$t(`zonesForm.zone${$model}`)
     });
   },
   isAllowedZoneType({ $model }, name) {

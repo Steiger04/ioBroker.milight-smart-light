@@ -81,6 +81,8 @@
           </div>
           <div class="col-auto q-pl-lg self-center">
             <q-btn
+                ref="refreshButton"
+                @click="provideControllerIps"
                 round
                 color="primary"
                 icon="refresh"
@@ -141,14 +143,15 @@ import {
 import { validationMessage } from 'vuelidate-messages';
 import { mapActions } from 'vuex';
 import { fieldsTemplate } from '../mixin/fieldsTemplate';
-
+import { fieldsApp } from '../mixin/fieldsApp';
 import { messages } from '../js/vuelidate-messages';
 
 export default {
   name: 'BridgeForm',
-  mixins: [fieldsTemplate],
+  mixins: [fieldsTemplate, fieldsApp],
   data() {
     return {
+      controllerIps: [],
       controllerTypeOptions: [
         {
           label: this.$t('bridgeForm.v6'),
@@ -189,6 +192,20 @@ export default {
   methods: {
     ...mapActions('template', ['deleteAllZones']),
     validationMsg: validationMessage(messages),
+    async provideControllerIps() {
+      this.controllerIps = [];
+
+      const isAlive = await this.$connection.socket.getState('system.adapter.milight-smart-light.0.alive');
+
+      if (!isAlive || !isAlive.val) {
+        this.errorText = this.$t('bridgeForm.startInstance');
+        return;
+      }
+
+      this.$refs.refreshButton.$el.disabled = true;
+      this.controllerIps = await this.$connection.socket.sendTo(this.$connection.instanceId, 'discover');
+      this.$refs.refreshButton.$el.disabled = false;
+    }
   },
   watch: {
     isVersion6(val) {

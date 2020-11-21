@@ -20,6 +20,7 @@ module.exports = {
     ibox1: 'iBox1',
     ibox2: 'iBox2',
     legacy: 'Legacy',
+    startInstance: 'Die Instanz muss erst gestartet werden.',
     type: 'Typ',
     v6: 'Version 6'
   },

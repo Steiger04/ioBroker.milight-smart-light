@@ -18,7 +18,7 @@ export function defaultColorOffset(value, zone) {
 }
 
 export function isAllowedZoneNumber(value, zone) {
-  if (value === 'zone5' || value === 'zone9') {
+  if ((value === '5' && this.maxZones === '4') || value === '9') {
     return zone.mslZoneType === 'bridge';
   }
 
@@ -26,7 +26,7 @@ export function isAllowedZoneNumber(value, zone) {
 }
 
 export function isAllowedZoneType(value, zone) {
-  if (zone.mslZoneNumber === 'zone5' || zone.mslZoneNumber === 'zone9') {
+  if ((zone.mslZoneNumber === '5' && this.maxZones === '4') || zone.mslZoneNumber === '9') {
     return value === 'bridge';
   }
 
