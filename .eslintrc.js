@@ -50,6 +50,7 @@ module.exports = {
 
   // add your custom rules here
   rules: {
+    'no-continue': 'off',
     'guard-for-in': 'off',
     'no-nested-ternary': 'off',
     'import/no-dynamic-require': 'off',
@@ -58,6 +59,7 @@ module.exports = {
     'no-restricted-syntax': 'off',
     'no-use-before-define': 'off',
     'no-underscore-dangle': 'off',
+    'comma-dangle': 'off',
     'no-plusplus': 'off',
     'func-names': 'off',
     'no-param-reassign': 'off',
@@ -75,7 +77,7 @@ module.exports = {
     'no-new': 'off',
     'indent': [ // ioBroker
       'error',
-      4,
+      2,
       {
         'SwitchCase': 1
       }

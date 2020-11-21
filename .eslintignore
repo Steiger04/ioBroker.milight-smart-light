@@ -1,7 +1,9 @@
-tools.js
+/lib/trans/tools.js
+/mslfe-ibr-quasar
 /admin
 /src-bex/www
 /src-capacitor
 /src-cordova
 /.quasar
 /node_modules
+package-lock.json

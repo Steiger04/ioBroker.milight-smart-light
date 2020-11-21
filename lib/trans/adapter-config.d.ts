@@ -2,6 +2,7 @@
 // using the actual properties present in io-package.json
 // in order to provide typings for adapter.config properties
 
+// @ts-ignore
 import { native } from "../io-package.json";
 
 type _AdapterConfig = typeof native;

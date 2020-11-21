@@ -6,14 +6,14 @@ import messages from 'src/i18n';
 Vue.use(VueI18n);
 
 const i18n = new VueI18n({
-    locale: Quasar.lang.getLocale(),
-    fallbackLocale: 'en',
-    messages,
+  locale: Quasar.lang.getLocale(),
+  fallbackLocale: 'en',
+  messages,
 });
 
 export default ({ app }) => {
-    // Set i18n instance on app
-    app.i18n = i18n;
+  // Set i18n instance on app
+  app.i18n = i18n;
 };
 
 export { i18n };

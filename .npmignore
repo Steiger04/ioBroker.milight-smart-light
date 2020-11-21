@@ -1,3 +1,10 @@
+.quasar
+src/
+.postcssrc.js
+babel.config.js
+package-lock.json
+main.test.js
+quasar.conf.js
 # all from ioBroker
 .git
 .idea
@@ -21,6 +28,7 @@ tsconfig.json
 tsconfig.*.json
 
 # ESLint configuration
+.eslintignore
 .eslintrc.json
 .eslintrc.js
 

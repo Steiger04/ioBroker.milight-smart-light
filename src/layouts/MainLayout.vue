@@ -112,12 +112,12 @@
 import { mapState } from 'vuex';
 
 export default {
-    name: 'MainLayout',
-    computed: {
-        ...mapState('app', ['changed']),
-        btnColor() {
-            return this.changed ? 'blue-6' : 'grey-11 text-grey-6';
-        },
+  name: 'MainLayout',
+  computed: {
+    ...mapState('app', ['changed']),
+    btnColor() {
+      return this.changed ? 'blue-6' : 'grey-11 text-grey-6';
     },
+  },
 };
 </script>

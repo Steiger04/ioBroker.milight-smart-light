@@ -5,7 +5,6 @@ package-lock.json
 
 # Quasar core related directories
 .quasar
-/admin
 
 # Cordova related directories and files
 /src-cordova/node_modules

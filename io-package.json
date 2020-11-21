@@ -4,42 +4,55 @@
     "version": "1.0.0",
     "news": {
       "1.0.0": {
-        "en": "initial release",
-        "de": "Erstveröffentlichung",
-        "ru": "Начальная версия",
-        "pt": "lançamento inicial",
-        "nl": "Eerste uitgave",
-        "fr": "Première version",
-        "it": "Versione iniziale",
-        "es": "Versión inicial",
-        "pl": "Pierwsze wydanie",
-        "zh-cn": "首次出版"
+        "en": "Added admin-UI based on Vue and Quasar"
+      },
+      "0.6.0": {
+        "en": "Added effectBrightness, effectOn, effectOff, effectOnOff for iBox1 and iBox2.",
+        "de": "EffectBrightness, effectOn, effectOff, effectOnOff für iBox1 und iBox2 hinzugefügt.",
+        "ru": "Добавлены effectBrightness, effectOn, effectOff, effectOnOff для iBox1 и iBox2.",
+        "pt": "Adicionado effectBrightness, effectOn, effectOff, effectOnOff para iBox1 e iBox2.",
+        "nl": "EffectBrightness, effectOn, effectOff, effectOnOff toegevoegd voor iBox1 en iBox2.",
+        "fr": "Ajout de effectBrightness, effectOn, effectOff, effectOnOff pour iBox1 et iBox2.",
+        "it": "Aggiunto effectBrightness, effectOn, effectOff, effectOnOff per iBox1 e iBox2.",
+        "es": "Se agregó effectBrightness, effectOn, effectOff, effectOnOff para iBox1 e iBox2.",
+        "pl": "Dodano efektBrightness, effectOn, effectOff, effectOnOff dla iBox1 i iBox2."
+      },
+      "0.5.0": {
+        "en": "Bug fix in rgb(w)",
+        "de": "Fehlerbehebung in rgb(w)",
+        "ru": "Исправлена ошибка в rgb(w)",
+        "pt": "Correção de bug em rgb(w)",
+        "nl": "Bugfix in RGB (W)",
+        "fr": "Correction d'un bug dans rgb(w)",
+        "it": "Bug fix in rgb (w)",
+        "es": "Corrección de errores en rgb(w)",
+        "pl": "Poprawka błędu w rgb(w)"
       }
     },
     "title": "milight-smart-light",
     "titleLang": {
-      "en": "milight-smart-light",
-      "de": "milight-smart-light",
-      "ru": "шаблон для vue",
-      "pt": "modelo para vue",
-      "nl": "sjabloon voor vue",
-      "fr": "modèle pour vue",
-      "it": "modello per vue",
-      "es": "plantilla para vue",
-      "pl": "szablon dla vue",
-      "zh-cn": "Vue的模板"
+      "en": "milight-smart-light for Milight-Bridges",
+      "de": "milight-smart-light für Milight-Bridges",
+      "ru": "milight-smart-light для Milight-Bridges",
+      "pt": "milight-smart-light para Milight-Bridges",
+      "nl": "milight-smart-light voor Milight-Bridges",
+      "fr": "milight-smart-light pour Milight-Bridges",
+      "it": "milight-smart-light per Milight-Bridges",
+      "es": "milight-smart-light para Milight-Bridges",
+      "pl": "milight-smart-light dla Milight-Bridges",
+      "zh-cn": "适用于Milight-Bridges的milight-smart-light"
     },
     "desc": {
-      "en": "milight-smart-light",
-      "de": "milight-smart-light",
-      "ru": "Шаблон-вю",
-      "pt": "template-vue",
-      "nl": "sjabloon-vue",
-      "fr": "template-vue",
-      "it": "template-vue",
-      "es": "plantilla-vue",
-      "pl": "szablon-vue",
-      "zh-cn": "范本"
+      "en": "The adapter controls the Milight-Bridges iBox1, iBox2 and Legacy.",
+      "de": "Der Adapter steuert die Milight-Bridges iBox1, iBox2 und Legacy.",
+      "ru": "Адаптер управляет Milight-Bridges iBox1, iBox2 и Legacy.",
+      "pt": "O adaptador controla o Milight-Bridges iBox1, iBox2 e Legacy.",
+      "nl": "De adapter stuurt de Milight-Bridges iBox1, iBox2 en Legacy aan.",
+      "fr": "L'adaptateur contrôle les Milight-Bridges iBox1, iBox2 et Legacy.",
+      "it": "L'adattatore controlla Milight-Bridges iBox1, iBox2 e Legacy.",
+      "es": "El adaptador controla Milight-Bridges iBox1, iBox2 y Legacy.",
+      "pl": "Adapter steruje Milight-Bridges iBox1, iBox2 i Legacy.",
+      "zh-cn": "适配器控制Milight-Bridges iBox1，iBox2和Legacy。"
     },
     "authors": [
       "Steiger04 <steiger04@posteo.de>"
@@ -55,8 +68,8 @@
     "main": "main.js",
     "icon": "milight-smart-light-logo.png",
     "enabled": true,
-    "extIcon": "https://raw.githubusercontent.com/Steiger04/ioBroker.template-vue/master/admin/milight-smart-light-logo.png",
-    "readme": "https://github.com/Steiger04/ioBroker.template-vue/blob/master/README.md",
+    "extIcon": "https://raw.githubusercontent.com/Steiger04/ioBroker.milight-smart-light/master/admin/milight-smart-light-logo.png",
+    "readme": "https://github.com/Steiger04/ioBroker.milight-smart-light/blob/master/README.md",
     "loglevel": "info",
     "mode": "daemon",
     "type": "general",
