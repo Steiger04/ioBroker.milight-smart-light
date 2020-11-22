@@ -1,0 +1,20 @@
+<!DOCTYPE html><html><head><title>milight-smart-light</title><meta charset=utf-8><meta name=description content="A vue-template for ioBroker based on Quasar Framework"><meta name=format-detection content="telephone=no"><meta name=msapplication-tap-highlight content=no><meta name=viewport content="user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width"><link rel=icon type=image/png sizes=128x128 href=icons/favicon-128x128.png><link rel=icon type=image/png sizes=96x96 href=icons/favicon-96x96.png><link rel=icon type=image/png sizes=32x32 href=icons/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=icons/favicon-16x16.png><link rel=icon type=image/ico href=favicon.ico><script>const script = document.createElement('script');
+
+    window.registerSocketOnLoad = (cb) => {
+      window.socketLoadedHandler = cb;
+    };
+    const parts = (window.location.search || '').replace(/^\?/, '')
+      .split('&');
+    const query = {};
+    parts.forEach((item) => {
+      const [name, val] = item.split('=');
+      query[decodeURIComponent(name)] = val !== undefined ? decodeURIComponent(val) : true;
+    });
+
+    script.onload = () => { typeof window.socketLoadedHandler === 'function' && window.socketLoadedHandler(); };
+    // eslint-disable-next-line max-len
+    script.src = window.location.port === '8080' || window.location.port === '8081' ?
+      `${window.location.protocol}//${query.host || window.location.hostname}:${query.port ||
+      8081}/lib/js/socket.io.js` : '%PUBLIC_URL%/../../lib/js/socket.io.js';
+
+    document.head.appendChild(script);</script></head><body><div id=q-app></div><script src=js/vendor.f7700147.js></script><script src=js/app.0b3e8fa6.js></script></body></html>
