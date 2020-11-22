@@ -23,7 +23,6 @@
     "type": "git",
     "url": "https://github.com/Steiger04/ioBroker.milight-smart-light"
   },
-  "private": true,
   "scripts": {
     "lint-fix-all": "eslint --fix --ext .js,.vue,.html .",
     "test": "echo \\\"No test specified\\\" && exit 0",
