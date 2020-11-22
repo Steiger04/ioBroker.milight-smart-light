@@ -116,7 +116,7 @@ gulp.task('translate', async (done) => {
       }
 
       if (!existing[t]) {
-        console.log(`${t}: ${existing[t]}`);
+        console.log(`Übersetzung von ${t}: ${existing[t]}`);
 
         existing[t] = await translate(enTrans[t], l, yandex);
       }

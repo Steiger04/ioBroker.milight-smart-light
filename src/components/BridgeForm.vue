@@ -219,7 +219,7 @@ export default {
       if (this.controllerIps.length) {
         this.selectIpDlg();
       } else {
-        this.errorText = 'Es wurde keine Bridge gefunden. Bitte erneut versuchen.';
+        this.errorText = this.$t('bridgeForm.noBridgeFound');
       }
 
       this.$refs.refreshButton.$el.disabled = false;

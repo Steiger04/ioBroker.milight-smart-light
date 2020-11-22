@@ -20,10 +20,10 @@ module.exports = {
     ibox1: 'iBox1',
     ibox2: 'iBox2',
     legacy: 'Legacy',
+    noBridgeFound: 'No bridge was found. Please try again.',
     startInstance: 'The instance has to be started first.',
     type: 'Typ',
-    v6: 'Version 6',
-    noBridgeFound: 'No bridge was found. Please try again.'
+    v6: 'Version 6'
   },
   cancel: 'cancel',
   close: 'close',
