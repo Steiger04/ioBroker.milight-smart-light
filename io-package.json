@@ -89,6 +89,7 @@
         "dataSource": "poll",
         "materialize": false,
         "message": true,
+        "messagebox": true,
         "supportStopInstance": true,
         "dependencies": [
             {
