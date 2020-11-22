@@ -40,9 +40,9 @@ class Adapter extends utils.Adapter {
     }
 
     if (!state || state.ack) {
-      /*if (state.ack) {
+      /* if (state.ack) {
         adapter.log.debug(`on:stateChange:ack=true->${_id}::state->${JSON.stringify(state)}`);
-      }*/
+      } */
       return;
     }
 
@@ -104,8 +104,6 @@ class Adapter extends utils.Adapter {
   async onMessage(obj) {
     if (typeof obj === 'object') {
       if (obj.command === 'discover') {
-        console.log('Nachricht ist angekommen!');
-        console.log(obj);
         let discoverIp = this.config.controllerIp;
 
         if (discoverIp === '') {

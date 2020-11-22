@@ -188,6 +188,9 @@ export default {
     isVersion6() {
       return this.controllerType === 'v6';
     },
+    dlgBg() {
+      return !this.$q.dark.isActive ? 'bg-grey-4 text-grey-9' : '';
+    }
   },
   methods: {
     ...mapActions('template', ['deleteAllZones']),
@@ -203,8 +206,39 @@ export default {
       }
 
       this.$refs.refreshButton.$el.disabled = true;
-      this.controllerIps = await this.$connection.socket.sendTo(this.$connection.instanceId, 'discover');
+      let tmp = await this.$connection.socket.sendTo(this.$connection.instanceId, 'discover');
+
+      tmp = tmp.map((val) => ({
+        label: `${val.type}|${val.ip}|${val.mac}`,
+        value: val.ip,
+        color: 'primary'
+      }));
+
+      this.controllerIps = tmp;
+
+      if (this.controllerIps.length) {
+        this.selectIpDlg();
+      } else {
+        this.errorText = 'Es wurde keine Bridge gefunden. Bitte erneut versuchen.';
+      }
+
       this.$refs.refreshButton.$el.disabled = false;
+    },
+    selectIpDlg() {
+      this.$q.dialog({
+        class: this.dlgBg,
+        title: this.$t('tabs.bridge'),
+        options: {
+          type: 'radio',
+          model: this.controllerIp,
+          // inline: true
+          items: this.controllerIps
+        },
+        cancel: true
+      })
+        .onOk((ip) => {
+          this.controllerIp = ip;
+        });
     }
   },
   watch: {

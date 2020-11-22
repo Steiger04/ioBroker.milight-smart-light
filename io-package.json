@@ -88,7 +88,6 @@
         "connectionType": "cloud",
         "dataSource": "poll",
         "materialize": false,
-        "messagebox": true,
         "message": true,
         "supportStopInstance": true,
         "dependencies": [
