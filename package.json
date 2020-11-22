@@ -1,17 +1,21 @@
 {
   "name": "iobroker.milight-smart-light",
   "version": "1.0.0",
-  "description": "A vue-template for ioBroker based on Quasar Framework",
-  "productName": "milight-smart-light",
+  "description": "Adapter for Milight LED bulbs and LED strips",
   "author": {
     "name": "Steiger04",
     "email": "steiger04@posteo.de"
   },
+  "productName": "milight-smart-light",
   "homepage": "https://github.com/Steiger04/ioBroker.milight-smart-light",
   "license": "MIT",
   "keywords": [
     "ioBroker",
-    "template",
+    "milight-smart-light",
+    "milight",
+    "bulb",
+    "strip",
+    "LED",
     "Smart Home",
     "home automation"
   ],
