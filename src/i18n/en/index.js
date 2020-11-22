@@ -22,7 +22,8 @@ module.exports = {
     legacy: 'Legacy',
     startInstance: 'The instance has to be started first.',
     type: 'Typ',
-    v6: 'Version 6'
+    v6: 'Version 6',
+    noBridgeFound: 'No bridge was found. Please try again.'
   },
   cancel: 'cancel',
   close: 'close',
