@@ -198,7 +198,7 @@ export default {
     async provideControllerIps() {
       this.controllerIps = [];
 
-      const isAlive = await this.$connection.socket.getState('system.adapter.milight-smart-light.0.alive');
+      const isAlive = await this.$connection.socket.getState(`${this.$connection.instanceId}.alive`);
 
       if (!isAlive || !isAlive.val) {
         this.errorText = this.$t('bridgeForm.startInstance');
