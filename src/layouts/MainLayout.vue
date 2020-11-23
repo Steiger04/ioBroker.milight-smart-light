@@ -7,7 +7,7 @@
             color="grey-6"
             size="56px"
         >
-          <img src="~assets/milight-smart-light-logo.png"/>
+          <img src="~assets/milight-smart-light.png"/>
         </q-avatar>
         <q-btn
             flat type="a"
