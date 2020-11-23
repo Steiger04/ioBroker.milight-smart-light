@@ -28,7 +28,7 @@
     "test": "echo \\\"No test specified\\\" && exit 0",
     "dev": "quasar dev",
     "build": "quasar build",
-    "lintibr": "eslint --ext .js",
+    "lintibr": "eslint --ext .js .",
     "testibr:js": "mocha --config test/mocharc.custom.json \"{!(node_modules|test)/**/*.test.js,*.test.js,test/**/test!(PackageFiles|Startup).js}\"",
     "testibr:package": "mocha test/package --exit",
     "testibr:unit": "mocha test/unit --exit",
