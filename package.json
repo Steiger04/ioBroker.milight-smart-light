@@ -23,6 +23,7 @@
     "type": "git",
     "url": "https://github.com/Steiger04/ioBroker.milight-smart-light"
   },
+  "main": "main.js",
   "scripts": {
     "lint-fix-all": "eslint --fix --ext .js,.vue,.html .",
     "dev": "quasar dev",
