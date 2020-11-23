@@ -28,11 +28,11 @@
     "test": "echo \\\"No test specified\\\" && exit 0",
     "dev": "quasar dev",
     "build": "quasar build",
-    "testibr:js": "mocha --opts test/mocha.custom.opts",
+    "testibr:js": "mocha --config test/mocharc.custom.json \"{!(node_modules|test)/**/*.test.js,*.test.js,test/**/test!(PackageFiles|Startup).js}\"",
     "testibr:package": "mocha test/package --exit",
     "testibr:unit": "mocha test/unit --exit",
     "testibr:integration": "mocha test/integration --exit",
-    "testibr": "npm run test:js && npm run test:package"
+    "testibr": "npm run testibr:js && npm run test:package"
   },
   "dependencies": {
     "@iobroker/adapter-core": "^2.4.0",
