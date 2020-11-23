@@ -37,9 +37,9 @@ jobs:
               run: npm ci
 
             - name: Lint source code
-              run: npm run lintibr
+              run: npm run lint
             - name: Test package files
-              run: npm run testibr:package
+              run: npm run test:package
 
     # Runs adapter tests on all supported node versions and OSes
     adapter-tests:
@@ -66,17 +66,17 @@ jobs:
               run: npm ci
 
             - name: Run unit tests
-              run: npm run testibr:unit
+              run: npm run test:unit
 
             - name: Run integration tests (unix only)
               if: startsWith(runner.OS, 'windows') == false
-              run: DEBUG=testing:* npm run testibr:integration
+              run: DEBUG=testing:* npm run test:integration
 
             - name: Run integration tests (windows only)
               if: startsWith(runner.OS, 'windows')
-              run: set DEBUG=testing:* & npm run testibr:integration
+              run: set DEBUG=testing:* & npm run test:integration
 
-# TODO: To enable automatic npm releases, create a token on npmjs.org
+# TODO: To enable automatic npm releases, create a token on npmjs.org 
 # Enter this token as a GitHub secret (with name NPM_TOKEN) in the repository options
 # Then uncomment the following block:
 
