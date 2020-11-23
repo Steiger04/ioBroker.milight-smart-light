@@ -1,4 +1,4 @@
-![milight-smart-light Logo](public/milight-smart-light-logo.png)
+![milight-smart-light Logo](./admin/milight-smart-light.png)
 
 # ioBroker.milight-smart-light
 
