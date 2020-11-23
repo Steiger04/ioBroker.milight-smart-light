@@ -37,7 +37,7 @@ jobs:
               run: npm ci
 
             - name: Lint source code
-              run: npm run eslint
+              run: npm run lintibr
             - name: Test package files
               run: npm run testibr:package
 
