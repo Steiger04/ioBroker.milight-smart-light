@@ -39,7 +39,7 @@ With adapter you can use both: **v6 Bridge** and **Legacy Bridge**.
 
 
 ## Changelog
-### 1.0.0 (2020-11-21)
+### 1.0.1 (2020-11-21)
 - (steiger04) Added admin-UI based on Vue and Quasar
 ### 0.6.0 (2020-05-23)
 - (steiger04): Added effectBrightness, effectOn, effectOff, effectOnOff for iBox1 and iBox2
