@@ -34,6 +34,7 @@
         <q-separator/>
 
         <q-tab-panels
+            keep-alive
             :class="{'pannels': !$q.dark.isActive}"
             v-model="formTab"
             animated

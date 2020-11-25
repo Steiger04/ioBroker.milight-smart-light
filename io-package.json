@@ -1,119 +1,119 @@
 {
-  "common": {
-    "name": "milight-smart-light",
-    "version": "1.0.1",
-    "news": {
-      "1.0.1": {
-        "en": "Added admin-UI based on Vue and Quasar.",
-        "de": "Admin-UI basierend auf Vue und Quasar hinzugefügt.",
-        "ru": "Добавлен интерфейс администратора на основе Vue и Quasar.",
-        "pt": "Adicionada IU de administrador baseada em Vue e Quasar.",
-        "nl": "Admin-UI toegevoegd op basis van Vue en Quasar.",
-        "fr": "Ajout de l'interface utilisateur d'administration basée sur Vue et Quasar.",
-        "it": "Aggiunta interfaccia utente amministrativa basata su Vue e Quasar.",
-        "es": "Se agregó la interfaz de usuario de administración basada en Vue y Quasar.",
-        "pl": "Dodano interfejs administratora oparty na Vue i Quasar.",
-        "zh-cn": "添加了基于Vue和Quasar的admin-UI."
-      },
-      "0.6.0": {
-        "en": "Added effectBrightness, effectOn, effectOff, effectOnOff for iBox1 and iBox2.",
-        "de": "EffectBrightness, effectOn, effectOff, effectOnOff für iBox1 und iBox2 hinzugefügt.",
-        "ru": "Добавлены effectBrightness, effectOn, effectOff, effectOnOff для iBox1 и iBox2.",
-        "pt": "Adicionado effectBrightness, effectOn, effectOff, effectOnOff para iBox1 e iBox2.",
-        "nl": "EffectBrightness, effectOn, effectOff, effectOnOff toegevoegd voor iBox1 en iBox2.",
-        "fr": "Ajout de effectBrightness, effectOn, effectOff, effectOnOff pour iBox1 et iBox2.",
-        "it": "Aggiunto effectBrightness, effectOn, effectOff, effectOnOff per iBox1 e iBox2.",
-        "es": "Se agregó effectBrightness, effectOn, effectOff, effectOnOff para iBox1 e iBox2.",
-        "pl": "Dodano efektBrightness, effectOn, effectOff, effectOnOff dla iBox1 i iBox2.",
-        "zh-cn": "为iBox1和iBox2添加了effectBrightness，effectOn，effectOff，effectOnOff。"
-      },
-      "0.5.0": {
-        "en": "Bug fix in rgb(w)",
-        "de": "Fehlerbehebung in rgb(w)",
-        "ru": "Исправлена ошибка в rgb(w)",
-        "pt": "Correção de bug em rgb(w)",
-        "nl": "Bugfix in RGB (W)",
-        "fr": "Correction d'un bug dans rgb(w)",
-        "it": "Bug fix in rgb (w)",
-        "es": "Corrección de errores en rgb(w)",
-        "pl": "Poprawka błędu w rgb(w)",
-        "zh-cn": "RGB（W）中的错误修复"
-      }
+    "common": {
+        "name": "milight-smart-light",
+        "version": "1.0.1",
+        "news": {
+            "1.0.1": {
+                "en": "Added admin-UI based on Vue and Quasar.",
+                "de": "Admin-UI basierend auf Vue und Quasar hinzugefügt.",
+                "ru": "Добавлен интерфейс администратора на основе Vue и Quasar.",
+                "pt": "Adicionada IU de administrador baseada em Vue e Quasar.",
+                "nl": "Admin-UI toegevoegd op basis van Vue en Quasar.",
+                "fr": "Ajout de l'interface utilisateur d'administration basée sur Vue et Quasar.",
+                "it": "Aggiunta interfaccia utente amministrativa basata su Vue e Quasar.",
+                "es": "Se agregó la interfaz de usuario de administración basada en Vue y Quasar.",
+                "pl": "Dodano interfejs administratora oparty na Vue i Quasar.",
+                "zh-cn": "添加了基于Vue和Quasar的admin-UI."
+            },
+            "0.6.0": {
+                "en": "Added effectBrightness, effectOn, effectOff, effectOnOff for iBox1 and iBox2.",
+                "de": "EffectBrightness, effectOn, effectOff, effectOnOff für iBox1 und iBox2 hinzugefügt.",
+                "ru": "Добавлены effectBrightness, effectOn, effectOff, effectOnOff для iBox1 и iBox2.",
+                "pt": "Adicionado effectBrightness, effectOn, effectOff, effectOnOff para iBox1 e iBox2.",
+                "nl": "EffectBrightness, effectOn, effectOff, effectOnOff toegevoegd voor iBox1 en iBox2.",
+                "fr": "Ajout de effectBrightness, effectOn, effectOff, effectOnOff pour iBox1 et iBox2.",
+                "it": "Aggiunto effectBrightness, effectOn, effectOff, effectOnOff per iBox1 e iBox2.",
+                "es": "Se agregó effectBrightness, effectOn, effectOff, effectOnOff para iBox1 e iBox2.",
+                "pl": "Dodano efektBrightness, effectOn, effectOff, effectOnOff dla iBox1 i iBox2.",
+                "zh-cn": "为iBox1和iBox2添加了effectBrightness，effectOn，effectOff，effectOnOff。"
+            },
+            "0.5.0": {
+                "en": "Bug fix in rgb(w)",
+                "de": "Fehlerbehebung in rgb(w)",
+                "ru": "Исправлена ошибка в rgb(w)",
+                "pt": "Correção de bug em rgb(w)",
+                "nl": "Bugfix in RGB (W)",
+                "fr": "Correction d'un bug dans rgb(w)",
+                "it": "Bug fix in rgb (w)",
+                "es": "Corrección de errores en rgb(w)",
+                "pl": "Poprawka błędu w rgb(w)",
+                "zh-cn": "RGB（W）中的错误修复"
+            }
+        },
+        "title": "milight-smart-light",
+        "titleLang": {
+            "en": "milight-smart-light for Milight-Bridges",
+            "de": "milight-smart-light für Milight-Bridges",
+            "ru": "milight-smart-light для Milight-Bridges",
+            "pt": "milight-smart-light para Milight-Bridges",
+            "nl": "milight-smart-light voor Milight-Bridges",
+            "fr": "milight-smart-light pour Milight-Bridges",
+            "it": "milight-smart-light per Milight-Bridges",
+            "es": "milight-smart-light para Milight-Bridges",
+            "pl": "milight-smart-light dla Milight-Bridges",
+            "zh-cn": "适用于Milight-Bridges的milight-smart-light"
+        },
+        "desc": {
+            "en": "The adapter controls the Milight-Bridges iBox1, iBox2 and Legacy.",
+            "de": "Der Adapter steuert die Milight-Bridges iBox1, iBox2 und Legacy.",
+            "ru": "Адаптер управляет Milight-Bridges iBox1, iBox2 и Legacy.",
+            "pt": "O adaptador controla o Milight-Bridges iBox1, iBox2 e Legacy.",
+            "nl": "De adapter stuurt de Milight-Bridges iBox1, iBox2 en Legacy aan.",
+            "fr": "L'adaptateur contrôle les Milight-Bridges iBox1, iBox2 et Legacy.",
+            "it": "L'adattatore controlla Milight-Bridges iBox1, iBox2 e Legacy.",
+            "es": "El adaptador controla Milight-Bridges iBox1, iBox2 y Legacy.",
+            "pl": "Adapter steruje Milight-Bridges iBox1, iBox2 i Legacy.",
+            "zh-cn": "适配器控制Milight-Bridges iBox1，iBox2和Legacy。"
+        },
+        "authors": [
+            "Steiger04 <steiger04@posteo.de>"
+        ],
+        "keywords": [
+            "ioBroker",
+            "template",
+            "Smart Home",
+            "home automation"
+        ],
+        "license": "MIT",
+        "platform": "Javascript/Node.js",
+        "main": "main.js",
+        "icon": "milight-smart-light.png",
+        "enabled": true,
+        "extIcon": "https://raw.githubusercontent.com/Steiger04/ioBroker.milight-smart-light/master/admin/milight-smart-light.png",
+        "readme": "https://github.com/Steiger04/ioBroker.milight-smart-light/blob/master/README.md",
+        "loglevel": "info",
+        "mode": "daemon",
+        "type": "lighting",
+        "compact": false,
+        "connectionType": "cloud",
+        "dataSource": "poll",
+        "materialize": true,
+        "message": true,
+        "messagebox": true,
+        "supportStopInstance": true,
+        "dependencies": [
+            {
+                "js-controller": ">=1.4.2"
+            }
+        ],
+        "localLink": "http://%ip%:%serverPort%"
     },
-    "title": "milight-smart-light",
-    "titleLang": {
-      "en": "milight-smart-light for Milight-Bridges",
-      "de": "milight-smart-light für Milight-Bridges",
-      "ru": "milight-smart-light для Milight-Bridges",
-      "pt": "milight-smart-light para Milight-Bridges",
-      "nl": "milight-smart-light voor Milight-Bridges",
-      "fr": "milight-smart-light pour Milight-Bridges",
-      "it": "milight-smart-light per Milight-Bridges",
-      "es": "milight-smart-light para Milight-Bridges",
-      "pl": "milight-smart-light dla Milight-Bridges",
-      "zh-cn": "适用于Milight-Bridges的milight-smart-light"
+    "native": {
+        "activeApp": false,
+        "serverPort": "4400",
+        "socketPort": "8082",
+        "controllerType": "v6",
+        "controllerIp": "",
+        "controllerPortLegacy": "8899",
+        "controllerPortV6": "5987",
+        "controllerPort": "5987",
+        "commandRepeat": "1",
+        "delayBetweenCommands": "20",
+        "iBox": "iBox2",
+        "maxZones": "4",
+        "debounceTime": "200",
+        "zones": []
     },
-    "desc": {
-      "en": "The adapter controls the Milight-Bridges iBox1, iBox2 and Legacy.",
-      "de": "Der Adapter steuert die Milight-Bridges iBox1, iBox2 und Legacy.",
-      "ru": "Адаптер управляет Milight-Bridges iBox1, iBox2 и Legacy.",
-      "pt": "O adaptador controla o Milight-Bridges iBox1, iBox2 e Legacy.",
-      "nl": "De adapter stuurt de Milight-Bridges iBox1, iBox2 en Legacy aan.",
-      "fr": "L'adaptateur contrôle les Milight-Bridges iBox1, iBox2 et Legacy.",
-      "it": "L'adattatore controlla Milight-Bridges iBox1, iBox2 e Legacy.",
-      "es": "El adaptador controla Milight-Bridges iBox1, iBox2 y Legacy.",
-      "pl": "Adapter steruje Milight-Bridges iBox1, iBox2 i Legacy.",
-      "zh-cn": "适配器控制Milight-Bridges iBox1，iBox2和Legacy。"
-    },
-    "authors": [
-      "Steiger04 <steiger04@posteo.de>"
-    ],
-    "keywords": [
-      "ioBroker",
-      "template",
-      "Smart Home",
-      "home automation"
-    ],
-    "license": "MIT",
-    "platform": "Javascript/Node.js",
-    "main": "main.js",
-    "icon": "milight-smart-light.png",
-    "enabled": true,
-    "extIcon": "https://raw.githubusercontent.com/Steiger04/ioBroker.milight-smart-light/master/admin/milight-smart-light.png",
-    "readme": "https://github.com/Steiger04/ioBroker.milight-smart-light/blob/master/README.md",
-    "loglevel": "info",
-    "mode": "daemon",
-    "type": "lighting",
-    "compact": false,
-    "connectionType": "cloud",
-    "dataSource": "poll",
-    "materialize": true,
-    "message": true,
-    "messagebox": true,
-    "supportStopInstance": true,
-    "dependencies": [
-      {
-        "js-controller": ">=1.4.2"
-      }
-    ],
-    "localLink": "http://%ip%:%serverPort%"
-  },
-  "native": {
-    "activeApp": false,
-    "serverPort": "4400",
-    "socketPort": "8082",
-    "controllerType": "v6",
-    "controllerIp": "",
-    "controllerPortLegacy": "8899",
-    "controllerPortV6": "5987",
-    "controllerPort": "5987",
-    "commandRepeat": "1",
-    "delayBetweenCommands": "20",
-    "iBox": "iBox2",
-    "maxZones": "4",
-    "debounceTime": "200",
-    "zones": []
-  },
-  "objects": [],
-  "instanceObjects": []
+    "objects": [],
+    "instanceObjects": []
 }
