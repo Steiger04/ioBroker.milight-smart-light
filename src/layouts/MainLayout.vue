@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh lpr lFf">
-    <q-header class="transparent">
+    <q-header style="background: #efefef;">
       <q-toolbar class="q-py-xs">
         <q-avatar
             rounded
