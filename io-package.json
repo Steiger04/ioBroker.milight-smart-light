@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "milight-smart-light",
-        "version": "1.0.1",
+        "version": "1.0.5",
         "news": {
+            "1.0.5": {
+                "en": "Small bug fix",
+                "de": "Kleine Fehlerbehebung",
+                "ru": "Исправление небольшой ошибки",
+                "pt": "Pequeno bug corrigido",
+                "nl": "Kleine bugfix",
+                "fr": "Petite correction de bogue",
+                "it": "Piccola correzione di bug",
+                "es": "Pequeña corrección de errores",
+                "pl": "Mała poprawka błędu",
+                "zh-cn": "小错误修复"
+            },
             "1.0.1": {
                 "en": "Added admin-UI based on Vue and Quasar.",
                 "de": "Admin-UI basierend auf Vue und Quasar hinzugefügt.",
