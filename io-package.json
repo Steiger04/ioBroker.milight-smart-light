@@ -1,19 +1,19 @@
 {
     "common": {
         "name": "milight-smart-light",
-        "version": "1.1.0",
+        "version": "1.1.1",
         "news": {
-            "1.1.0": {
-                "en": "Small bug fix",
-                "de": "Kleine Fehlerbehebung",
-                "ru": "Исправление небольшой ошибки",
-                "pt": "Pequeno bug corrigido",
-                "nl": "Kleine bugfix",
-                "fr": "Petite correction de bogue",
-                "it": "Piccola correzione di bug",
-                "es": "Pequeña corrección de errores",
-                "pl": "Mała poprawka błędu",
-                "zh-cn": "小错误修复"
+            "1.1.1": {
+                "en": "compact mode added",
+                "de": "Kompaktmodus hinzugefügt",
+                "ru": "добавлен компактный режим",
+                "pt": "modo compacto adicionado",
+                "nl": "compacte modus toegevoegd",
+                "fr": "mode compact ajouté",
+                "it": "modalità compatta aggiunta",
+                "es": "modo compacto agregado",
+                "pl": "dodano tryb kompaktowy",
+                "zh-cn": "紧凑模式添加"
             },
             "1.0.5": {
                 "en": "Small bug fix",
