@@ -3,14 +3,29 @@ const path = require('path');
 const _ = require('lodash');
 const utils = require('@iobroker/adapter-core');
 
-let smartLight = null;
+const { startAppServer } = require(path.join(__dirname, '/lib/js/mslfeServer/mslfeServer'));
+const mslcommandsV6 = require(path.join(__dirname, '/lib/js/mslcommandsV6'));
+const mslcommands2 = require(path.join(__dirname, '/lib/js/mslcommands2'));
 
-class Adapter extends utils.Adapter {
+const MslStatestore = require(path.join(__dirname, '/lib/js/mslstatestore/mslstatestore'));
+const States = require(path.join(__dirname, '/lib/js/mslstates'));
+
+const Milight = require('node-milight-promise').MilightController;
+
+class MilightSmartLight extends utils.Adapter {
   constructor(options) {
     super({
       ...options,
       name: 'milight-smart-light',
     });
+
+    this.zonesFromAdmin = [];
+    this.addZonesToStorage = [];
+
+    this.mslStatestore = new MslStatestore(this);
+    this.mslcommandsV6 = mslcommandsV6(this, this.mslStatestore);
+    this.mslcommands2 = mslcommands2(this, this.mslStatestore);
+    this.states = new States();
 
     this.on('ready', this.onReady.bind(this));
     this.on('stateChange', this.onStateChange.bind(this));
@@ -21,7 +36,7 @@ class Adapter extends utils.Adapter {
 
   async onReady() {
     if (this.config.controllerIp !== '') {
-      await main();
+      await this.main();
     } else {
       this.log.info(`milight-smart-light Adpter must be configured first!`);
     }
@@ -41,7 +56,7 @@ class Adapter extends utils.Adapter {
 
     if (!state || state.ack) {
       /* if (state.ack) {
-        adapter.log.debug(`on:stateChange:ack=true->${_id}::state->${JSON.stringify(state)}`);
+        this.log.debug(`on:stateChange:ack=true->${_id}::state->${JSON.stringify(state)}`);
       } */
       return;
     }
@@ -70,7 +85,7 @@ class Adapter extends utils.Adapter {
     options.val = state.val;
     options.ack = state.ack;
 
-    await mslStatestore.setState({
+    await this.mslStatestore.setState({
       dp: options.dp,
       val: state.val,
       params: options,
@@ -80,7 +95,7 @@ class Adapter extends utils.Adapter {
     switch (this.config.controllerType) {
       case 'v6':
         try {
-          await smartLight.sendCommands(await mslcommandsV6[mslZoneType][dp](options));
+          await this.smartLight.sendCommands(await this.mslcommandsV6[mslZoneType][dp](options));
           this.log.debug(`mslcommandsV6 executed::${Date.now() - start}ms`);
         } catch (err) {
           this.log.error(`on:stateChange:mslcommandsV6->${err.message}`);
@@ -89,7 +104,7 @@ class Adapter extends utils.Adapter {
 
       case 'legacy':
         try {
-          await smartLight.sendCommands(await mslcommands2[mslZoneType][dp](options));
+          await this.smartLight.sendCommands(await this.mslcommands2[mslZoneType][dp](options));
           this.log.debug(`mslcommands2 executed::${Date.now() - start}ms`);
         } catch (err) {
           this.log.error(`on:stateChange:mslcommands2->::${err.message}`);
@@ -133,9 +148,9 @@ class Adapter extends utils.Adapter {
         }
       } else if (obj.command === 'stopInstance') { // "supportStopInstance" : true in common{...}
         // deleteEnums ()
-        if (smartLight) {
+        if (this.smartLight) {
           try {
-            await smartLight.close();
+            await this.smartLight.close();
             this.log.info('on:message:stopInstance->All command have been executed - closing MiLight!');
           } catch (err) {
             this.log.error(`on:message:stopInstance->${err}`);
@@ -157,172 +172,169 @@ class Adapter extends utils.Adapter {
       callback();
     }
   }
-}
 
-const adapter = new Adapter();
-
-const { startAppServer } = require(path.join(__dirname, '/lib/js/mslfeServer/mslfeServer'));
-const mslStatestore = new (require(path.join(__dirname, '/lib/js/mslstatestore/mslstatestore')))(adapter);
-const mslcommandsV6 = require(path.join(__dirname, '/lib/js/mslcommandsV6'))(adapter, mslStatestore);
-const mslcommands2 = require(path.join(__dirname, '/lib/js/mslcommands2'))(adapter, mslStatestore);
-
-const states = require(path.join(__dirname, '/lib/js/mslstates'));
-const Milight = require('node-milight-promise').MilightController;
-
-async function main() {
-  smartLight = new Milight({
-    ip: adapter.config.controllerIp,
-    type: adapter.config.controllerType,
-    delayBetweenCommands: parseInt(adapter.config.delayBetweenCommands),
-    commandRepeat: parseInt(adapter.config.commandRepeat),
-    port: parseInt(adapter.config.controllerPort),
-    fullSync: true,
-  });
-
-  try {
-    await configAsync();
-    adapter.log.info('main->::all MiLight zones and states were created!');
-
-    await adapter.subscribeStatesAsync('*');
-    adapter.log.info('main->::all states were subscribed!');
-
-    if (adapter.config.activeApp) {
-      await startAppServer(adapter);
-    }
-
-    adapter.log.info('main->::milight-smart-light adapter was started successfully!');
-  } catch (err) {
-    adapter.log.error(`main->::${err}`);
-  }
-
-  process.on('unhandledRejection', (reason, promise) => {
-    adapter.log.error(`${(new Date()).toUTCString()} unhandledRejection at:`, promise);
-    adapter.log.error(`${(new Date()).toUTCString()} unhandledRejection reason:`, reason);
-    // process.exit(1);
-  });
-}
-
-const zonesFromAdmin = [];
-let addZonesToStorage = [];
-
-async function configAsync() {
-  if (adapter.config.zones.length > 0) {
-    _.forEach(adapter.config.zones, (zone) => {
-      zonesFromAdmin.push({
-        instance: adapter.namespace,
-        instanceNumber: adapter.instance,
-        group_id: `${adapter.namespace}.${zone.mslGroupName.replace(/\s+/g, '_')}`,
-
-        controllerType: adapter.config.controllerType,
-        iBox: adapter.config.iBox,
-
-        mslZoneActive: zone.mslZoneActive,
-        mslZoneNumber: zone.mslZoneNumber,
-        mslGroupNameCommon: zone.mslGroupName,
-        mslGroupName: zone.mslGroupName.replace(/\s+/g, '_'),
-        mslZoneType: zone.mslZoneType,
-
-        mslColorOffset: zone.mslColorOffset,
-
-        mslZoneName: _.isEmpty(zone.mslZoneName) ? `${zone.mslZoneType}-${zone.mslZoneNumber}` : zone.mslZoneName,
-
-        mslRoom: zone.mslRoom === null ? [] : [zone.mslRoom],
-        mslFunc: zone.mslFunc.length < 1 ? [] : zone.mslFunc,
-
-        mslZoneTypeNumber: `${zone.mslZoneType}-${zone.mslZoneNumber}`,
-
-        channelPath: `${zone.mslGroupName}.${zone.mslZoneType}-${zone.mslZoneNumber}.`.replace(/\s+/g, '_'),
-        fullChannelPath: `${adapter.namespace}.${zone.mslGroupName}.${zone.mslZoneType}-${zone.mslZoneNumber}.`.replace(/\s+/g, '_'),
-
-        name: _.isEmpty(zone.mslZoneName) ? `${zone.mslZoneType}-${zone.mslZoneNumber}` : zone.mslZoneName,
-      });
+  async main() {
+    this.smartLight = new Milight({
+      ip: this.config.controllerIp,
+      type: this.config.controllerType,
+      delayBetweenCommands: parseInt(this.config.delayBetweenCommands),
+      commandRepeat: parseInt(this.config.commandRepeat),
+      port: parseInt(this.config.controllerPort),
+      fullSync: true,
     });
 
-    _.remove(zonesFromAdmin, (val) => val.mslZoneActive === false || _.isEmpty(val.mslZoneNumber) || _.isEmpty(val.mslGroupName) || _.isEmpty(val.mslZoneType));
+    try {
+      await this.configAsync();
+      this.log.info('main->::all MiLight zones and states were created!');
+
+      await this.subscribeStatesAsync('*');
+      this.log.info('main->::all states were subscribed!');
+
+      if (this.config.activeApp) {
+        await startAppServer(this);
+      }
+
+      this.log.info('main->::milight-smart-light adapter was started successfully!');
+    } catch (err) {
+      this.log.error(`main->::${err}`);
+    }
+
+    process.on('unhandledRejection', (reason, promise) => {
+      this.log.error(`${(new Date()).toUTCString()} unhandledRejection at: ${promise}`);
+      this.log.error(`${(new Date()).toUTCString()} unhandledRejection reason:${promise}`);
+      // process.exit(1);
+    });
   }
 
-  const groupsFromStorage = await adapter.getDevicesAsync();
-  const zonesFromStorage = _.flatten(await Promise.all(groupsFromStorage.map((device) => adapter.getChannelsOfAsync(device._id))));
-  let deleteZonesFromStorage = _.differenceWith(zonesFromStorage, zonesFromAdmin, (zoneStorage, zoneAdmin) => _.isEqual(zoneStorage.common, zoneAdmin));
+  async configAsync() {
+    if (this.config.zones.length > 0) {
+      _.forEach(this.config.zones, (zone) => {
+        this.zonesFromAdmin.push({
+          instance: this.namespace,
+          instanceNumber: this.instance,
+          group_id: `${this.namespace}.${zone.mslGroupName.replace(/\s+/g, '_')}`,
 
-  deleteZonesFromStorage = _.map(deleteZonesFromStorage, (zone) => adapter.idToDCS(zone._id));
-  addZonesToStorage = _.differenceWith(zonesFromAdmin, zonesFromStorage, (zoneAdmin, zoneStorage) => _.isEqual(zoneStorage.common, zoneAdmin));
+          controllerType: this.config.controllerType,
+          iBox: this.config.iBox,
 
-  const zonesInStorage = _.differenceWith(zonesFromAdmin, addZonesToStorage, (zoneAdmin, zoneStorage) => _.isEqual(zoneStorage, zoneAdmin));
+          mslZoneActive: zone.mslZoneActive,
+          mslZoneNumber: zone.mslZoneNumber,
+          mslGroupNameCommon: zone.mslGroupName,
+          mslGroupName: zone.mslGroupName.replace(/\s+/g, '_'),
+          mslZoneType: zone.mslZoneType,
 
-  // mslStatestore für unveränderte Zonen initialisieren
-  if (zonesInStorage.length > 0) {
-    for (const zone of zonesInStorage) {
-      for (const dp of states.statesList(adapter.config.controllerType, zone.mslZoneType)) {
-        const state = await adapter.getStateAsync(zone.fullChannelPath + dp);
-        await mslStatestore.initState({
-          dp,
-          val: state.val,
-          params: zone,
+          mslColorOffset: zone.mslColorOffset,
+
+          mslZoneName: _.isEmpty(zone.mslZoneName) ? `${zone.mslZoneType}-${zone.mslZoneNumber}` : zone.mslZoneName,
+
+          mslRoom: zone.mslRoom === null ? [] : [zone.mslRoom],
+          mslFunc: zone.mslFunc.length < 1 ? [] : zone.mslFunc,
+
+          mslZoneTypeNumber: `${zone.mslZoneType}-${zone.mslZoneNumber}`,
+
+          channelPath: `${zone.mslGroupName}.${zone.mslZoneType}-${zone.mslZoneNumber}.`.replace(/\s+/g, '_'),
+          fullChannelPath: `${this.namespace}.${zone.mslGroupName}.${zone.mslZoneType}-${zone.mslZoneNumber}.`.replace(/\s+/g, '_'),
+
+          name: _.isEmpty(zone.mslZoneName) ? `${zone.mslZoneType}-${zone.mslZoneNumber}` : zone.mslZoneName,
         });
+      });
+
+      _.remove(this.zonesFromAdmin, (val) => val.mslZoneActive === false || _.isEmpty(val.mslZoneNumber) || _.isEmpty(val.mslGroupName) || _.isEmpty(val.mslZoneType));
+    }
+
+    const groupsFromStorage = await this.getDevicesAsync();
+    const zonesFromStorage = _.flatten(await Promise.all(groupsFromStorage.map((device) => this.getChannelsOfAsync(device._id))));
+    let deleteZonesFromStorage = _.differenceWith(zonesFromStorage, this.zonesFromAdmin, (zoneStorage, zoneAdmin) => _.isEqual(zoneStorage.common, zoneAdmin));
+
+    deleteZonesFromStorage = _.map(deleteZonesFromStorage, (zone) => this.idToDCS(zone._id));
+    this.addZonesToStorage = _.differenceWith(this.zonesFromAdmin, zonesFromStorage, (zoneAdmin, zoneStorage) => _.isEqual(zoneStorage.common, zoneAdmin));
+
+    const zonesInStorage = _.differenceWith(this.zonesFromAdmin, this.addZonesToStorage, (zoneAdmin, zoneStorage) => _.isEqual(zoneStorage, zoneAdmin));
+
+    // mslStatestore für unveränderte Zonen initialisieren
+    if (zonesInStorage.length > 0) {
+      for (const zone of zonesInStorage) {
+        for (const dp of this.states.statesList(this.config.controllerType, zone.mslZoneType)) {
+          const state = await this.getStateAsync(zone.fullChannelPath + dp);
+          await this.mslStatestore.initState({
+            dp,
+            val: state.val,
+            params: zone,
+          });
+        }
       }
     }
-  }
 
-  // MiLight-Zonen aus deleteZonesFromStorage aus dem Speicher löschen
-  if (deleteZonesFromStorage.length > 0) {
-    for (const DCS of deleteZonesFromStorage) {
-      await adapter.deleteChannelAsync(DCS.device, DCS.channel);
-      adapter.log.debug(`configAsync->::deleted MiLight zone:${DCS.device}.${DCS.channel}`);
+    // MiLight-Zonen aus deleteZonesFromStorage aus dem Speicher löschen
+    if (deleteZonesFromStorage.length > 0) {
+      for (const DCS of deleteZonesFromStorage) {
+        await this.deleteChannelAsync(DCS.device, DCS.channel);
+        this.log.debug(`configAsync->::deleted MiLight zone:${DCS.device}.${DCS.channel}`);
 
-      const channels = await adapter.getChannelsOfAsync(DCS.device);
+        const channels = await this.getChannelsOfAsync(DCS.device);
 
-      if (channels.length < 1) {
-        await adapter.deleteDeviceAsync(DCS.device);
-        adapter.log.debug(`configAsync->::deleted MiLight group:${DCS.device}`);
+        if (channels.length < 1) {
+          await this.deleteDeviceAsync(DCS.device);
+          this.log.debug(`configAsync->::deleted MiLight group:${DCS.device}`);
+        }
+
+        await this.deleteChannelFromEnumAsync(null, DCS.device, DCS.channel);
+        this.log.debug(`configAsync->::${this.namespace}.${DCS.device}.${DCS.channel}: all associated enums have been deleted!`);
       }
-
-      await adapter.deleteChannelFromEnumAsync(null, DCS.device, DCS.channel);
-      adapter.log.debug(`configAsync->::${adapter.namespace}.${DCS.device}.${DCS.channel}: all associated enums have been deleted!`);
     }
-  }
 
-  // MiLight-Zonen und Enums aus addZonesToStorage anlegen
-  if (addZonesToStorage.length > 0) {
-    for (const addZone of addZonesToStorage) {
-      // device für addZonesToStorage anlegen
-      await adapter.createDeviceAsync(addZone.mslGroupName, { name: addZone.mslGroupNameCommon });
-      adapter.log.debug(`configAsync->::MiLight group :${adapter.namespace}.${addZone.mslGroupName}: was created!`);
+    // MiLight-Zonen und Enums aus addZonesToStorage anlegen
+    if (this.addZonesToStorage.length > 0) {
+      for (const addZone of this.addZonesToStorage) {
+        // device für addZonesToStorage anlegen
+        await this.createDeviceAsync(addZone.mslGroupName, { name: addZone.mslGroupNameCommon });
+        this.log.debug(`configAsync->::MiLight group :${this.namespace}.${addZone.mslGroupName}: was created!`);
 
-      // channel für addZonesToStorage anlegen
-      await adapter.createChannelAsync(addZone.mslGroupName, addZone.mslZoneTypeNumber, addZone);
-      adapter.log.debug(`configAsync->::MiLight zone :${adapter.namespace}.${addZone.mslGroupName}.${addZone.mslZoneTypeNumber}: was created!`);
+        // channel für addZonesToStorage anlegen
+        await this.createChannelAsync(addZone.mslGroupName, addZone.mslZoneTypeNumber, addZone);
+        this.log.debug(`configAsync->::MiLight zone :${this.namespace}.${addZone.mslGroupName}.${addZone.mslZoneTypeNumber}: was created!`);
 
-      // States für addZonesToStorage anlegen und mslStatestore initialisieren
-      for (const dp of states.statesList(adapter.config.controllerType, addZone.mslZoneType)) {
-        await adapter.createStateAsync(addZone.mslGroupName, addZone.mslZoneTypeNumber, dp, states.getCommon(dp));
-        await mslStatestore.initState({
-          dp,
-          val: states.getCommon(dp)._def,
-          params: addZone,
-        });
-      }
+        // States für addZonesToStorage anlegen und mslStatestore initialisieren
+        for (const dp of this.states.statesList(this.config.controllerType, addZone.mslZoneType)) {
+          await this.createStateAsync(addZone.mslGroupName, addZone.mslZoneTypeNumber, dp, this.states.getCommon(dp));
+          await this.mslStatestore.initState({
+            dp,
+            val: this.states.getCommon(dp)._def,
+            params: addZone,
+          });
+        }
 
-      await adapter.deleteChannelFromEnumAsync(null, addZone.mslGroupName, addZone.mslZoneTypeNumber);
-      for (const enumName of _.concat(addZone.mslFunc, addZone.mslRoom)) {
-        if (enumName) {
-          await adapter.addChannelToEnumAsync(enumName, enumName, addZone.mslGroupName, addZone.mslZoneTypeNumber);
-          adapter.log.debug(
-            `configAsync->::${adapter.namespace}.${addZone.mslGroupName}.${addZone.mslZoneTypeNumber}: was assigned to enum->::${enumName}`,
-          );
+        await this.deleteChannelFromEnumAsync(null, addZone.mslGroupName, addZone.mslZoneTypeNumber);
+        for (const enumName of _.concat(addZone.mslFunc, addZone.mslRoom)) {
+          if (enumName) {
+            await this.addChannelToEnumAsync(enumName, enumName, addZone.mslGroupName, addZone.mslZoneTypeNumber);
+            this.log.debug(`configAsync->::${this.namespace}.${addZone.mslGroupName}.${addZone.mslZoneTypeNumber}: was assigned to enum->::${enumName}`);
+          }
         }
       }
     }
   }
+
+  /* async deleteEnums() {
+    for (const zone of _.flatten([this.addZonesToStorage, this.zonesFromAdmin])) {
+      try {
+        await this.deleteChannelFromEnumAsync(null, zone.mslGroupName, zone.mslZoneTypeNumber);
+        this.log.debug('deleteEnums->::Channel was deleted from enum (room and function)!');
+      } catch (err) {
+        this.log.error(`deleteEnums->::${err.message}`);
+      }
+    }
+  } */
 }
 
-/* async function deleteEnums() {
-    for (const zone of _.flatten([addZonesToStorage, zonesFromAdmin])) {
-        try {
-            await adapter.deleteChannelFromEnumAsync(null, zone.mslGroupName, zone.mslZoneTypeNumber);
-            adapter.log.debug('deleteEnums->::Channel was deleted from enum (room and function)!');
-        } catch (err) {
-            adapter.log.error(`deleteEnums->::${err.message}`);
-        }
-    }
-} */
+// @ts-ignore parent is a valid property on module
+if (module.parent) {
+  // Export the constructor in compact mode
+  /**
+   * @param {Partial<utils.AdapterOptions>} [options={}]
+   */
+  module.exports = (options) => new MilightSmartLight(options);
+} else {
+  // otherwise start the instance directly
+  new MilightSmartLight();
+}

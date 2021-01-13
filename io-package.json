@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "milight-smart-light",
-        "version": "1.0.5",
+        "version": "1.1.0",
         "news": {
+            "1.1.0": {
+                "en": "Small bug fix",
+                "de": "Kleine Fehlerbehebung",
+                "ru": "Исправление небольшой ошибки",
+                "pt": "Pequeno bug corrigido",
+                "nl": "Kleine bugfix",
+                "fr": "Petite correction de bogue",
+                "it": "Piccola correzione di bug",
+                "es": "Pequeña corrección de errores",
+                "pl": "Mała poprawka błędu",
+                "zh-cn": "小错误修复"
+            },
             "1.0.5": {
                 "en": "Small bug fix",
                 "de": "Kleine Fehlerbehebung",
@@ -96,7 +108,7 @@
         "loglevel": "info",
         "mode": "daemon",
         "type": "lighting",
-        "compact": false,
+        "compact": true,
         "connectionType": "cloud",
         "dataSource": "poll",
         "materialize": true,
