@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "milight-smart-light",
-        "version": "1.2.0",
+        "version": "1.2.1",
         "news": {
+            "1.2.1": {
+                "en": "Compatibility with socketio v3.1.4",
+                "de": "Kompatibilität mit socketio v3.1.4",
+                "ru": "Совместимость с socketio v3.1.4",
+                "pt": "Compatibilidade com socketio v3.1.4",
+                "nl": "Compatibiliteit met socketio v3.1.4",
+                "fr": "Compatibilité avec socketio v3.1.4",
+                "it": "Compatibilità con socketio v3.1.4",
+                "es": "Compatibilidad con socketio v3.1.4",
+                "pl": "Zgodność z Socketio 3.1.4",
+                "zh-cn": "与socketio v3.1.4的兼容性"
+            },
             "1.2.0": {
                 "en": "compact mode added",
                 "de": "Kompaktmodus hinzugefügt",

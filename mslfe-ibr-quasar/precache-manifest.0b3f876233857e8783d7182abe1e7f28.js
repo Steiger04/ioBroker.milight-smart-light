@@ -80,7 +80,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "img/mslfe-onoff-button-green.1a13fbb8.svg"
   },
   {
-    "revision": "f0f45d50c9527ef69eedd393202c9e2a",
+    "revision": "6bfeb707f3dc1106a6b8fc5a4e7d5cd7",
     "url": "index.html"
   },
   {
@@ -100,8 +100,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "js/5.349fb131.js"
   },
   {
-    "revision": "885e663e3d3828bc89c3",
-    "url": "js/app.e3c98a91.js"
+    "revision": "ed3a886d7b7aa229d3ac",
+    "url": "js/app.47c21718.js"
   },
   {
     "revision": "ac843413a56ce7cc9a70",
