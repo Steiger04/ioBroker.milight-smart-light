@@ -1,6 +1,6 @@
 {
   "name": "iobroker.milight-smart-light",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Adapter for Milight LED bulbs and LED strips",
   "author": {
     "name": "Steiger04",
@@ -37,11 +37,11 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@iobroker/adapter-core": "^2.4.0",
+    "@iobroker/adapter-core": "^2.5.1",
     "@quasar/extras": "^1.9.13",
     "core-js": "^3.6.5",
     "express": "^4.17.1",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "nanoid": "^3.1.16",
     "node-milight-promise": "github:Steiger04/node-milight-promise",
     "quasar": "^1.15.0",
@@ -53,7 +53,7 @@
     "vuex-map-fields": "^1.4.0"
   },
   "devDependencies": {
-    "@iobroker/testing": "^2.2.0",
+    "@iobroker/testing": "^2.5.2",
     "@quasar/app": "^2.1.14",
     "@types/chai": "^4.2.11",
     "@types/chai-as-promised": "^7.1.2",

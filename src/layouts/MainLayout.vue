@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh lpr lFf">
-    <q-header style="background: #efefef;">
+    <q-header :style="{background: $q.dark.isActive ? '#64b5f7' : '#efefef'}">
       <q-toolbar class="q-py-xs">
         <q-avatar
             rounded
@@ -71,9 +71,13 @@
       <router-view/>
     </q-page-container>
 
+    <!--    <q-footer
+            class="bg-blue-4"
+            :style="{ marginBottom: $connection.isIFrame ? '38px' : '0px' }"
+        >-->
     <q-footer
         class="bg-blue-4"
-        :style="{ marginBottom: $connection.isIFrame ? '38px' : '0px' }"
+        :style="'marginBottom: 0px'"
     >
       <q-toolbar class="q-py-md">
         <div class="q-gutter-xs">
