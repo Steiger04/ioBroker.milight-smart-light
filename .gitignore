@@ -40,3 +40,6 @@ nbproject
 iobroker.*.tgz
 
 Thumbs.db
+
+#ignore .commitinfo created by ioBroker release script
+.commitinfo
