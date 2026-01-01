@@ -58,4 +58,4 @@ A detailed description can be found [here](https://steiger04.github.io/milight-s
 ## License
 The MIT License (MIT)
 
-Copyright (c) 2017-2021 Steiger04 <steiger04@posteo.de>
+Copyright (c) 2017-2026 Steiger04 <steiger04@posteo.de>
