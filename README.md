@@ -55,6 +55,8 @@ A detailed description can be found [here](https://steiger04.github.io/milight-s
 ### 0.5.0 (2020-05-21)
 - (steiger04): Bug fix in rgb(w)
 
+[Older changelogs can be found there](CHANGELOG_OLD.md)
+
 ## License
 The MIT License (MIT)
 
