@@ -140,7 +140,7 @@
     "supportStopInstance": true,
     "dependencies": [
       {
-        "js-controller": ">=1.4.2"
+        "js-controller": ">=6.0.11"
       }
     ],
     "localLinks": {
