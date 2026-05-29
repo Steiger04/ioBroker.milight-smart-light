@@ -40,6 +40,10 @@ A detailed description can be found [here](https://steiger04.github.io/milight-s
 
 
 ## Changelog
+
+### **WORK IN PROGRESS**
+- (ioBroker-Bot) Adapter requires js-controller >= 6.0.11 now.
+
 ### 1.2.2 (2021-10-17)
 - (steiger04) Compatibility check and testing for Node.js 16 and some CSS adjustments
 ### 1.2.1 (2021-05-18)

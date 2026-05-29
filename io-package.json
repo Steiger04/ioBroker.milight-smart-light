@@ -135,18 +135,20 @@
     "compact": true,
     "connectionType": "cloud",
     "dataSource": "poll",
-    "materialize": true,
     "messagebox": true,
     "supportStopInstance": true,
     "dependencies": [
       {
-        "js-controller": ">=1.4.2"
+        "js-controller": ">=6.0.11"
       }
     ],
     "localLinks": {
       "_default": {
         "link": "%protocol%://%ip%:%serverPort%"
       }
+    },
+    "adminUI": {
+      "config": "materialize"
     }
   },
   "native": {
